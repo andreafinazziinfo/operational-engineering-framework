@@ -2,14 +2,15 @@
 
 # 🏗️ Operational Engineering Framework
 
-**Manuale operativo per progettare, eseguire, operare e governare sistemi software** — greenfield e brownfield — con un layer dedicato agli agenti AI.
+**Manuale operativo per progettare, eseguire, operare e governare sistemi software** — greenfield e brownfield — con layer **C-level** (`6_STRATEGY`) e protocollo agenti AI.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![Docs](https://img.shields.io/badge/docs-6%20frameworks-2ea44f)](./0_META_FRAMEWORK.md)
+[![Docs](https://img.shields.io/badge/docs-7%20frameworks-2ea44f)](./0_META_FRAMEWORK.md)
+[![Executive](https://img.shields.io/badge/executive-13%20artefatti-purple)](./executive/README.md)
 [![Last review](https://img.shields.io/badge/review-2026--07--24-informational)](#-changelog)
 [![Maturity target](https://img.shields.io/badge/maturity%20target-%E2%89%A5%203-orange)](./FRAMEWORK_MATURITY.md)
 
-[📖 Inizia qui](#-quick-start) · [🗺️ Mappa documenti](#-framework-operativi) · [🤖 Agenti AI](./AGENTS.md) · [🚨 Runbook](./runbooks/README.md)
+[📖 Inizia qui](#-quick-start) · [🎯 Strategy C-level](#-layer-strategico-c-level) · [🗺️ Framework](#-framework-operativi) · [🤖 Agenti AI](./AGENTS.md) · [🚨 Runbook](./runbooks/README.md)
 
 </div>
 
@@ -19,6 +20,7 @@
 
 - [Cos'è](#-cosè)
 - [Per chi è](#-per-chi-è)
+- [Layer strategico C-level](#-layer-strategico-c-level)
 - [Architettura del manuale](#-architettura-del-manuale)
 - [Flusso operativo](#-flusso-operativo)
 - [Framework operativi](#-framework-operativi)
@@ -43,6 +45,7 @@ Un **set di documenti operativi** — non un tool — che traduce buone pratiche
 | **Dogfooding** | Il manuale si governa con le proprie regole (`0_META`) |
 | **Tier-aware** | Ogni task ha un livello di rigore: LIGHT · STANDARD · CRITICO |
 | **Path-aware** | Greenfield e brownfield hanno percorsi distinti ma convergono su Execution e Operations |
+| **Strategy-aware** | Portfolio, roadmap, risk e FinOps prima di Discovery (`6_STRATEGY`) |
 | **AI-native** | Gli agenti AI seguono un protocollo esplicito (`4_AI_AGENT`) con escalation e DoD |
 
 > 💡 **Non sostituisce** la documentazione del tuo prodotto: fornisce **come** lavorare su design, delivery, ops e legacy in modo coerente.
@@ -53,6 +56,8 @@ Un **set di documenti operativi** — non un tool — che traduce buone pratiche
 
 | Ruolo | Documenti di ingresso |
 |-------|----------------------|
+| **CEO / CTO** | `6_STRATEGY` · [executive/](./executive/README.md) · portfolio · risk |
+| **Fellow / Principal** | [ENGINEERING_PRINCIPLES](./executive/ENGINEERING_PRINCIPLES.md) · [HORIZON_BETS](./executive/HORIZON_BETS.md) · ARB |
 | **Tech lead / architect** | `1_DESIGN` · `5_BROWNFIELD` · ADR |
 | **Developer** | `2_EXECUTION` · `DEFINITION_OF_DONE` |
 | **SRE / on-call** | `3_OPERATIONS` · `runbooks/` · `DR_BACKUP_PLAN` |
@@ -65,6 +70,11 @@ Un **set di documenti operativi** — non un tool — che traduce buone pratiche
 
 ```mermaid
 flowchart TB
+    subgraph executive ["🎯 Strategy C-level"]
+        STRAT["6_STRATEGY"]
+        EX["executive/<br/>13 artefatti P0–P2"]
+    end
+
     subgraph governance ["🧭 Governance"]
         META["0_META<br/>Versioning · RACI · Maturity"]
         AI["4_AI_AGENT<br/>Protocollo agenti"]
@@ -83,9 +93,11 @@ flowchart TB
         DR["DR_BACKUP_PLAN"]
         TM["THREAT_MODEL"]
         LEDGER["TECHNICAL_DEBT_LEDGER"]
-        MAT["FRAMEWORK_MATURITY"]
+        MAT["FRAMEWORK_MATURITY<br/>progetto + org"]
     end
 
+    STRAT --> EX
+    EX --> DISC
     META --> AI
     AI --> DISC
     DISC -->|greenfield| DESIGN
@@ -99,6 +111,7 @@ flowchart TB
     DESIGN --> TM
     OPS --> LEDGER
     META --> MAT
+    STRAT --> MAT
 ```
 
 ---
@@ -107,7 +120,8 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    START([💡 Idea / obiettivo]) --> DISC{DISCOVERY<br/>go / no-go}
+    START([💡 Visione / portfolio]) --> STRAT[6_STRATEGY + executive/]
+    STRAT --> DISC{DISCOVERY<br/>go / no-go}
 
     DISC -->|❌ NO-GO| STOP([Stop · riformula])
     DISC -->|✅ GO greenfield| D1[1_DESIGN]
@@ -131,6 +145,32 @@ flowchart LR
 
 - Ogni task passa da **[DEFINITION_OF_DONE](./DEFINITION_OF_DONE.md)** prima del merge o del deploy.
 - Review trimestrale con **[FRAMEWORK_MATURITY](./FRAMEWORK_MATURITY.md)** — target minimo **≥ 3** su produzione con utenti reali.
+
+---
+
+## 🎯 Layer strategico C-level
+
+Framework e artefatti per **CEO**, **CTO** e **Fellow** — sopra Discovery, sotto il codice.
+
+| | Alias | Documento | Ver. | Quando usarlo |
+|---|-------|-----------|:----:|---------------|
+| 🎯 | `6_STRATEGY` | [6_STRATEGY_FRAMEWORK.md](./6_STRATEGY_FRAMEWORK.md) | **1.0** | Portfolio · roadmap · risk · FinOps · org · compliance |
+
+### Tier executive → operativo
+
+| Executive | Orizzonte | Mapping task |
+|-----------|-----------|--------------|
+| **STRATEGIC** | 6–18 mesi | Alimenta Discovery · business case §2b |
+| **TACTICAL** | Quarter | Default **STANDARD** · CRITICO se security/denaro |
+| **OPERATIONAL** | Sprint | **LIGHT** / **STANDARD** / **CRITICO** |
+
+### Artefatti [executive/](./executive/README.md)
+
+| Priorità | Artefatti |
+|:--------:|-----------|
+| **P0** | Portfolio · Roadmap · Risk register · FinOps |
+| **P1** | Team topology · ARB · Compliance · Stakeholder comms |
+| **P2** | Engineering principles · Horizon bets · Responsible AI · Vendor scorecard · M&A DD |
 
 ---
 
@@ -293,6 +333,13 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 2. Solo **`2_EXECUTION`** sez. B + D
 3. Verifica **[DoD LIGHT](./DEFINITION_OF_DONE.md)**
 
+### CEO / CTO (priorità portfolio)
+
+1. Compila P0 in **[executive/](./executive/README.md)** (portfolio, roadmap, risk, FinOps)
+2. Review trimestrale con **[6_STRATEGY](./6_STRATEGY_FRAMEWORK.md)**
+3. Maturity **organizzazione** ≥ 3 prima di nuove linee prodotto
+4. GO Discovery solo con riferimento portfolio/roadmap
+
 ---
 
 ## 📁 Struttura repository
@@ -306,7 +353,9 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 ├── 4_AI_AGENT_FRAMEWORK.md      # Protocollo AI
 ├── 5_BROWNFIELD_FRAMEWORK.md    # Legacy · assessment
 ├── AGENTS.md                    # Entry point agenti
-├── ADR-000.md · ADR-001.md      # Architecture Decision Records
+├── 6_STRATEGY_FRAMEWORK.md      # Strategy · C-level
+├── executive/                   # 13 artefatti P0–P2
+├── ADR-000.md · ADR-001.md · ADR-002.md
 ├── CHANGELOG.md
 ├── DEFINITION_OF_DONE.md
 ├── DISCOVERY_CHECKLIST.md
@@ -328,6 +377,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 | [ADR-000.md](./ADR-000.md) | Perché 9/6/5 pilastri |
 | [ADR-001.md](./ADR-001.md) | Decisione architetturale brownfield |
 | [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) | Ledger debito tecnico live |
+| [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md) | Autovalutazione manuale (9 pilastri) |
 | [LICENSE](./LICENSE) | **MIT** — uso, modifica e distribuzione liberi |
 
 **Prossimo self-audit consigliato:** 2026-10-24 (trimestrale)
@@ -336,7 +386,12 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 
 ## 📅 Changelog
 
-**2026-07-24** — Release iniziale pubblica
+**2026-07-24 (b)** — Layer strategy C-level + self-audit
+
+- `6_STRATEGY` v1.0 · cartella `executive/` (13 artefatti)
+- `0_META` v1.6 · `4_AI_AGENT` v1.6 · maturity org · ADR-002 · SELF_AUDIT
+
+**2026-07-24 (a)** — Release iniziale pubblica
 
 - Artefatti trasversali: discovery, DoD, DR, maturity, threat model
 - `0_META` v1.5 · `4_AI_AGENT` v1.5

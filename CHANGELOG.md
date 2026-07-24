@@ -2,6 +2,24 @@
 
 Formato basato su [Keep a Changelog](https://keepachangelog.com/). Le versioni seguono ogni singolo documento; questo file traccia le modifiche al **set completo**.
 
+## [2026-07-24] — Layer strategy C-level v1.6
+
+### Aggiunto
+- [6_STRATEGY_FRAMEWORK.md](./6_STRATEGY_FRAMEWORK.md) — 6 aree strategiche · tier STRATEGIC/TACTICAL/OPERATIONAL
+- Cartella [executive/](./executive/README.md) — **13 artefatti** P0/P1/P2
+- [ADR-002.md](./ADR-002.md) — decisione layer strategy
+- [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md) — autovalutazione 9 pilastri + piano miglioramenti
+
+### Modificato
+- `0_META` v1.5 → **v1.6** — flusso strategy-first · RACI C-level · review calendar · circuit breaker org
+- `4_AI_AGENT` v1.5 → **v1.6** — strategy gate · loading `6_STRATEGY` · escalation portfolio
+- [DISCOVERY_CHECKLIST.md](./DISCOVERY_CHECKLIST.md) — §2b business case
+- [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) — maturity organizzazione 0–5
+- [3_OPERATIONS_FRAMEWORK.md](./3_OPERATIONS_FRAMEWORK.md) — comms stakeholder P1
+- [AGENTS.md](./AGENTS.md) · [README.md](./README.md) — layer 6 · executive index
+
+---
+
 ## [2026-07-24] — Artefatti trasversali v1.5
 
 ### Aggiunto

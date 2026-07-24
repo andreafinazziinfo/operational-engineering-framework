@@ -71,6 +71,40 @@ Azioni:
 
 ---
 
+## Maturity organizzazione (0–5)
+
+Misura quanto l'**organizzazione** aderisce al layer strategico + operativo. Complementa la scorecard progetto.
+
+**Valutazione**: annuale (CEO/CTO) + trimestrale light · owner: ___ · data: ___
+
+| Livello | Nome | Criteri sintetici |
+|---------|------|-------------------|
+| **0** | Reattiva | Nessun portfolio · firefighting |
+| **1** | Consapevole | Discovery · roadmap informale |
+| **2** | Baseline | P0 executive · FinOps alert |
+| **3** | Strutturata | ARB · compliance · risk register |
+| **4** | Allineata | Roadmap multi-anno · SLO ↔ KPI · vendor scorecard |
+| **5** | Matura | Horizon bets · responsible AI · board review |
+
+### Scorecard organizzazione
+
+| Criterio | Peso | Sì (1) / No (0) | Note |
+|----------|------|-----------------|------|
+| [executive/PORTFOLIO_PRIORITIZATION.md](./executive/PORTFOLIO_PRIORITIZATION.md) attivo | 1 | | |
+| [executive/TECH_PRODUCT_ROADMAP.md](./executive/TECH_PRODUCT_ROADMAP.md) Now/Next/Later | 1 | | |
+| [executive/ENTERPRISE_RISK_REGISTER.md](./executive/ENTERPRISE_RISK_REGISTER.md) · 0 rischi ≥25 senza piano | 1 | | |
+| [executive/FINOPS_BUDGET.md](./executive/FINOPS_BUDGET.md) · alert 80/95% | 1 | | |
+| [executive/ARB_PROCESS.md](./executive/ARB_PROCESS.md) operativo | 1 | | |
+| Maturity progetto media **≥ 3** su prod attivi | 1 | | |
+| [executive/COMPLIANCE_PROGRAM.md](./executive/COMPLIANCE_PROGRAM.md) review ≤ 12 mesi | 1 | | |
+| Comms P1 via [STAKEHOLDER_COMMS_TEMPLATES.md](./executive/STAKEHOLDER_COMMS_TEMPLATES.md) se richiesto | 1 | | |
+| [executive/ENGINEERING_PRINCIPLES.md](./executive/ENGINEERING_PRINCIPLES.md) adottati | 1 | | |
+| Review strategy trimestrale documentata | 1 | | |
+
+**Target org**: startup **≥ 2** · scale-up **≥ 3** · enterprise/regulated **≥ 4**.
+
+---
+
 ## Circuit breaker maturity
 
 Se livello **≤ 2** su prod con utenti reali **> 30 giorni** → congelare feature non critiche fino a livello **≥ 3** (allineato a circuit breaker manuale in `0_META`).
@@ -79,6 +113,6 @@ Se livello **≤ 2** su prod con utenti reali **> 30 giorni** → congelare feat
 
 ## Collegamenti
 
-- Governance review → `0_META` Area C
+- Governance review → `0_META` Area C · strategy → [6_STRATEGY](./6_STRATEGY_FRAMEWORK.md)
 - Ingresso brownfield → `5_BROWNFIELD` Area A
 - Agente AI: dichiarare maturity stimata in trace se valutazione richiesta

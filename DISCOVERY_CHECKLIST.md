@@ -26,6 +26,21 @@ Usare **prima** di `1_DESIGN` (greenfield) o `5_BROWNFIELD` Area A (brownfield) 
 
 ---
 
+## 2b. Business case (CEO/CTO — obbligatorio se tier executive STRATEGIC o TACTICAL)
+
+Usare template in [executive/PORTFOLIO_PRIORITIZATION.md](./executive/PORTFOLIO_PRIORITIZATION.md) e [executive/FINOPS_BUDGET.md](./executive/FINOPS_BUDGET.md).
+
+- [ ] **Beneficio atteso** quantificato (€, tempo, utenti, revenue) con orizzonte
+- [ ] **Costo totale** stimato (build + run 12 mesi) · confronto **build vs buy vs integrare**
+- [ ] **ROI / payback** indicativo o scenario *do nothing*
+- [ ] **Strategic fit** (1–5) allineato a [executive/TECH_PRODUCT_ROADMAP.md](./executive/TECH_PRODUCT_ROADMAP.md)
+- [ ] **Rischio enterprise** registrato o aggiornato in [executive/ENTERPRISE_RISK_REGISTER.md](./executive/ENTERPRISE_RISK_REGISTER.md) se score ≥ 15
+- [ ] Riferimento voce **portfolio** o roadmap Now (ID iniziativa)
+
+**Soglia NO-GO**: costo > beneficio atteso **oppure** payback > **24 mesi** senza strategic fit ≥ 4.
+
+---
+
 ## 3. Build vs buy vs integrare
 
 | Opzione | Quando preferirla | Da documentare |
@@ -59,6 +74,7 @@ Usare **prima** di `1_DESIGN` (greenfield) o `5_BROWNFIELD` Area A (brownfield) 
 
 ## 6. Collegamenti
 
+- Strategy layer → [6_STRATEGY_FRAMEWORK.md](./6_STRATEGY_FRAMEWORK.md) · [executive/](./executive/README.md)
 - Obiettivo approvato → [DEFINITION_OF_DONE.md](./DEFINITION_OF_DONE.md) per tier task
 - Tier CRITICO → [security/THREAT_MODEL_TEMPLATE.md](./security/THREAT_MODEL_TEMPLATE.md) in Design
 - Prod esistente → [DR_BACKUP_PLAN.md](./DR_BACKUP_PLAN.md) se mancante

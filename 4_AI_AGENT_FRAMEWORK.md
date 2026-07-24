@@ -4,10 +4,10 @@
 **Documento**: Layer di meta-prompting — istruzioni operative per agenti AI (Claude Code, Cursor, Antigravity, ecc.)  
 **Alias canonico**: `4_AI_AGENT`  
 **File**: `4_AI_AGENT_FRAMEWORK.md`  
-**Prerequisito**: Esistono `0_META`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD` (vedi [README.md](./README.md))  
-**Versione**: 1.5  
+**Prerequisito**: Esistono `0_META`, `6_STRATEGY`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD` (vedi [README.md](./README.md))  
+**Versione**: 1.6  
 **Ultima modifica**: 2026-07-24  
-**Compatibile con**: `0_META` v1.5, `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.0  
+**Compatibile con**: `0_META` v1.6, `6_STRATEGY` v1.0, `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.0  
 **Differenza col Meta-Governance**: `0_META` governa **il contenuto** del manuale (chi lo modifica, quando). Questo documento governa **come** un agente AI lo **legge e lo usa** in una sessione di lavoro reale.
 
 ---
@@ -37,6 +37,7 @@ Un framework scritto per un umano non è automaticamente utilizzabile da un agen
 | Segnale | Azione |
 |---------|--------|
 | Obiettivo vago · "facciamo X" senza metriche | [DISCOVERY_CHECKLIST.md](./DISCOVERY_CHECKLIST.md) · **zero codice** |
+| Iniziativa STRATEGIC/TACTICAL senza portfolio | [6_STRATEGY](./6_STRATEGY_FRAMEWORK.md) + [executive/PORTFOLIO_PRIORITIZATION.md](./executive/PORTFOLIO_PRIORITIZATION.md) · poi Discovery |
 | GO greenfield | → `1_DESIGN` |
 | GO brownfield | → `5_BROWNFIELD` ASSESSMENT |
 | NO-GO / PIVOT | stop o nuova discovery |
@@ -79,6 +80,7 @@ Un framework scritto per un umano non è automaticamente utilizzabile da un agen
 ### B. 📂 LOADING PROTOCOL
 
 - [ ] **DISCOVERY** (idea vaga) → solo [DISCOVERY_CHECKLIST.md](./DISCOVERY_CHECKLIST.md)
+- [ ] **STRATEGY** (portfolio, roadmap, risk, FinOps) → [6_STRATEGY_FRAMEWORK.md](./6_STRATEGY_FRAMEWORK.md) + artefatto `executive/` pertinente · **non** sostituisce Discovery
 - [ ] **GREENFIELD** + LIGHT → `2_EXECUTION` B + D
 - [ ] **GREENFIELD** + STANDARD → `1_DESIGN` 1–2 + `2_EXECUTION`
 - [ ] **GREENFIELD** + CRITICO → `1_DESIGN` + `2_EXECUTION` + `3_OPERATIONS` B + C + [DEFINITION_OF_DONE.md](./DEFINITION_OF_DONE.md) + [security/THREAT_MODEL_TEMPLATE.md](./security/THREAT_MODEL_TEMPLATE.md)
@@ -99,6 +101,7 @@ Un framework scritto per un umano non è automaticamente utilizzabile da un agen
 | `3_OPERATIONS` | `3_OPERATIONS_FRAMEWORK.md` |
 | `4_AI_AGENT` | `4_AI_AGENT_FRAMEWORK.md` |
 | `5_BROWNFIELD` | `5_BROWNFIELD_FRAMEWORK.md` |
+| `6_STRATEGY` | `6_STRATEGY_FRAMEWORK.md` |
 
 ---
 
@@ -158,6 +161,7 @@ Task: ottimizzare query ordini | BROWNFIELD/INCREMENTAL | STANDARD | Profiling p
 - [ ] **CRITICO** senza [threat model](./security/THREAT_MODEL_TEMPLATE.md) approvato
 - [ ] **CRITICO** su prod senza [DR_BACKUP_PLAN.md](./DR_BACKUP_PLAN.md) (RTO/RPO)
 - [ ] **ASSESSMENT** con merge codice proposto → stop · baseline prima
+- [ ] GO Discovery **senza** riferimento portfolio/roadmap su prod revenue → stop · [6_STRATEGY](./6_STRATEGY_FRAMEWORK.md)
 - [ ] Task chiuso senza verifica [DEFINITION_OF_DONE.md](./DEFINITION_OF_DONE.md) per tier
 
 ---
@@ -166,12 +170,13 @@ Task: ottimizzare query ordini | BROWNFIELD/INCREMENTAL | STANDARD | Profiling p
 
 ```
 Idea vaga → DISCOVERY_CHECKLIST.md prima di codice.
+Iniziativa multi-team → 6_STRATEGY + executive/ prima di Discovery.
 Determina GREENFIELD vs BROWNFIELD. Verifica DEFINITION_OF_DONE per tier.
 Su BROWNFIELD senza baseline: ASSESSMENT, solo 5_BROWNFIELD Area A, zero merge.
 CRITICO: threat model + DR plan su prod.
 Dichiara intent PRIMA di codice. Trace + DoD a fine task. Stop su escalation.
-File: 0_META, 1_DESIGN, 2_EXECUTION, 3_OPERATIONS, 4_AI_AGENT, 5_BROWNFIELD (_FRAMEWORK.md).
-Artefatti: DISCOVERY_CHECKLIST, DEFINITION_OF_DONE, DR_BACKUP_PLAN, FRAMEWORK_MATURITY, security/THREAT_MODEL_TEMPLATE.
+File: 0_META, 6_STRATEGY, 1_DESIGN, 2_EXECUTION, 3_OPERATIONS, 4_AI_AGENT, 5_BROWNFIELD (_FRAMEWORK.md).
+Artefatti: executive/, DISCOVERY_CHECKLIST, DEFINITION_OF_DONE, DR_BACKUP_PLAN, FRAMEWORK_MATURITY, security/THREAT_MODEL_TEMPLATE.
 ```
 
 ---

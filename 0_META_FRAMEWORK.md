@@ -1,26 +1,27 @@
 # 🧭 META-GOVERNANCE FRAMEWORK
-## Governance del Manuale: Versionare, Auditare e Far Evolvere i 5 Framework + Layer AI
+## Governance del Manuale: Versionare, Auditare e Far Evolvere i 6 Framework + Layer AI + Strategy
 
-**Documento**: Framework di governance applicato all'intero manuale (Design, Execution, Operations, Brownfield, AI Agent)  
+**Documento**: Framework di governance applicato all'intero manuale (Strategy, Design, Execution, Operations, Brownfield, AI Agent)  
 **Alias canonico**: `0_META`  
 **File**: `0_META_FRAMEWORK.md`  
-**Prerequisito**: Esistono `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD`, `4_AI_AGENT` (vedi [README.md](./README.md))  
-**Versione**: 1.5  
+**Prerequisito**: Esistono `6_STRATEGY`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD`, `4_AI_AGENT` (vedi [README.md](./README.md))  
+**Versione**: 1.6  
 **Ultima modifica**: 2026-07-24  
-**Compatibile con**: `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.0, `4_AI_AGENT` v1.5  
+**Compatibile con**: `6_STRATEGY` v1.0, `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.0, `4_AI_AGENT` v1.6  
 **Principio guida**: Il manuale stesso è un sistema. Va progettato, eseguito e mantenuto con le sue stesse regole (dogfooding).
 
 ---
 
 ## 📋 PERCHÉ SERVE QUESTO LIVELLO
 
-I cinque framework operativi coprono il ciclo di vita di **un progetto** (greenfield e brownfield). Nessuno risponde da solo a:
+I sei framework operativi + il layer strategico coprono il ciclo **visione → progetto → delivery → ops**. Nessuno risponde da solo a:
 
 - "Chi decide se il framework stesso è sbagliato o obsoleto?"
 - "Come si aggiorna senza rompere la coerenza tra i documenti?"
 - "Chi ha l'autorità di modificarlo?"
 - "Come un agente AI applica il manuale in modo coerente?" → `4_AI_AGENT`, **governato** da questo documento
 - "Come si applica il manuale a un progetto **già in sviluppo o finito**?" → `5_BROWNFIELD`, invocato via `4_AI_AGENT`
+- "Quali iniziative hanno priorità a livello azienda?" → [`6_STRATEGY`](./6_STRATEGY_FRAMEWORK.md) + [`executive/`](./executive/README.md)
 
 ---
 
@@ -55,6 +56,10 @@ I cinque framework operativi coprono il ciclo di vita di **un progetto** (greenf
 | Applicare modifica ai file | Owner o delegato | Owner del manuale | — | Team |
 | Agent AI applica framework su task | Agente AI | Utente umano | — | — |
 | Agent AI propone modifica al manuale | Agente AI | Owner del manuale | — | — |
+| Portfolio / priorità iniziative | VP Product / Eng | CEO / CTO | Finance | Board |
+| Escalation rischio enterprise ≥ 25 | Risk owner | CEO / board | Legal | Stakeholder |
+| Approvazione ADR tier CRITICO | Tech lead | ARB ([executive/ARB_PROCESS.md](./executive/ARB_PROCESS.md)) | Security | Team |
+| Comunicazione P1 a board/clienti | On-call / Comms | CEO / CTO | Legal | Clienti |
 
 **Regola one-person**: l'owner è chi mantiene il repo; l'agente propone, l'umano approva sempre prima del merge.
 
@@ -84,6 +89,8 @@ I cinque framework operativi coprono il ciclo di vita di **un progetto** (greenf
   - [x] **Artefatti operativi**: [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) · [runbooks/](./runbooks/README.md) · [AGENTS.md](./AGENTS.md)
   - [x] **Brownfield**: adozione su codebase esistente → [5_BROWNFIELD_FRAMEWORK.md](./5_BROWNFIELD_FRAMEWORK.md) · [ADR-001.md](./ADR-001.md)
   - [x] **Artefatti trasversali**: [DISCOVERY_CHECKLIST.md](./DISCOVERY_CHECKLIST.md) · [DEFINITION_OF_DONE.md](./DEFINITION_OF_DONE.md) · [DR_BACKUP_PLAN.md](./DR_BACKUP_PLAN.md) · [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) · [security/THREAT_MODEL_TEMPLATE.md](./security/THREAT_MODEL_TEMPLATE.md)
+  - [x] **Layer strategy**: [6_STRATEGY_FRAMEWORK.md](./6_STRATEGY_FRAMEWORK.md) · [executive/](./executive/README.md) · [ADR-002.md](./ADR-002.md)
+  - [x] **Self-audit documentato**: [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md)
 
 ---
 
@@ -99,9 +106,12 @@ I cinque framework operativi coprono il ciclo di vita di **un progetto** (greenf
 
 ---
 
-## ⚡ FLUSSO COMPLETO (discovery → delivery)
+## ⚡ FLUSSO COMPLETO (strategy → discovery → delivery)
 
 ```
+6_STRATEGY + executive/ (portfolio · roadmap · risk · FinOps · org)
+    │
+    ▼
 DISCOVERY (idea vaga) → DISCOVERY_CHECKLIST.md
     │
     ├── GO greenfield ──► 1_DESIGN → 2_EXECUTION → 3_OPERATIONS
@@ -110,7 +120,7 @@ DISCOVERY (idea vaga) → DISCOVERY_CHECKLIST.md
 ```
 
 Ogni task: tier LIGHT / STANDARD / CRITICO · verifica [DEFINITION_OF_DONE.md](./DEFINITION_OF_DONE.md)  
-Maturity progetto: [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) (review trimestrale)
+Maturity progetto: [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) · maturity org: stessa sezione **organizzazione**
 
 ## ⚡ CLASSIFICAZIONE TASK (ASSESSMENT / LIGHT / STANDARD / CRITICO)
 
@@ -153,6 +163,8 @@ Segnale esplicito che il framework **non viene più rispettato** su un progetto:
 2. [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) con voci **Alto impatto** > 30 giorni senza revisione
 3. Post-Mortem (`2_EXECUTION` Fase F) che identifica rischi previsti nel Pre-Mortem ma ignorati
 4. [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) livello **≤ 2** su prod con utenti **> 30 giorni**
+5. Maturity **organizzazione ≤ 2** con **≥ 2** prod attivi **> 90 giorni**
+6. Iniziativa GO Discovery **senza** riferimento portfolio/roadmap ([6_STRATEGY](./6_STRATEGY_FRAMEWORK.md))
 
 **Azione**: fermare nuove feature, eseguire audit con `1_DESIGN` completo, aggiornare tier e debito tecnico.
 
@@ -172,8 +184,21 @@ Prima di ogni release del manuale, verificare:
 - [x] [AGENTS.md](./AGENTS.md) — entry point Cursor/agent
 - [x] [5_BROWNFIELD_FRAMEWORK.md](./5_BROWNFIELD_FRAMEWORK.md) — brownfield + [ADR-001.md](./ADR-001.md)
 - [x] Artefatti trasversali: Discovery, DoD, DR, Maturity, Threat model template
+- [x] `6_STRATEGY` + `executive/` (13 artefatti P0–P2) · [ADR-002.md](./ADR-002.md)
+- [x] Cross-link P2 executive corretti · maturity org in FRAMEWORK_MATURITY
 
 ---
+
+## 📅 REVIEW CALENDAR
+
+| Review | Frequenza | Owner | Output |
+|--------|-----------|-------|--------|
+| Self-audit manuale (Area C) | Trimestrale | Owner manuale | Checklist `0_META` + [SELF_AUDIT](./SELF_AUDIT_2026-07-24.md) template |
+| Strategy / portfolio | Trimestrale | CEO / CTO | [executive/PORTFOLIO_PRIORITIZATION.md](./executive/PORTFOLIO_PRIORITIZATION.md) |
+| Maturity org | Annuale (+ trimestrale light) | CTO | [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) sezione org |
+| Compliance | Semestrale | DPO / Security | [executive/COMPLIANCE_PROGRAM.md](./executive/COMPLIANCE_PROGRAM.md) |
+
+**Prossima review consigliata**: 2026-10-24
 
 ## 📊 FRAMEWORK MATURITY (progetto)
 
@@ -191,4 +216,4 @@ Valutare ogni progetto con [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) · l
 
 ## 📌 Esito dell'Autovalutazione
 
-Il manuale copre il ciclo **discovery → greenfield/brownfield → delivery → ops**, con DoD per tier, DR/backup, threat modeling, maturity score, ledger, runbook e `AGENTS.md`. **Completo per uso operativo.**
+Il manuale copre **strategy → discovery → greenfield/brownfield → delivery → ops**, con layer executive (CEO/CTO/Fellow), DoD per tier, DR, threat modeling, maturity progetto **e organizzazione**, ledger, runbook e `AGENTS.md`. **Completo per uso operativo e governance C-level** — vedi [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md).

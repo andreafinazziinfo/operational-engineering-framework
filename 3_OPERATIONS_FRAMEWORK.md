@@ -7,7 +7,7 @@
 **Prerequisito**: Il sistema è già in produzione secondo `2_EXECUTION`  
 **Versione**: 1.1  
 **Ultima modifica**: 2026-07-24  
-**Compatibile con**: `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `0_META` v1.5, `4_AI_AGENT` v1.5, `5_BROWNFIELD` v1.0  
+**Compatibile con**: `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `0_META` v1.6, `4_AI_AGENT` v1.6, `5_BROWNFIELD` v1.0, `6_STRATEGY` v1.0  
 
 ---
 
@@ -36,6 +36,7 @@
   - [ ] Ogni incidente produce un report scritto (cosa è successo, impatto, causa, fix)?
   - [ ] Il tempo di rilevamento (TTD) e di risoluzione (TTR) vengono misurati?
   - [ ] Soglia quantitativa TTD P1: **≤ 5 minuti** · TTR P1 target: **≤ 4 ore** (mitigazione entro **≤ 15 min**)
+  - [ ] Comunicazione stakeholder (board, clienti enterprise, regolatore) via [executive/STAKEHOLDER_COMMS_TEMPLATES.md](./executive/STAKEHOLDER_COMMS_TEMPLATES.md) entro **≤ 60 min** su P1 con impatto esterno?
 
 **Runbook disponibili**: vedi [runbooks/README.md](./runbooks/README.md) — personalizza placeholder per il tuo stack.
 
