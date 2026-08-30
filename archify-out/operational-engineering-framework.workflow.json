@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "Operational Engineering Framework — Flusso Operativo",
+    "output": "oef-workflow.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "go-no-go",
+        "label": "Discovery go/no-go",
+        "focus": [
+          "strat",
+          "disc",
+          "stop",
+          "design",
+          "bf"
+        ],
+        "note": "Ogni iniziativa passa da Discovery prima di Design — greenfield o brownfield si biforcano qui."
+      },
+      {
+        "id": "tier-gate",
+        "label": "Tier gate e chiusura",
+        "focus": [
+          "exec",
+          "tier_gate",
+          "dod",
+          "ops"
+        ],
+        "note": "Il tier (LIGHT/STANDARD/CRITICO) determina il rigore richiesto prima della Definition of Done."
+      }
+    ]
+  },
+  "lanes": [
+    {
+      "id": "strategy",
+      "label": "Strategy & Discovery"
+    },
+    {
+      "id": "brownfield",
+      "label": "Brownfield"
+    },
+    {
+      "id": "delivery",
+      "label": "Design & Delivery"
+    },
+    {
+      "id": "tier",
+      "label": "Tier Gate",
+      "variant": "exception"
+    },
+    {
+      "id": "ops",
+      "label": "Operations"
+    }
+  ],
+  "mainPath": [
+    "vision",
+    "strat",
+    "disc",
+    "design",
+    "exec",
+    "tier_gate",
+    "dod"
+  ],
+  "nodes": [
+    {
+      "id": "vision",
+      "lane": "strategy",
+      "col": 0,
+      "type": "external",
+      "label": "Vision"
+    },
+    {
+      "id": "strat",
+      "lane": "strategy",
+      "col": 1,
+      "type": "backend",
+      "label": "6_STRATEGY",
+      "width": 70
+    },
+    {
+      "id": "disc",
+      "lane": "strategy",
+      "col": 2,
+      "type": "security",
+      "label": "DISCOVERY",
+      "sublabel": "go/no-go",
+      "tag": "gate",
+      "width": 70
+    },
+    {
+      "id": "stop",
+      "lane": "tier",
+      "col": 2,
+      "type": "external",
+      "label": "STOP"
+    },
+    {
+      "id": "bf",
+      "lane": "brownfield",
+      "col": 3,
+      "type": "backend",
+      "label": "5_BROWNFIELD"
+    },
+    {
+      "id": "design",
+      "lane": "delivery",
+      "col": 3,
+      "type": "backend",
+      "label": "1_DESIGN",
+      "width": 60
+    },
+    {
+      "id": "exec",
+      "lane": "delivery",
+      "col": 4,
+      "type": "backend",
+      "label": "EXEC",
+      "width": 60
+    },
+    {
+      "id": "tier_gate",
+      "lane": "tier",
+      "col": 5,
+      "type": "security",
+      "label": "Tier",
+      "tag": "gate"
+    },
+    {
+      "id": "dod",
+      "lane": "delivery",
+      "col": 5,
+      "type": "database",
+      "label": "DoD"
+    },
+    {
+      "id": "ops",
+      "lane": "ops",
+      "col": 5,
+      "type": "cloud",
+      "label": "3_OPERATIONS"
+    }
+  ],
+  "edges": [
+    {
+      "from": "vision",
+      "to": "strat",
+      "variant": "emphasis",
+      "route": "bottom-channel",
+      "fromSide": "bottom",
+      "toSide": "bottom"
+    },
+    {
+      "from": "strat",
+      "to": "disc",
+      "variant": "emphasis",
+      "route": "bottom-channel",
+      "fromSide": "bottom",
+      "toSide": "bottom"
+    },
+    {
+      "from": "disc",
+      "to": "stop",
+      "label": "NO-GO",
+      "variant": "dashed",
+      "role": "error",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelSegment": 1,
+      "channelX": 300,
+      "labelAt": [
+        300,
+        400
+      ]
+    },
+    {
+      "from": "disc",
+      "to": "design",
+      "label": "GO greenfield",
+      "variant": "emphasis",
+      "labelSegment": 1,
+      "channelX": 340
+    },
+    {
+      "from": "disc",
+      "to": "bf",
+      "label": "GO brownfield",
+      "route": "bottom-channel",
+      "labelSegment": 1,
+      "channelX": 370
+    },
+    {
+      "from": "bf",
+      "to": "design",
+      "label": "incremental/full",
+      "labelAt": [
+        430,
+        322
+      ]
+    },
+    {
+      "from": "bf",
+      "to": "exec",
+      "label": "diretto"
+    },
+    {
+      "from": "design",
+      "to": "exec",
+      "variant": "emphasis",
+      "route": "bottom-channel",
+      "fromSide": "bottom",
+      "toSide": "bottom"
+    },
+    {
+      "from": "exec",
+      "to": "tier_gate",
+      "variant": "security",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "from": "tier_gate",
+      "to": "dod",
+      "variant": "emphasis",
+      "route": "drop",
+      "fromSide": "top",
+      "toSide": "bottom"
+    },
+    {
+      "from": "tier_gate",
+      "to": "ops",
+      "label": "avvia monitoring",
+      "route": "drop",
+      "fromSide": "bottom",
+      "toSide": "top",
+      "labelAt": [
+        625,
+        539
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Path-aware",
+      "items": [
+        "Greenfield e brownfield hanno percorsi distinti ma convergono su Execution",
+        "5_BROWNFIELD può alimentare Design (incremental/full) o andare diretto a Execution"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Tier non negoziabile",
+      "items": [
+        "CRITICO (security/produzione/denaro) non è negoziabile sotto deadline — vedi Circuit Breaker in 0_META",
+        "Ogni task passa da DEFINITION_OF_DONE prima di merge o deploy"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Review trimestrale",
+      "items": [
+        "FRAMEWORK_MATURITY — target minimo ≥3 su produzione con utenti reali",
+        "6_STRATEGY alimenta Discovery: portfolio, roadmap, risk, FinOps"
+      ]
+    }
+  ]
+}
