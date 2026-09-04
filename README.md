@@ -275,7 +275,7 @@ stateDiagram-v2
 | 📝 | [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) | Unità di lavoro implementabile per `2_EXECUTION` Fase A — ispirato a BMAD, idioma gate+soglia |
 | ❓ | [FAQ.md](./FAQ.md) | Domande frequenti umano-orientate — link ai file canonici, nessuna checklist duplicata |
 | 🪞 | [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) | Post-mortem compilabile per `2_EXECUTION` Fase F, entro 48h da P1/P2 |
-| 🔧 | [scripts/check_consistency.sh](./scripts/check_consistency.sh) | Verifica meccanica: link rotti + coerenza versioni — non solo self-audit dichiarato |
+| 🔧 | [scripts/check_consistency.sh](./scripts/check_consistency.sh) | Verifica meccanica: link rotti + coerenza versioni + copertura skill canonica — non solo self-audit dichiarato |
 | 📓 | [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) | Incidenti/gap reali e cosa è cambiato di conseguenza — chiude la dimensione 9 di `BENCHMARK.md` |
 | 🤝 | [NEXT_SESSION.md](./NEXT_SESSION.md) | Handover per la prossima sessione — sovrascritto a fine sessione, non un log |
 | ⚙️ | [.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml) | CI: `check_consistency.sh` su ogni push/PR |

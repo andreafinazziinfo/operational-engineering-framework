@@ -19,6 +19,11 @@ Formato basato su [Keep a Changelog](https://keepachangelog.com/). Le versioni s
 - Scala benchmark passata da **0–5** a **0–10** (stesso giorno, su richiesta owner per più precisione) — ogni dimensione ripensata da zero, non solo raddoppiata: voto composito **6.3/10** (dopo `scripts/check_consistency.sh`, `SELF_IMPROVEMENT_LOG.md` e la CI), leggermente più severo del 3.2/5 originale a parità di sostanza
 - [.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml) — `scripts/check_consistency.sh` automatizzato su ogni push/PR verso `main` · `BENCHMARK.md` dimensione 4 (Governance) 8/10→**9/10**
 - [NEXT_SESSION.md](./NEXT_SESSION.md) — handover per la sessione successiva: primo task esplicito (verifica live della skill, non fattibile in questa sessione perché circolare), poi audit del framework su sé stesso, poi backlog con priorità onesta
+
+### Corretto (controllo finale, stessa sessione)
+- `.claude/skills/operational-engineering-framework/SKILL.md` era rimasta indietro rispetto a 6 artefatti aggiunti dopo averla scritta (`POST_MORTEM_TEMPLATE`, `SELF_IMPROVEMENT_LOG`, `NEXT_SESSION`, `FAQ`, `DISCOVERY_CHECKLIST`, `DEFINITION_OF_DONE`) — tabella e workflow aggiornati
+- `scripts/check_consistency.sh` esteso con **Check 3**: verifica che la skill referenzi ogni artefatto trasversale atteso — testato in positivo e in negativo, ha già trovato 2 gap veri al primo run
+- Claim sbagliata corretta: la skill compare nell'elenco disponibile **nella stessa sessione** in cui è stata scritta, non serve una sessione nuova per la sola discoverability (resta da verificare l'invocazione automatica su un task reale) — vedi `SELF_IMPROVEMENT_LOG.md` #7
 - [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) — registro di incidenti/gap reali e cosa è cambiato di conseguenza nel manuale, distinto da `TECHNICAL_DEBT_LEDGER.md` (quello traccia debito aperto, questo lezioni chiuse) · 5 voci da questa sessione · chiude parzialmente `BENCHMARK.md` dimensione 9 (1/10→**3/10**)
 - **Reversibilità** ("one-way vs two-way door", mental model) → `1_DESIGN` Pilastro 2, campo dedicato nel template ADR. `1_DESIGN` v3.3→**v3.4**
 - [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) — post-mortem compilabile per `2_EXECUTION` Fase F (v2.2→**v2.3**), stesso gap già chiuso per Fase A con `SPEC_TEMPLATE.md`

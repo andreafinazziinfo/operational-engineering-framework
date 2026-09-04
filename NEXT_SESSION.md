@@ -7,7 +7,7 @@
 ## 🎯 Primo task esplicito per la prossima sessione
 
 1. **Apri una sessione nuova** in questo repo (`operational-engineering-framework`), senza incollare contesto da questa conversazione.
-2. **Osserva se la skill si attiva da sola.** Fai una richiesta plausibile e generica — es. "aiutami a pianificare una feature" o "voglio scrivere un ADR per una decisione tecnica" — **senza nominare** il framework o la skill esplicitamente. Registra: si è attivata `operational-engineering-framework`? Con quale trigger della description? Se non si attiva, prova a nominarla esplicitamente e registra anche quello.
+2. **Osserva se la skill si attiva da sola su un task reale.** *(Correzione 2026-09-04: comparire nell'elenco skill disponibili NON richiede una sessione nuova — è successo nella stessa sessione che l'ha scritta, vedi `SELF_IMPROVEMENT_LOG.md` #7. Quello che resta da verificare è più specifico: si attiva quando è *pertinente*, non solo quando esiste.)* Fai una richiesta plausibile e generica — es. "aiutami a pianificare una feature" o "voglio scrivere un ADR per una decisione tecnica" — **senza nominare** il framework o la skill esplicitamente. Registra: si è attivata `operational-engineering-framework`? Con quale trigger della description? Se non si attiva, prova a nominarla esplicitamente e registra anche quello.
 3. **Poi, esplicitamente**, usa la skill per condurre un **audit completo del framework applicato a sé stesso** (dogfooding meta, coerente con `0_META` Principio guida):
    - Applica `1_DESIGN` Pilastri 1, 2, 4, 7, 8 (i più rilevanti per un manuale, non per un sistema in produzione) al manuale stesso, come se fosse un sistema software
    - Confronta l'esito con [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md) (self-audit interno) e [BENCHMARK.md](./BENCHMARK.md) (confronto esterno) — sono entrambi datati, verifica se sono ancora accurati
@@ -35,23 +35,24 @@
 
 ---
 
-## ✅ Cosa è stato fatto (stato al 2026-09-04, commit `78e178b`)
+## ✅ Cosa è stato fatto (stato al 2026-09-04, ultimo commit prima del push finale)
 
 - `7_COLLABORATION_FRAMEWORK.md` v1.3 (layer collaborazione, poi rinforzato dopo un incidente reale)
 - 5 mental model nei pilastri esistenti (second-order, falsificabilità, recency check, reversibilità, sunk cost, circle of competence, Goodhart)
-- `BENCHMARK.md` — confronto esterno, **6.2/10**, non il 5/5 del self-audit interno
+- `BENCHMARK.md` — confronto esterno, **6.3/10**, non il 5/5 del self-audit interno
 - `SPEC_TEMPLATE.md`, `POST_MORTEM_TEMPLATE.md` — artefatti per `2_EXECUTION` Fasi A e F
-- `.claude/skills/operational-engineering-framework/SKILL.md` (ADR-004) — **non ancora testata in sessione reale**, è il gap #1 sopra
-- `scripts/check_consistency.sh` — verifica meccanica, testata contro errori iniettati
-- `SELF_IMPROVEMENT_LOG.md` — 5 voci reali
+- `.claude/skills/operational-engineering-framework/SKILL.md` (ADR-004) — sincronizzata con tutti gli artefatti trasversali (era rimasta indietro, corretto lo stesso giorno, vedi `SELF_IMPROVEMENT_LOG.md` #6) — **non ancora verificata l'invocazione automatica su un task reale**, è il gap #1 sopra (nota: comparire nell'elenco skill NON richiede più una sessione nuova, vedi #7)
+- `scripts/check_consistency.sh` — 3 check (link, versioni, copertura skill), tutti testati in positivo e in negativo, **automatizzato in CI** su ogni push/PR
+- `SELF_IMPROVEMENT_LOG.md` — 7 voci reali
 - 11 link rotti pre-esistenti corretti in `executive/`
-- 2 commit locali, push a GitHub in corso nella stessa sessione che ha scritto questo file
+- Pushato su GitHub, CI verificata (primo run: success)
 
 ## ⚠️ Cosa NON è stato verificato (onestà, non solo elenco)
 
-- Che la skill si attivi davvero da sola in Claude Code
+- Che la skill si attivi davvero da sola su un task reale (non solo che compaia nell'elenco)
 - Che `SELF_IMPROVEMENT_LOG.md` catturi lezioni utili oltre la prima sessione che l'ha creato
 - Che i 5 mental model aggiunti oggi siano davvero usati, non solo scritti
+- Che il Check 3 (copertura skill) resti aggiornato da solo quando si aggiunge un nuovo artefatto — oggi è stato aggiornato a mano insieme al check, non c'è ancora prova che qualcuno se ne ricordi la prossima volta
 
 ## 🔗 Riferimenti
 

@@ -21,12 +21,20 @@ Manuale: [README.md](../../../README.md)
 | Protocollo agente per singolo task | [4_AI_AGENT_FRAMEWORK.md](../../../4_AI_AGENT_FRAMEWORK.md) |
 | Codebase esistente/legacy | [5_BROWNFIELD_FRAMEWORK.md](../../../5_BROWNFIELD_FRAMEWORK.md) |
 | Igiene sessione, delega, verifica cross-agente | [7_COLLABORATION_FRAMEWORK.md](../../../7_COLLABORATION_FRAMEWORK.md) |
+| Post-mortem compilabile (Fase F) | [POST_MORTEM_TEMPLATE.md](../../../POST_MORTEM_TEMPLATE.md) |
 | Confronto esterno del manuale stesso | [BENCHMARK.md](../../../BENCHMARK.md) |
+| Incidenti/gap reali → cosa è cambiato | [SELF_IMPROVEMENT_LOG.md](../../../SELF_IMPROVEMENT_LOG.md) |
+| Handover di sessione (stato attuale, non un log) | [NEXT_SESSION.md](../../../NEXT_SESSION.md) |
+| Domande frequenti umano-orientate | [FAQ.md](../../../FAQ.md) |
+| Verifica meccanica link + versioni | [scripts/check_consistency.sh](../../../scripts/check_consistency.sh) |
+| Pre-design go/no-go (idea vaga, zero codice) | [DISCOVERY_CHECKLIST.md](../../../DISCOVERY_CHECKLIST.md) |
+| Definition of Done per tier | [DEFINITION_OF_DONE.md](../../../DEFINITION_OF_DONE.md) |
 
 **Nota versioni**: non hardcodare mai un numero di versione qui — leggi l'header del file target. Causa diretta di staleness osservata nella versione precedente di questa skill (vedi `ADR-004`); coerente con il Recency Check di `7_COLLABORATION` Area D.
 
 ## Quando invocare
 
+- Idea vaga, senza metriche, prima di qualsiasi piano tecnico → DISCOVERY_CHECKLIST.md, zero codice
 - Inizio di una nuova sessione su un repo che adotta questo manuale → applica prima `7_COLLABORATION` (una volta, non per task)
 - Creare o aggiornare un piano tecnico, ADR, wave doc, prompt di sessione
 - Scoping di refactor, migrazione, nuovo sottosistema
@@ -39,6 +47,7 @@ Manuale: [README.md](../../../README.md)
 ```
 0. SESSION START (una volta, non ripetere per ogni task):
    carica 7_COLLABORATION_FRAMEWORK.md — working tree condivisa, delega, verifica cross-agente
+   se esiste NEXT_SESSION.md nel repo, leggilo prima di iniziare — è l'handover della sessione precedente
 
 1. CLASSIFY task: greenfield/brownfield (4_AI_AGENT Sez. A) → tier LIGHT/STANDARD/CRITICO
    → dichiara intent (4_AI_AGENT Sez. C)
@@ -67,6 +76,13 @@ Manuale: [README.md](../../../README.md)
    → applica 7_COLLABORATION Area D (Goodhart's Law, Recency/Currency Check)
 
 10. Dopo l'esecuzione → produci EXECUTION TRACE (4_AI_AGENT Sez. D), anche su LIGHT
+    e verifica DEFINITION_OF_DONE.md per il tier prima di dichiarare il task chiuso
+
+11. Se è successo qualcosa degno di nota (incidente, gap scoperto, o conferma di un pattern) →
+    registra una riga in SELF_IMPROVEMENT_LOG.md, non solo nella tua risposta all'utente
+
+12. A fine sessione (o quando il contesto sta per esaurirsi) → sovrascrivi NEXT_SESSION.md
+    con stato attuale, cosa non è verificato, prossimo passo esplicito (7_COLLABORATION Area A)
 ```
 
 ## Template sezione piano (obbligatorio su STANDARD/CRITICO)
@@ -115,8 +131,9 @@ Manuale: [README.md](../../../README.md)
 
 ## Limiti dichiarati
 
-- Questa skill non è stata ancora verificata in una sessione Claude Code reale per confermare che venga auto-invocata correttamente (vedi Pre-Mortem in `ADR-004.md`) — non trattare la sua sola esistenza come prova che funziona.
+- **Aggiornato 2026-09-04**: la skill è comparsa nell'elenco skill disponibili nella stessa sessione in cui è stata scritta — la claim originale "serve una sessione nuova perché non comparirà" era sbagliata (vedi `SELF_IMPROVEMENT_LOG.md`). Resta vero che **non è ancora verificato** che si auto-invochi correttamente su un task reale senza essere nominata esplicitamente — comparire nell'elenco è discoverability, non prova di invocazione corretta. Non trattare l'una come prova dell'altra.
 - Nessun contenuto specifico di progetto qui per design (coerente con la regola "zero riferimenti a progetti specifici" del repo canonico). Un fork che ne ha bisogno (IP policy, tool interni) li aggiunge nella propria copia, non qui.
+- Questo file va tenuto sincronizzato a mano con i nuovi artefatti trasversali del repo — `scripts/check_consistency.sh` ora verifica che ogni artefatto atteso sia referenziato qui (Check 3), ma non verifica che il *workflow* descritto sopra li usi correttamente.
 
 ## Adattare a un fork
 

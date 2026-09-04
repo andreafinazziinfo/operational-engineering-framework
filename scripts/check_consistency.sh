@@ -70,6 +70,33 @@ else
 fi
 
 echo ""
+echo "=== 3. Copertura skill canonica (.claude/skills/operational-engineering-framework/SKILL.md) ==="
+
+SKILL_FILE=".claude/skills/operational-engineering-framework/SKILL.md"
+# Artefatti trasversali che la skill deve conoscere per pianificare/eseguire un task.
+# Non ogni file .md del repo (CHANGELOG, LICENSE, ADR storiche non servono qui) — solo
+# quelli che uno svolgimento reale di un task dovrebbe usare o aggiornare.
+EXPECTED_ARTIFACTS="SPEC_TEMPLATE.md POST_MORTEM_TEMPLATE.md BENCHMARK.md SELF_IMPROVEMENT_LOG.md NEXT_SESSION.md TECHNICAL_DEBT_LEDGER.md DEFINITION_OF_DONE.md DISCOVERY_CHECKLIST.md FAQ.md"
+
+MISSING_FROM_SKILL=0
+if [ -f "$SKILL_FILE" ]; then
+  for artifact in $EXPECTED_ARTIFACTS; do
+    if ! grep -q "$artifact" "$SKILL_FILE"; then
+      echo "MISSING dalla skill: $artifact non referenziato in $SKILL_FILE"
+      MISSING_FROM_SKILL=$((MISSING_FROM_SKILL + 1))
+    fi
+  done
+  if [ "$MISSING_FROM_SKILL" -eq 0 ]; then
+    echo "OK — skill referenzia tutti gli artefatti trasversali attesi"
+  else
+    echo "TROVATI $MISSING_FROM_SKILL artefatti non referenziati nella skill"
+    FAIL=1
+  fi
+else
+  echo "SKIP — $SKILL_FILE non trovato"
+fi
+
+echo ""
 if [ "$FAIL" -eq 0 ]; then
   echo "=== RISULTATO: pulito ==="
 else

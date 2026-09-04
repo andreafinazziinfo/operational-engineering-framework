@@ -50,6 +50,18 @@
 
 ---
 
+### 2026-09-04 #6 — La skill era già stale il giorno stesso in cui è stata scritta
+**Tipo**: Incidente
+**Cosa è successo**: l'owner ha chiesto un controllo finale prima di chiudere la sessione. Rileggendo `.claude/skills/operational-engineering-framework/SKILL.md`, mancavano dalla tabella di riferimento 6 artefatti aggiunti *dopo* averla scritta: `POST_MORTEM_TEMPLATE.md`, `SELF_IMPROVEMENT_LOG.md`, `NEXT_SESSION.md`, `FAQ.md`, `DISCOVERY_CHECKLIST.md`, `DEFINITION_OF_DONE.md`. Il workflow non menzionava mai di leggere `NEXT_SESSION.md` all'avvio né di scrivere su `SELF_IMPROVEMENT_LOG.md`.
+**Causa radice**: ogni volta che è stato aggiunto un nuovo artefatto trasversale in questa sessione, la skill (scritta prima) non veniva aggiornata di conseguenza — nessun meccanismo lo forzava. Esattamente lo stesso pattern dell'incidente #2 (self-audit non verificato meccanicamente), applicato a un file diverso.
+**Cosa è cambiato**: SKILL.md aggiornata (tabella + workflow, step 0/11/12 aggiunti). `scripts/check_consistency.sh` esteso con un **Check 3**: verifica che la skill referenzi ogni artefatto trasversale atteso — testato in positivo e in negativo (ho rimosso un riferimento apposta, il check l'ha preso, poi ripristinato da una copia in `/tmp`, non con `git checkout`, lezione dell'incidente #4 applicata).
+
+### 2026-09-04 #7 — La skill si è attivata nella stessa sessione che l'ha scritta
+**Tipo**: Gap scoperto (correzione di un mio claim sbagliato)
+**Cosa è successo**: `NEXT_SESSION.md` e `ADR-004.md` dichiaravano che la skill non sarebbe comparsa nell'elenco skill disponibili senza una sessione nuova, perché le skill di progetto si caricherebbero solo all'avvio sessione. Falso: è comparsa nell'elenco skill disponibili in un turno successivo della **stessa** sessione in cui è stata creata.
+**Causa radice**: assunzione non verificata sul comportamento di Claude Code, presentata come fatto invece che come ipotesi da controllare.
+**Cosa è cambiato**: claim corretta in `.claude/skills/operational-engineering-framework/SKILL.md` (sezione Limiti dichiarati) — resta vero che l'**invocazione automatica su un task reale** non è verificata (comparire nell'elenco è discoverability, non prova di uso corretto), quello sì richiede un test onesto in un turno che non sa già tutto.
+
 ## 🔗 Collegamenti
 
 - Gap che questo file inizia a chiudere → [BENCHMARK.md](./BENCHMARK.md) dimensione 9
