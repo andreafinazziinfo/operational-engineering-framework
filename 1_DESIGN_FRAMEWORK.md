@@ -5,9 +5,9 @@
 **Alias canonico**: `1_DESIGN`  
 **File**: `1_DESIGN_FRAMEWORK.md`  
 **Utilizzo**: Applicabile a qualsiasi piano tecnico, refactor o migrazione infrastrutturale — a prescindere dal dominio  
-**Versione**: 3.1  
-**Ultima modifica**: 2026-07-24  
-**Compatibile con**: `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `0_META` v1.5, `4_AI_AGENT` v1.5, `5_BROWNFIELD` v1.0  
+**Versione**: 3.4  
+**Ultima modifica**: 2026-09-04  
+**Compatibile con**: `2_EXECUTION` v2.3, `3_OPERATIONS` v1.1, `0_META` v1.7, `4_AI_AGENT` v1.7, `5_BROWNFIELD` v1.1, `7_COLLABORATION` v1.3  
 
 ---
 
@@ -37,6 +37,7 @@
   - [ ] Cosa succede se una dipendenza esterna (API, servizio terzo, cloud) va offline per 24 ore?
   - [ ] Cosa succede con input corrotti, mancanti o fuori range?
   - [ ] Come si comporta il sistema se RAM/disco/CPU vengono saturati improvvisamente?
+  - [ ] **Effetti di secondo ordine**: oltre al fallimento diretto, cosa succede *dopo* — a valle, su altri moduli/utenti/costi — se la mitigazione stessa entra in gioco (es. retry che amplifica il carico, fallback che nasconde l'errore invece di risolverlo)?
   - [ ] Soglia quantitativa: elencati **≥ 5 scenari di guasto** con impatto stimato (P1/P2/P3) e mitigazione proposta?
 
 ---
@@ -47,6 +48,9 @@
 - **Checklist**:
   - [ ] Ogni decisione architetturale rilevante ha un ADR numerato?
   - [ ] Ogni ADR elenca **≥ 2 alternative scartate** con motivazione?
+  - [ ] **Falsificazione**: ogni ADR dichiara quale evidenza/metrica, osservata *dopo* l'implementazione, dimostrerebbe che la scelta era sbagliata — non solo perché è stata presa?
+  - [ ] **Recency/Currency Check**: per scelte su librerie/API/pattern che cambiano rapidamente, l'ADR è verificato contro fonti aggiornate live (docs ufficiali, changelog), non dichiarato per fiducia nel training data del modello? Un agente AI non deve mai fidarsi del proprio cutoff percepito su claim time-sensitive
+  - [ ] **Reversibilità** ("one-way vs two-way door"): l'ADR dichiara se la scelta è facilmente reversibile o costosa/difficile da annullare? Una decisione irreversibile merita più rigore (tier più alto, più alternative valutate) di una che si può disfare in un'ora
   - [ ] Soglia quantitativa: **100%** delle dipendenze critiche (SPOF potenziali) coperte da ADR prima del merge?
 - **Formato**:
   - **Titolo**: [es. ADR-001: Scelta di Postgres su MongoDB per il modulo X]
@@ -60,6 +64,7 @@
 # ADR-NNN: [Titolo breve]
 **Stato**: Proposto | Accettato | Deprecato
 **Data**: YYYY-MM-DD
+**Reversibilità**: One-way door (costosa/difficile da annullare) | Two-way door (reversibile a basso costo)
 
 ## Contesto
 [Problema da risolvere]
@@ -72,6 +77,9 @@
 
 ## Conseguenze e trade-off
 [Guadagni e costi]
+
+## Criterio di falsificazione
+[Quale evidenza/metrica, osservata dopo l'implementazione, dimostrerebbe che questa scelta era sbagliata]
 ```
 
 ---
@@ -176,8 +184,8 @@ Tracciabilità di *perché* ogni pilastro esiste nel manuale — richiesto dal P
 
 | Pilastro | Fonte primaria | Riferimenti / pattern | Validazione nel manuale |
 |----------|----------------|----------------------|-------------------------|
-| **1 Pre-Mortem** | Esperienza operativa + cultura postmortem | Google SRE Book (postmortem), Amazon "working backwards" | Trigger revisione trimestrale in `0_META` |
-| **2 ADR** | Best practice industry | Michael Nygard — ADR format; ThoughtWorks Technology Radar | [ADR-000.md](./ADR-000.md) |
+| **1 Pre-Mortem** | Esperienza operativa + cultura postmortem | Google SRE Book (postmortem), Amazon "working backwards"; inversione + effetti di secondo ordine (mental model) | Trigger revisione trimestrale in `0_META` |
+| **2 ADR** | Best practice industry | Michael Nygard — ADR format; ThoughtWorks Technology Radar; first-principles + falsificazione + recency check + reversibilità "one-way/two-way door" (Amazon/Bezos, mental model) | [ADR-000.md](./ADR-000.md) · campo "Criterio di falsificazione" e "Reversibilità" nel template |
 | **3 Blast Radius** | Resilienza distribuita | Netflix chaos principles; bulkhead pattern (Release It!, Nygard) | Tier CRITICO obbligatorio in `0_META` |
 | **4 Data Lineage** | Data engineering + compliance | W3C PROV; GDPR art. 5(2) accountability; OpenLineage | Tabella sopra + sezione Pilastro 4 |
 | **5 Idempotency** | Esperienza diretta su retry/queue | Stripe Idempotency-Key; exactly-once semantics (Kafka docs); HTTP Idempotency | Checklist quantitativa Pilastro 5 |

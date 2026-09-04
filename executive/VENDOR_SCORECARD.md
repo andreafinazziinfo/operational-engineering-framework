@@ -73,7 +73,7 @@
 | R2 | ≥2 alternative (T1) | Architecture |
 | R3 | SLA, liability, DPA | Legal / DPO |
 | R4 | Exit plan valido (<12 mesi) | Tech Lead |
-| R5 | Costi vs [6_STRATEGY](../../6_STRATEGY_FRAMEWORK.md) | Finance |
+| R5 | Costi vs [6_STRATEGY](../6_STRATEGY_FRAMEWORK.md) | Finance |
 
 ---
 
@@ -83,7 +83,7 @@
 |---------|-----------|
 | Trigger | M&A vendor, breach, price +X%, EOL |
 | Export | Formato, API, tempi, costi egress |
-| Migration | Fasi, durata, [5_BROWNFIELD](../5_BROWNFIELD/README.md) |
+| Migration | Fasi, durata, [5_BROWNFIELD](../5_BROWNFIELD_FRAMEWORK.md) |
 | Rollback | Strategia migrazione parallela |
 
 - [ ] Export testato ≤12 mesi (T1) · Clausola portabilità · Rehearsal ogni 24 mesi (T1)

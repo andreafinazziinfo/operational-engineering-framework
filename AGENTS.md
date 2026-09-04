@@ -2,6 +2,10 @@
 
 Segui **`4_AI_AGENT_FRAMEWORK.md`** come protocollo obbligatorio.
 
+## Passo -3: Inizio sessione (una volta, prima del primo task)
+
+Carica **[7_COLLABORATION_FRAMEWORK.md](./7_COLLABORATION_FRAMEWORK.md)** — working tree condivisa, delega a sub-agent, verifica di claim propri e di altre sessioni/agenti AI, attrito tool/permessi. Non ricaricare per ogni task: cadenza per-sessione, non per-task.
+
 ## Passo -2: Strategy (iniziativa multi-team / revenue / portfolio)
 
 Obiettivo a livello azienda → **[6_STRATEGY_FRAMEWORK.md](./6_STRATEGY_FRAMEWORK.md)** + artefatto pertinente in **[executive/](./executive/README.md)**  
@@ -36,7 +40,7 @@ GO greenfield → `1_DESIGN` · GO brownfield → `5_BROWNFIELD` ASSESSMENT
 
 ## File framework
 
-`0_META` · `6_STRATEGY` · `1_DESIGN` · `2_EXECUTION` · `3_OPERATIONS` · `5_BROWNFIELD` · `4_AI_AGENT`  
+`0_META` · `6_STRATEGY` · `1_DESIGN` · `2_EXECUTION` · `3_OPERATIONS` · `5_BROWNFIELD` · `4_AI_AGENT` · `7_COLLABORATION`  
 (suffisso `_FRAMEWORK.md`)
 
 ## Maturity

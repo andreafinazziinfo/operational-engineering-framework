@@ -83,13 +83,13 @@
 
 ## 🤖 AI assets · 🔗 Post-close
 
-- [ ] Modelli prod, hosting, license · Bias assessment · Allineamento [4_AI_AGENT](../4_AI_AGENT/README.md)
+- [ ] Modelli prod, hosting, license · Bias assessment · Allineamento [4_AI_AGENT](../4_AI_AGENT_FRAMEWORK.md)
 
 | Workstream | Framework |
 |------------|-----------|
-| Legacy integration | [5_BROWNFIELD](../5_BROWNFIELD/README.md) |
-| UX convergence | [1_DESIGN — Pilastro 9](../1_DESIGN/PILASTRO_9.md) |
-| Strategy | [6_STRATEGY_FRAMEWORK.md](../../6_STRATEGY_FRAMEWORK.md) |
+| Legacy integration | [5_BROWNFIELD](../5_BROWNFIELD_FRAMEWORK.md) |
+| UX convergence | [1_DESIGN — Pilastro 9](../1_DESIGN_FRAMEWORK.md) |
+| Strategy | [6_STRATEGY_FRAMEWORK.md](../6_STRATEGY_FRAMEWORK.md) |
 
 ---
 

@@ -4,10 +4,11 @@
 **Documento**: Layer di meta-prompting — istruzioni operative per agenti AI (Claude Code, Cursor, Antigravity, ecc.)  
 **Alias canonico**: `4_AI_AGENT`  
 **File**: `4_AI_AGENT_FRAMEWORK.md`  
-**Prerequisito**: Esistono `0_META`, `6_STRATEGY`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD` (vedi [README.md](./README.md))  
-**Versione**: 1.6  
-**Ultima modifica**: 2026-07-24  
-**Compatibile con**: `0_META` v1.6, `6_STRATEGY` v1.0, `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.0  
+**Prerequisito**: Esistono `0_META`, `6_STRATEGY`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD`, `7_COLLABORATION` (vedi [README.md](./README.md))  
+**Versione**: 1.7  
+**Ultima modifica**: 2026-09-04  
+**Compatibile con**: `0_META` v1.7, `6_STRATEGY` v1.0, `1_DESIGN` v3.4, `2_EXECUTION` v2.3, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.1, `7_COLLABORATION` v1.3  
+**Relazione con `7_COLLABORATION`**: questo documento governa come un agente applica il manuale a **un task** (cadenza per-task). `7_COLLABORATION` governa come owner e agente(i) lavorano insieme **nel tempo**, attraverso sessioni (cadenza per-sessione) — caricalo una volta a inizio sessione, prima del primo task.  
 **Differenza col Meta-Governance**: `0_META` governa **il contenuto** del manuale (chi lo modifica, quando). Questo documento governa **come** un agente AI lo **legge e lo usa** in una sessione di lavoro reale.
 
 ---
@@ -79,6 +80,7 @@ Un framework scritto per un umano non è automaticamente utilizzabile da un agen
 
 ### B. 📂 LOADING PROTOCOL
 
+- [ ] **INIZIO SESSIONE** (una volta, prima del primo task) → `7_COLLABORATION_FRAMEWORK.md` — igiene di sessione, working tree condivisa, delega, verifica cross-agente
 - [ ] **DISCOVERY** (idea vaga) → solo [DISCOVERY_CHECKLIST.md](./DISCOVERY_CHECKLIST.md)
 - [ ] **STRATEGY** (portfolio, roadmap, risk, FinOps) → [6_STRATEGY_FRAMEWORK.md](./6_STRATEGY_FRAMEWORK.md) + artefatto `executive/` pertinente · **non** sostituisce Discovery
 - [ ] **GREENFIELD** + LIGHT → `2_EXECUTION` B + D
@@ -102,6 +104,7 @@ Un framework scritto per un umano non è automaticamente utilizzabile da un agen
 | `4_AI_AGENT` | `4_AI_AGENT_FRAMEWORK.md` |
 | `5_BROWNFIELD` | `5_BROWNFIELD_FRAMEWORK.md` |
 | `6_STRATEGY` | `6_STRATEGY_FRAMEWORK.md` |
+| `7_COLLABORATION` | `7_COLLABORATION_FRAMEWORK.md` |
 
 ---
 
@@ -163,19 +166,21 @@ Task: ottimizzare query ordini | BROWNFIELD/INCREMENTAL | STANDARD | Profiling p
 - [ ] **ASSESSMENT** con merge codice proposto → stop · baseline prima
 - [ ] GO Discovery **senza** riferimento portfolio/roadmap su prod revenue → stop · [6_STRATEGY](./6_STRATEGY_FRAMEWORK.md)
 - [ ] Task chiuso senza verifica [DEFINITION_OF_DONE.md](./DEFINITION_OF_DONE.md) per tier
+- [ ] Circuit breaker della collaborazione attivato (`7_COLLABORATION` — perdita working tree, dato fabbricato non verificato, babysitting infra ripetuto) → stop, audit Area D di `7_COLLABORATION`
 
 ---
 
 ## ⚡ ESEMPIO DI PROMPT DI SISTEMA
 
 ```
+Inizio sessione → 7_COLLABORATION_FRAMEWORK.md una volta (working tree condivisa, delega, verifica cross-agente).
 Idea vaga → DISCOVERY_CHECKLIST.md prima di codice.
 Iniziativa multi-team → 6_STRATEGY + executive/ prima di Discovery.
 Determina GREENFIELD vs BROWNFIELD. Verifica DEFINITION_OF_DONE per tier.
 Su BROWNFIELD senza baseline: ASSESSMENT, solo 5_BROWNFIELD Area A, zero merge.
 CRITICO: threat model + DR plan su prod.
 Dichiara intent PRIMA di codice. Trace + DoD a fine task. Stop su escalation.
-File: 0_META, 6_STRATEGY, 1_DESIGN, 2_EXECUTION, 3_OPERATIONS, 4_AI_AGENT, 5_BROWNFIELD (_FRAMEWORK.md).
+File: 0_META, 6_STRATEGY, 1_DESIGN, 2_EXECUTION, 3_OPERATIONS, 4_AI_AGENT, 5_BROWNFIELD, 7_COLLABORATION (_FRAMEWORK.md).
 Artefatti: executive/, DISCOVERY_CHECKLIST, DEFINITION_OF_DONE, DR_BACKUP_PLAN, FRAMEWORK_MATURITY, security/THREAT_MODEL_TEMPLATE.
 ```
 
@@ -186,7 +191,7 @@ Artefatti: executive/, DISCOVERY_CHECKLIST, DEFINITION_OF_DONE, DR_BACKUP_PLAN, 
 | Regola | Fonte primaria | Riferimenti / pattern | Validazione |
 |--------|----------------|----------------------|-------------|
 | **A Classification** | Risk + context routing | FAIR; brownfield vs greenfield (ThoughtWorks) | README + `0_META` |
-| **B Loading** | Context optimization | RAG chunking; load on demand | Mapping 6 file |
+| **B Loading** | Context optimization | RAG chunking; load on demand | Mapping 7 file |
 | **C Declaration** | HITL AI | Pre-flight checklists | CRITICO stop |
 | **D Trace** | Observability | Structured logging | Trace obbligatorio |
 | **E Escalation** | Safety guardrails | OWASP LLM; rewrite/API triggers | ADR + contract test |
@@ -195,4 +200,4 @@ Artefatti: executive/, DISCOVERY_CHECKLIST, DEFINITION_OF_DONE, DR_BACKUP_PLAN, 
 
 ## 📌 Relazione con gli Altri Documenti
 
-Traduce `0_META`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, **`5_BROWNFIELD`** in protocollo eseguibile per agenti AI — inclusi progetti già in sviluppo o finiti.
+Traduce `0_META`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, **`5_BROWNFIELD`** in protocollo eseguibile per agenti AI — inclusi progetti già in sviluppo o finiti. Complementare a **`7_COLLABORATION`**: quello governa la sessione nel tempo, questo il singolo task dentro la sessione.

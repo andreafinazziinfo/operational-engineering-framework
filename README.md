@@ -5,12 +5,12 @@
 **Manuale operativo per progettare, eseguire, operare e governare sistemi software** — greenfield e brownfield — con layer **C-level** (`6_STRATEGY`) e protocollo agenti AI.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![Docs](https://img.shields.io/badge/docs-7%20frameworks-2ea44f)](./0_META_FRAMEWORK.md)
+[![Docs](https://img.shields.io/badge/docs-8%20frameworks-2ea44f)](./0_META_FRAMEWORK.md)
 [![Executive](https://img.shields.io/badge/executive-13%20artefatti-purple)](./executive/README.md)
-[![Last review](https://img.shields.io/badge/review-2026--07--24-informational)](#-changelog)
+[![Last review](https://img.shields.io/badge/review-2026--09--04-informational)](#-changelog)
 [![Maturity target](https://img.shields.io/badge/maturity%20target-%E2%89%A5%203-orange)](./FRAMEWORK_MATURITY.md)
 
-[📖 Inizia qui](#-quick-start) · [🎯 Strategy C-level](#-layer-strategico-c-level) · [🗺️ Framework](#-framework-operativi) · [🤖 Agenti AI](./AGENTS.md) · [🚨 Runbook](./runbooks/README.md)
+[📖 Inizia qui](#-quick-start) · [🎯 Strategy C-level](#-layer-strategico-c-level) · [🗺️ Framework](#-framework-operativi) · [🤝 Collaborazione](./7_COLLABORATION_FRAMEWORK.md) · [❓ FAQ](./FAQ.md) · [🤖 Agenti AI](./AGENTS.md) · [🚨 Runbook](./runbooks/README.md)
 
 </div>
 
@@ -21,6 +21,7 @@
 - [Cos'è](#-cosè)
 - [Per chi è](#-per-chi-è)
 - [Layer strategico C-level](#-layer-strategico-c-level)
+- [Collaborazione owner-AI](#-collaborazione-owner-ai)
 - [Architettura del manuale](#-architettura-del-manuale)
 - [Flusso operativo](#-flusso-operativo)
 - [Framework operativi](#-framework-operativi)
@@ -66,6 +67,18 @@ Un **set di documenti operativi** — non un tool — che traduce buone pratiche
 
 ---
 
+## 🤝 Collaborazione owner-AI
+
+Layer trasversale — non nella catena verticale del ciclo di vita, si applica **attraverso** di essa, a cadenza per-sessione (non per-task).
+
+| | Alias | Documento | Ver. | Quando usarlo |
+|---|-------|-----------|:----:|---------------|
+| 🤝 | `7_COLLABORATION` | [7_COLLABORATION_FRAMEWORK.md](./7_COLLABORATION_FRAMEWORK.md) | **1.3** | Inizio sessione · working tree condivisa · delega sub-agent · verifica claim propri e di altri agenti AI |
+
+**5 aree**: Session Identity & Handover · Shared Working-Tree & Infra · Delegation & Sub-Agent Discipline · Verification & Trust Boundary · Tool & Permission Friction. Decisione architetturale: [ADR-003.md](./ADR-003.md).
+
+---
+
 ## 🧩 Architettura del manuale
 
 ```mermaid
@@ -78,6 +91,7 @@ flowchart TB
     subgraph governance ["🧭 Governance"]
         META["0_META<br/>Versioning · RACI · Maturity"]
         AI["4_AI_AGENT<br/>Protocollo agenti"]
+        COLLAB["7_COLLABORATION<br/>Sessione · delega · verifica"]
     end
 
     subgraph lifecycle ["🔄 Ciclo di vita progetto"]
@@ -99,6 +113,7 @@ flowchart TB
     STRAT --> EX
     EX --> DISC
     META --> AI
+    COLLAB -.-> AI
     AI --> DISC
     DISC -->|greenfield| DESIGN
     DISC -->|brownfield| BF
@@ -178,12 +193,13 @@ Framework e artefatti per **CEO**, **CTO** e **Fellow** — sopra Discovery, sot
 
 | | Alias | Documento | Ver. | Quando usarlo |
 |---|-------|-----------|:----:|---------------|
-| 🧭 | `0_META` | [0_META_FRAMEWORK.md](./0_META_FRAMEWORK.md) | **1.5** | Governance del manuale · versioning · maturity · RACI |
-| 📐 | `1_DESIGN` | [1_DESIGN_FRAMEWORK.md](./1_DESIGN_FRAMEWORK.md) | **3.1** | Piano tecnico · 9 pilastri · refactor strutturale |
-| ⚙️ | `2_EXECUTION` | [2_EXECUTION_FRAMEWORK.md](./2_EXECUTION_FRAMEWORK.md) | **2.1** | Dal piano al rilascio · test · CI · deploy |
+| 🧭 | `0_META` | [0_META_FRAMEWORK.md](./0_META_FRAMEWORK.md) | **1.7** | Governance del manuale · versioning · maturity · RACI |
+| 📐 | `1_DESIGN` | [1_DESIGN_FRAMEWORK.md](./1_DESIGN_FRAMEWORK.md) | **3.4** | Piano tecnico · 9 pilastri · refactor strutturale |
+| ⚙️ | `2_EXECUTION` | [2_EXECUTION_FRAMEWORK.md](./2_EXECUTION_FRAMEWORK.md) | **2.3** | Dal piano al rilascio · test · CI · deploy |
 | 🛡️ | `3_OPERATIONS` | [3_OPERATIONS_FRAMEWORK.md](./3_OPERATIONS_FRAMEWORK.md) | **1.1** | Post-deploy · incidenti · SLO · debito tecnico |
-| 🏚️ | `5_BROWNFIELD` | [5_BROWNFIELD_FRAMEWORK.md](./5_BROWNFIELD_FRAMEWORK.md) | **1.0** | Codebase esistente · assessment · legacy |
-| 🤖 | `4_AI_AGENT` | [4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md) | **1.5** | Protocollo obbligatorio per agenti AI |
+| 🏚️ | `5_BROWNFIELD` | [5_BROWNFIELD_FRAMEWORK.md](./5_BROWNFIELD_FRAMEWORK.md) | **1.1** | Codebase esistente · assessment · legacy |
+| 🤖 | `4_AI_AGENT` | [4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md) | **1.7** | Protocollo obbligatorio per agenti AI |
+| 🤝 | `7_COLLABORATION` | [7_COLLABORATION_FRAMEWORK.md](./7_COLLABORATION_FRAMEWORK.md) | **1.3** | Igiene sessione owner↔AI · delega · verifica cross-agente |
 
 <details>
 <summary><strong>📂 Aree brownfield (5_BROWNFIELD)</strong></summary>
@@ -255,6 +271,11 @@ stateDiagram-v2
 | 💾 | [DR_BACKUP_PLAN.md](./DR_BACKUP_PLAN.md) | RTO/RPO · restore drill |
 | 📊 | [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) | Score adozione **0–5** per progetto |
 | 🔐 | [security/THREAT_MODEL_TEMPLATE.md](./security/THREAT_MODEL_TEMPLATE.md) | STRIDE · obbligatorio tier CRITICO |
+| 📈 | [BENCHMARK.md](./BENCHMARK.md) | Confronto esterno vs BMAD-METHOD, AWS/Google Well-Architected, guidance Anthropic — voto 0–10 su 9 dimensioni |
+| 📝 | [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) | Unità di lavoro implementabile per `2_EXECUTION` Fase A — ispirato a BMAD, idioma gate+soglia |
+| ❓ | [FAQ.md](./FAQ.md) | Domande frequenti umano-orientate — link ai file canonici, nessuna checklist duplicata |
+| 🪞 | [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) | Post-mortem compilabile per `2_EXECUTION` Fase F, entro 48h da P1/P2 |
+| 🔧 | [scripts/check_consistency.sh](./scripts/check_consistency.sh) | Verifica meccanica: link rotti + coerenza versioni — non solo self-audit dichiarato |
 
 ### Maturity score (sintesi)
 
@@ -308,6 +329,8 @@ Passo  2  →  Esegui checklist · verifica DoD · trace · stop su escalation
 
 Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 
+**Claude Code (o altro tool con supporto SKILL.md — standard aperto da dicembre 2025)**: [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) applica l'intero manuale on-demand, senza caricamento manuale — vedi [ADR-004.md](./ADR-004.md). **Non ancora verificata in una sessione reale** (limite dichiarato, vedi il file stesso).
+
 ---
 
 ## 🚀 Quick start
@@ -354,13 +377,21 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 ├── 5_BROWNFIELD_FRAMEWORK.md    # Legacy · assessment
 ├── AGENTS.md                    # Entry point agenti
 ├── 6_STRATEGY_FRAMEWORK.md      # Strategy · C-level
+├── 7_COLLABORATION_FRAMEWORK.md # Igiene sessione owner-AI
 ├── executive/                   # 13 artefatti P0–P2
-├── ADR-000.md · ADR-001.md · ADR-002.md
+├── ADR-000.md · ADR-001.md · ADR-002.md · ADR-003.md
 ├── CHANGELOG.md
 ├── DEFINITION_OF_DONE.md
 ├── DISCOVERY_CHECKLIST.md
 ├── DR_BACKUP_PLAN.md
 ├── FRAMEWORK_MATURITY.md
+├── BENCHMARK.md                 # Confronto esterno (BMAD, AWS/Google, Anthropic)
+├── SPEC_TEMPLATE.md              # Unità di lavoro implementabile (2_EXECUTION Fase A)
+├── ADR-004.md                    # Decisione skill canonica operational-engineering-framework
+├── .claude/skills/operational-engineering-framework/SKILL.md  # Skill Claude Code (standard aperto) — copre 8 file, on-demand
+├── FAQ.md                        # Domande frequenti, link ai file canonici
+├── POST_MORTEM_TEMPLATE.md       # Post-mortem compilabile (2_EXECUTION Fase F)
+├── scripts/check_consistency.sh  # Verifica meccanica link + versioni
 ├── TECHNICAL_DEBT_LEDGER.md
 ├── runbooks/                    # 5 scenari P1–P3
 └── security/
@@ -376,6 +407,8 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 | [CHANGELOG.md](./CHANGELOG.md) | Storico modifiche al set |
 | [ADR-000.md](./ADR-000.md) | Perché 9/6/5 pilastri |
 | [ADR-001.md](./ADR-001.md) | Decisione architetturale brownfield |
+| [ADR-003.md](./ADR-003.md) | Decisione architetturale layer `7_COLLABORATION` |
+| [ADR-004.md](./ADR-004.md) | Decisione architetturale skill canonica `operational-engineering-framework` (ex `lead-architect-plan`) |
 | [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) | Ledger debito tecnico live |
 | [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md) | Autovalutazione manuale (9 pilastri) |
 | [LICENSE](./LICENSE) | **MIT** — uso, modifica e distribuzione liberi |
@@ -385,6 +418,23 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 ---
 
 ## 📅 Changelog
+
+**2026-09-04** — Layer collaborazione owner-AI + mental model mirati
+
+- [7_COLLABORATION_FRAMEWORK.md](./7_COLLABORATION_FRAMEWORK.md) v1.1 — 5 aree: session identity, working-tree condivisa, delega sub-agent, verification/trust boundary, tool/permission friction
+- [ADR-003.md](./ADR-003.md) — decisione layer collaborazione
+- `0_META` v1.6 → **v1.7** · `4_AI_AGENT` v1.6 → **v1.7** — loading a inizio sessione · escalation circuit breaker collaborazione
+- [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) — colonna Categoria (Architetturale | Collaborazione/Tooling)
+- 5 mental model innestati come checklist item mirati (non un nuovo pilastro): effetti di secondo ordine + falsificazione in `1_DESIGN` P1/P2 (v3.1→**v3.2**), sunk cost check in `5_BROWNFIELD` D (v1.0→**v1.1**), circle of competence + Goodhart's Law in `7_COLLABORATION` C/D (v1.0→**v1.1**)
+- [BENCHMARK.md](./BENCHMARK.md) — confronto esterno vs BMAD-METHOD, AWS/Google Well-Architected, guidance Anthropic "Building Effective Agents" · scala passata a **0–10** (più precisa di 0–5) · voto composito onesto **6.0/10** (dopo lo script sotto), non il 5/5 del self-audit interno · gap ancora aperti: validazione esterna, loop di verifica efficacia — non manifatturabili senza cadere in Goodhart
+- [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) — artefatto per scomporre un design in unità di lavoro implementabili, agganciato a `2_EXECUTION` Fase A · chiude parzialmente il gap 6 di `BENCHMARK.md` (4/10, scala rivista), ispirato al concetto PRD→story di BMAD-METHOD ma nel nostro idioma gate+soglia
+- [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica Claude Code (standard aperto), generalizza la versione già in uso in CycleLab/Titan da 3 a 8 file coperti, nessuna versione hardcodata · [ADR-004.md](./ADR-004.md) · non ancora verificata in sessione reale (limite dichiarato)
+- **Recency/Currency Check** (mental model, ricerca 2026 su knowledge cutoff staleness) → `1_DESIGN` P2 (v3.2→**v3.3**) + `7_COLLABORATION` D (v1.1→**v1.2**): scelte tecniche e claim time-sensitive verificati con ricerca live, mai per fiducia nel training data
+- [FAQ.md](./FAQ.md) — Q&A umano-orientate su tutto il manuale (tier, quale file per quale situazione, sessioni concorrenti, Goodhart, governance) — link ai file canonici, zero checklist duplicate
+- 11 link rotti pre-esistenti corretti in `executive/` P2 · self-audit 2026-07-24 corretto (dichiarava un fix mai fatto)
+- **Reversibilità** ("one-way vs two-way door") in `1_DESIGN` P2 (v3.3→**v3.4**) — l'ADR dichiara se la scelta è facile o costosa da annullare
+- [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) — post-mortem compilabile per `2_EXECUTION` Fase F (v2.2→**v2.3**), stesso gap già chiuso per Fase A con `SPEC_TEMPLATE.md`
+- [scripts/check_consistency.sh](./scripts/check_consistency.sh) — verifica meccanica (link + versioni), non solo self-report — alza la dimensione 4 (Governance) di `BENCHMARK.md` verso il prossimo giro
 
 **2026-07-24 (b)** — Layer strategy C-level + self-audit
 

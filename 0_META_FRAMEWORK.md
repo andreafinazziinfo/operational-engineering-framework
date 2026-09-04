@@ -4,10 +4,10 @@
 **Documento**: Framework di governance applicato all'intero manuale (Strategy, Design, Execution, Operations, Brownfield, AI Agent)  
 **Alias canonico**: `0_META`  
 **File**: `0_META_FRAMEWORK.md`  
-**Prerequisito**: Esistono `6_STRATEGY`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD`, `4_AI_AGENT` (vedi [README.md](./README.md))  
-**Versione**: 1.6  
-**Ultima modifica**: 2026-07-24  
-**Compatibile con**: `6_STRATEGY` v1.0, `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.0, `4_AI_AGENT` v1.6  
+**Prerequisito**: Esistono `6_STRATEGY`, `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS`, `5_BROWNFIELD`, `4_AI_AGENT`, `7_COLLABORATION` (vedi [README.md](./README.md))  
+**Versione**: 1.7  
+**Ultima modifica**: 2026-09-04  
+**Compatibile con**: `6_STRATEGY` v1.0, `1_DESIGN` v3.4, `2_EXECUTION` v2.3, `3_OPERATIONS` v1.1, `5_BROWNFIELD` v1.1, `4_AI_AGENT` v1.7, `7_COLLABORATION` v1.3  
 **Principio guida**: Il manuale stesso è un sistema. Va progettato, eseguito e mantenuto con le sue stesse regole (dogfooding).
 
 ---
@@ -22,6 +22,7 @@ I sei framework operativi + il layer strategico coprono il ciclo **visione → p
 - "Come un agente AI applica il manuale in modo coerente?" → `4_AI_AGENT`, **governato** da questo documento
 - "Come si applica il manuale a un progetto **già in sviluppo o finito**?" → `5_BROWNFIELD`, invocato via `4_AI_AGENT`
 - "Quali iniziative hanno priorità a livello azienda?" → [`6_STRATEGY`](./6_STRATEGY_FRAMEWORK.md) + [`executive/`](./executive/README.md)
+- "Come lavorano insieme owner e agente(i) AI **nel tempo**, tra sessioni?" → [`7_COLLABORATION`](./7_COLLABORATION_FRAMEWORK.md), caricato a inizio sessione (vedi [ADR-003.md](./ADR-003.md))
 
 ---
 
@@ -186,6 +187,13 @@ Prima di ogni release del manuale, verificare:
 - [x] Artefatti trasversali: Discovery, DoD, DR, Maturity, Threat model template
 - [x] `6_STRATEGY` + `executive/` (13 artefatti P0–P2) · [ADR-002.md](./ADR-002.md)
 - [x] Cross-link P2 executive corretti · maturity org in FRAMEWORK_MATURITY
+- [x] [7_COLLABORATION_FRAMEWORK.md](./7_COLLABORATION_FRAMEWORK.md) — igiene sessione/delega/verifica · [ADR-003.md](./ADR-003.md) · confine esplicito con `4_AI_AGENT` §E
+- [x] [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) — colonna Categoria (Architetturale | Collaborazione/Tooling)
+- [x] [BENCHMARK.md](./BENCHMARK.md) — confronto esterno, distinto dal self-audit interno · fonti verificate, non a memoria
+- [x] [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) — unità di lavoro implementabile, agganciato a `2_EXECUTION` Fase A
+- [x] [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica, 8 file coperti · [ADR-004.md](./ADR-004.md) · **non ancora verificata in sessione reale** (limite dichiarato)
+- [x] [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) — post-mortem compilabile, agganciato a `2_EXECUTION` Fase F
+- [x] [scripts/check_consistency.sh](./scripts/check_consistency.sh) — verifica meccanica link + versioni, non solo self-report
 
 ---
 
@@ -193,7 +201,8 @@ Prima di ogni release del manuale, verificare:
 
 | Review | Frequenza | Owner | Output |
 |--------|-----------|-------|--------|
-| Self-audit manuale (Area C) | Trimestrale | Owner manuale | Checklist `0_META` + [SELF_AUDIT](./SELF_AUDIT_2026-07-24.md) template |
+| Self-audit manuale (Area C) | Trimestrale | Owner manuale | Checklist `0_META` + [SELF_AUDIT](./SELF_AUDIT_2026-07-24.md) template + [scripts/check_consistency.sh](./scripts/check_consistency.sh) (verifica meccanica, non solo auto-dichiarata) |
+| Benchmark esterno (coerenza vs framework reali) | Trimestrale (con self-audit) | Owner manuale | [BENCHMARK.md](./BENCHMARK.md) aggiornato · fonti riverificate |
 | Strategy / portfolio | Trimestrale | CEO / CTO | [executive/PORTFOLIO_PRIORITIZATION.md](./executive/PORTFOLIO_PRIORITIZATION.md) |
 | Maturity org | Annuale (+ trimestrale light) | CTO | [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) sezione org |
 | Compliance | Semestrale | DPO / Security | [executive/COMPLIANCE_PROGRAM.md](./executive/COMPLIANCE_PROGRAM.md) |
@@ -216,4 +225,4 @@ Valutare ogni progetto con [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) · l
 
 ## 📌 Esito dell'Autovalutazione
 
-Il manuale copre **strategy → discovery → greenfield/brownfield → delivery → ops**, con layer executive (CEO/CTO/Fellow), DoD per tier, DR, threat modeling, maturity progetto **e organizzazione**, ledger, runbook e `AGENTS.md`. **Completo per uso operativo e governance C-level** — vedi [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md).
+Il manuale copre **strategy → discovery → greenfield/brownfield → delivery → ops**, con layer executive (CEO/CTO/Fellow), layer trasversale di collaborazione owner↔AI (`7_COLLABORATION`), DoD per tier, DR, threat modeling, maturity progetto **e organizzazione**, ledger, runbook e `AGENTS.md`. **Completo per uso operativo, governance C-level e igiene di collaborazione multi-sessione** — vedi [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md) (delta 2026-09-04 per `7_COLLABORATION` in coda al documento) e [BENCHMARK.md](./BENCHMARK.md) per il confronto esterno (5.9/10, non un 5/5 auto-dichiarato).

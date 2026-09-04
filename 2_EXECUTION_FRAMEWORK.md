@@ -5,9 +5,9 @@
 **Alias canonico**: `2_EXECUTION`  
 **File**: `2_EXECUTION_FRAMEWORK.md`  
 **Prerequisito**: Il piano ha superato `1_DESIGN` o `5_BROWNFIELD` Area A (brownfield) — tier in `0_META` / `4_AI_AGENT`
-**Versione**: 2.1  
-**Ultima modifica**: 2026-07-24  
-**Compatibile con**: `1_DESIGN` v3.1, `3_OPERATIONS` v1.1, `0_META` v1.5, `4_AI_AGENT` v1.5, `5_BROWNFIELD` v1.0  
+**Versione**: 2.3  
+**Ultima modifica**: 2026-09-04  
+**Compatibile con**: `1_DESIGN` v3.4, `3_OPERATIONS` v1.1, `0_META` v1.7, `4_AI_AGENT` v1.7, `5_BROWNFIELD` v1.1, `7_COLLABORATION` v1.3  
 
 ---
 
@@ -29,6 +29,7 @@
 
 ### A. 🧩 TASK BREAKDOWN
 - **Obiettivo**: Trasformare il piano in task eseguibili in max 1-2 ore ciascuno, con dipendenze esplicite.
+- **Template**: [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) — artefatto copiabile per formalizzare ogni unità di lavoro, opzionale su LIGHT ovvio, consigliato su STANDARD/CRITICO o quando il contesto rischia di perdersi tra sessioni (`7_COLLABORATION` Area A)
 - **Checklist**:
   - [ ] Ogni task ha un output verificabile (file, test che passa, endpoint funzionante)?
   - [ ] Le dipendenze tra task sono esplicite?
@@ -85,6 +86,7 @@
 
 ### F. 🪞 POST-MORTEM REALE
 - **Obiettivo**: Confrontare le ipotesi del Pre-Mortem (`1_DESIGN` Pilastro 1) con quanto accaduto realmente.
+- **Template**: [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) — artefatto copiabile, entro 48h da P1/P2
 - **Checklist**:
   - [ ] Quali rischi previsti si sono materializzati? Quali non erano previsti?
   - [ ] L'ADR originale (`1_DESIGN` Pilastro 2) va aggiornato con una nota "esito reale"?

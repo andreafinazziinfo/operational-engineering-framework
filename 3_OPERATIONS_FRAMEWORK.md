@@ -7,7 +7,7 @@
 **Prerequisito**: Il sistema è già in produzione secondo `2_EXECUTION`  
 **Versione**: 1.1  
 **Ultima modifica**: 2026-07-24  
-**Compatibile con**: `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `0_META` v1.6, `4_AI_AGENT` v1.6, `5_BROWNFIELD` v1.0, `6_STRATEGY` v1.0  
+**Compatibile con**: `1_DESIGN` v3.4, `2_EXECUTION` v2.3, `0_META` v1.7, `4_AI_AGENT` v1.7, `5_BROWNFIELD` v1.1, `6_STRATEGY` v1.0, `7_COLLABORATION` v1.3  
 
 ---
 

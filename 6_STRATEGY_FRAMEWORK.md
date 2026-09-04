@@ -7,7 +7,7 @@
 **Prerequisito**: [README.md](./README.md) · [0_META_FRAMEWORK.md](./0_META_FRAMEWORK.md) v1.6 · artefatti in [executive/](./executive/README.md)  
 **Versione**: 1.0  
 **Ultima modifica**: 2026-07-24  
-**Compatibile con**: `0_META` v1.6, `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `4_AI_AGENT` v1.6, `5_BROWNFIELD` v1.0  
+**Compatibile con**: `0_META` v1.7, `1_DESIGN` v3.4, `2_EXECUTION` v2.3, `3_OPERATIONS` v1.1, `4_AI_AGENT` v1.7, `5_BROWNFIELD` v1.1, `7_COLLABORATION` v1.3  
 **Principio guida**: La strategia definisce *cosa* e *perché*; Discovery e i framework operativi definiscono *come* e *quando*.
 
 ---
@@ -199,4 +199,4 @@ DISCOVERY_CHECKLIST ──► GO / NO-GO / PIVOT
 
 ## 📌 Esito dell'Autovalutazione
 
-`6_STRATEGY` collega visione executive al ciclo **Discovery → Design → Execution → Operations**, con artefatti P0/P1 misurabili e tier STRATEGIC/TACTICAL/OPERATIONAL mappati su LIGHT/STANDARD/CRITICO. **Pronto per adozione con `0_META` v1.6.**
+`6_STRATEGY` collega visione executive al ciclo **Discovery → Design → Execution → Operations**, con artefatti P0/P1 misurabili e tier STRATEGIC/TACTICAL/OPERATIONAL mappati su LIGHT/STANDARD/CRITICO. **Pronto per adozione con `0_META` v1.7.**

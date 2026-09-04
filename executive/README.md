@@ -4,7 +4,7 @@
 **Framework di riferimento**: [6_STRATEGY_FRAMEWORK.md](../6_STRATEGY_FRAMEWORK.md) (`6_STRATEGY`)  
 **Versione indice**: 1.0  
 **Ultima modifica**: 2026-07-24  
-**Compatibile con**: `0_META` v1.6 · [FRAMEWORK_MATURITY.md](../FRAMEWORK_MATURITY.md)
+**Compatibile con**: `0_META` v1.7 · [FRAMEWORK_MATURITY.md](../FRAMEWORK_MATURITY.md)
 
 ---
 

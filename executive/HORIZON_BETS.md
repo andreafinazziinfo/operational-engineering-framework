@@ -45,11 +45,11 @@
 
 ## 🔬 Gate DISCOVERY (obbligatorio)
 
-Prima di *Idea → Active*, completare [DISCOVERY spike](../discovery/DISCOVERY_SPIKE.md):
+Prima di *Idea → Active*, completare [DISCOVERY spike](../DISCOVERY_CHECKLIST.md):
 
 - [ ] Problema validato (≥5 interviste o dati quantitativi)
 - [ ] Metrica primaria e soglia di successo definite
-- [ ] Effort tecnico e dipendenze [5_BROWNFIELD](../5_BROWNFIELD/README.md)
+- [ ] Effort tecnico e dipendenze [5_BROWNFIELD](../5_BROWNFIELD_FRAMEWORK.md)
 - [ ] Risk assessment in [ENTERPRISE_RISK_REGISTER.md](./ENTERPRISE_RISK_REGISTER.md)
 - [ ] Go/No-Go con sponsor executive
 
@@ -59,14 +59,14 @@ Prima di *Idea → Active*, completare [DISCOVERY spike](../discovery/DISCOVERY_
 
 | Transizione | Criteri |
 |-------------|---------|
-| Idea → Discovery | Allineamento [6_STRATEGY_FRAMEWORK.md](../../6_STRATEGY_FRAMEWORK.md) |
+| Idea → Discovery | Allineamento [6_STRATEGY_FRAMEWORK.md](../6_STRATEGY_FRAMEWORK.md) |
 | Discovery → Pilot | Spike OK; MVP ≤8 settimane |
 | Pilot → Scale | KPI ≥ soglia per 2 cicli; unit economics positivi |
 | Scale → H1 Core | Revenue material; ownership permanente |
 
 **Kill** (2 review consecutive con una condizione vera): KPI <50% target · Costo >150% budget · Blocco dipendenza >90gg · Cambio strategico · Rischio regolatorio non mitigabile
 
-**Pivot:** segmento errato → cambio ICP · tech immatura → partnership/vendor · legacy → [5_BROWNFIELD](../5_BROWNFIELD/README.md) + wrapper API
+**Pivot:** segmento errato → cambio ICP · tech immatura → partnership/vendor · legacy → [5_BROWNFIELD](../5_BROWNFIELD_FRAMEWORK.md) + wrapper API
 
 ---
 
@@ -84,4 +84,4 @@ Prima di *Idea → Active*, completare [DISCOVERY spike](../discovery/DISCOVERY_
 
 - [ ] Post-mortem o success story · Metriche archiviate
 - [ ] Rischi chiusi in [ENTERPRISE_RISK_REGISTER.md](./ENTERPRISE_RISK_REGISTER.md)
-- [ ] Learnings linkati al prossimo [DISCOVERY spike](../discovery/DISCOVERY_SPIKE.md)
+- [ ] Learnings linkati al prossimo [DISCOVERY spike](../DISCOVERY_CHECKLIST.md)

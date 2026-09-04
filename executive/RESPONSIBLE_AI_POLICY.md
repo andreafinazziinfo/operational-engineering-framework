@@ -55,7 +55,7 @@ Modelli ML, LLM, agenti (RAG, tool-use), copilot, automazioni decisionali, train
 | Medio | Motivazione + confidence; opt-out umano |
 | Alto | Log decisionale, explainability strutturata, appeal path |
 
-Copy UX conforme a [1_DESIGN — Pilastro 9](../1_DESIGN/PILASTRO_9.md). Utente informato AI vs umano.
+Copy UX conforme a [1_DESIGN — Pilastro 9](../1_DESIGN_FRAMEWORK.md). Utente informato AI vs umano.
 
 ---
 
@@ -67,7 +67,7 @@ Copy UX conforme a [1_DESIGN — Pilastro 9](../1_DESIGN/PILASTRO_9.md). Utente 
 | Azioni irreversibili | ✅ Conferma esplicita |
 | Bassa confidence | ✅ Fallback umano |
 
-Agenti ([4_AI_AGENT](../4_AI_AGENT/README.md)): tool side-effect gated · kill switch ≤5 min · audit trail azioni autonome
+Agenti ([4_AI_AGENT](../4_AI_AGENT_FRAMEWORK.md)): tool side-effect gated · kill switch ≤5 min · audit trail azioni autonome
 
 ---
 
@@ -104,6 +104,6 @@ Agenti ([4_AI_AGENT](../4_AI_AGENT/README.md)): tool side-effect gated · kill s
 | T2 | Customer chatbot | AI Committee |
 | T3 | Underwriting, HR screening | Executive + DPO + Legal |
 
-**Go-live:** risk tier · HITL testato · monitoring (latency, drift, toxicity) · runbook incident · allineamento [6_STRATEGY_FRAMEWORK.md](../../6_STRATEGY_FRAMEWORK.md)
+**Go-live:** risk tier · HITL testato · monitoring (latency, drift, toxicity) · runbook incident · allineamento [6_STRATEGY_FRAMEWORK.md](../6_STRATEGY_FRAMEWORK.md)
 
 Violazioni → sospensione → AI Committee → [ENTERPRISE_RISK_REGISTER.md](./ENTERPRISE_RISK_REGISTER.md)

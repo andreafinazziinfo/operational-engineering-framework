@@ -5,9 +5,9 @@
 **Alias canonico**: `5_BROWNFIELD`  
 **File**: `5_BROWNFIELD_FRAMEWORK.md`  
 **Prerequisito**: Conoscenza di `1_DESIGN`, `2_EXECUTION`, `3_OPERATIONS` · invocazione via `4_AI_AGENT`  
-**Versione**: 1.0  
-**Ultima modifica**: 2026-07-24  
-**Compatibile con**: `0_META` v1.5, `1_DESIGN` v3.1, `2_EXECUTION` v2.1, `3_OPERATIONS` v1.1, `4_AI_AGENT` v1.5  
+**Versione**: 1.1  
+**Ultima modifica**: 2026-09-04  
+**Compatibile con**: `0_META` v1.7, `1_DESIGN` v3.4, `2_EXECUTION` v2.3, `3_OPERATIONS` v1.1, `4_AI_AGENT` v1.7, `7_COLLABORATION` v1.3  
 
 ---
 
@@ -118,6 +118,7 @@
 - **Checklist**:
   - [ ] Rewrite limitato a **modulo con interfaccia stabile** verso il resto (API, queue, file format)
   - [ ] ADR con alternative (ottimizza vs rewrite vs buy) · `1_DESIGN` Pilastro 2 **Bloccante**
+  - [ ] **Sunk cost check**: ripartendo da zero oggi, con quello che si sa ora, si sceglierebbe ancora il rewrite? Se la risposta è "no, ma abbiamo già investito X" → fermarsi e ridiscutere l'ADR
   - [ ] Piano **strangler fig**: % traffico 10% → 50% → 100% con rollback per fase
   - [ ] Idempotency su dual-write / dual-read durante migrazione (`1_DESIGN` Pilastro 5)
   - [ ] Rollback per modulo testato · non dipendere da "non si torna indietro"
@@ -148,7 +149,7 @@
 | **A Baseline** | Legacy modernization | ThoughtWorks Strangler Fig; AWS Migration Evaluator; archeology sprint | Tier ASSESSMENT in `0_META` |
 | **B Bottleneck** | Performance engineering | Google SRE performance; USE/RED methods; "measure don't guess" | Matrice decisione + ADR |
 | **C API Boundary** | Contract-first integration | OpenAPI/Consumer-Driven Contracts (Pact); BFF (Sam Newman) | Contract test in `2_EXECUTION` B |
-| **D Polyglot Rewrite** | Incremental migration | Strangler Fig Application; Branch by Abstraction | Pilastri 3, 5 + Area E sunset |
+| **D Polyglot Rewrite** | Incremental migration | Strangler Fig Application; Branch by Abstraction; sunk cost fallacy (mental model) | Pilastri 3, 5 + Area E sunset · sunk cost check sopra |
 | **E Legacy Fit** | Operate-first on brownfield | DORA on legacy; "stabilize before accelerate" | Runbook + SLO before features |
 
 **Revisione provenance**: self-audit trimestrale (`0_META` Area C).
