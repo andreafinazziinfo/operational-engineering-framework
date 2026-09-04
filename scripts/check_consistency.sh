@@ -13,18 +13,38 @@ cd "$(dirname "$0")/.." || exit 2
 FAIL=0
 
 echo "=== 1. Link relativi rotti ==="
+# Un solo processo python3 in batch invece di uno per link (~615 link nel repo):
+# la versione precedente spawnava un subprocess per link, ~19s totali su questa
+# macchina — abbastanza da far scadere il timeout dell'hook PostToolUse
+# check-framework-edit.sh (HOOKS_ENFORCEMENT_PLAN.md unità 2, scoperto testando
+# l'hook dal vivo, non ipotetico). Stesso comportamento, ordini di grandezza più veloce.
 BROKEN_LINKS=0
+PAIRS_FILE=$(mktemp)
 while IFS= read -r -d '' f; do
   d=$(dirname "$f")
   while IFS= read -r link; do
     [ -z "$link" ] && continue
-    target=$(python3 -c "import os,sys; print(os.path.normpath(os.path.join('$d', '$link')))" 2>/dev/null)
-    if [ ! -e "$target" ]; then
-      echo "BROKEN: $f -> $link"
-      BROKEN_LINKS=$((BROKEN_LINKS + 1))
-    fi
+    printf '%s\t%s\t%s\n' "$f" "$d" "$link" >> "$PAIRS_FILE"
   done < <(grep -oE '\]\(\.[^)]+\)' "$f" 2>/dev/null | sed -E 's/^\]\((.*)\)$/\1/' | sed 's/#.*//' | sort -u)
 done < <(find . -name "*.md" -not -path "./.git/*" -print0)
+
+if [ -s "$PAIRS_FILE" ]; then
+  while IFS=$'\t' read -r broken_f broken_link; do
+    echo "BROKEN: $broken_f -> $broken_link"
+    BROKEN_LINKS=$((BROKEN_LINKS + 1))
+  done < <(python3 -c "
+import os, sys
+for line in sys.stdin:
+    line = line.rstrip('\n')
+    if not line:
+        continue
+    f, d, link = line.split('\t')
+    target = os.path.normpath(os.path.join(d, link))
+    if not os.path.exists(target):
+        print(f + '\t' + link)
+" < "$PAIRS_FILE")
+fi
+rm -f "$PAIRS_FILE"
 
 if [ "$BROKEN_LINKS" -eq 0 ]; then
   echo "OK — 0 link rotti"
@@ -94,6 +114,39 @@ if [ -f "$SKILL_FILE" ]; then
   fi
 else
   echo "SKIP — $SKILL_FILE non trovato"
+fi
+
+echo ""
+echo "=== 4. Staleness SELF_IMPROVEMENT_LOG.md (solo se INCLUDE_STALENESS_CHECK=1) ==="
+
+# Circuit breaker per il loop di auto-miglioramento (ADR-005, gap #9 in SELF_IMPROVEMENT_LOG.md):
+# check_consistency.sh verifica coerenza strutturale, non se il loop di logging è ancora vivo.
+# Disattivato di default per non cambiare il comportamento del job push/pull_request esistente —
+# attivato solo dal job CI schedulato settimanale (o manualmente per test).
+if [ "${INCLUDE_STALENESS_CHECK:-0}" = "1" ]; then
+  LOG_FILE="SELF_IMPROVEMENT_LOG.md"
+  STALENESS_THRESHOLD_DAYS=30
+  if [ -f "$LOG_FILE" ]; then
+    LAST_DATE=$(grep -oE '^### [0-9]{4}-[0-9]{2}-[0-9]{2}' "$LOG_FILE" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' | sort -u | tail -1)
+    if [ -z "$LAST_DATE" ]; then
+      echo "TROVATO: nessuna data di voce riconosciuta in $LOG_FILE"
+      FAIL=1
+    else
+      LAST_EPOCH=$(date -d "$LAST_DATE" +%s 2>/dev/null)
+      NOW_EPOCH=$(date +%s)
+      DAYS_SINCE=$(( (NOW_EPOCH - LAST_EPOCH) / 86400 ))
+      if [ "$DAYS_SINCE" -gt "$STALENESS_THRESHOLD_DAYS" ]; then
+        echo "STALE: ultima voce in $LOG_FILE è del $LAST_DATE, $DAYS_SINCE giorni fa (soglia: $STALENESS_THRESHOLD_DAYS)"
+        FAIL=1
+      else
+        echo "OK — ultima voce $LAST_DATE, $DAYS_SINCE giorni fa (soglia: $STALENESS_THRESHOLD_DAYS)"
+      fi
+    fi
+  else
+    echo "SKIP — $LOG_FILE non trovato"
+  fi
+else
+  echo "SKIP — check disattivato di default (attivo solo nel job CI schedulato settimanale)"
 fi
 
 echo ""

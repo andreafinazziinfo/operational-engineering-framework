@@ -1,0 +1,42 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-destructive-git.sh",
+            "if": "Bash(git *)",
+            "timeout": 10,
+            "statusMessage": "Verifico comandi git distruttivi (ADR-005)..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-framework-edit.sh",
+            "timeout": 15,
+            "statusMessage": "Verifico coerenza manuale dopo l'edit (ADR-005)..."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-next-session.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

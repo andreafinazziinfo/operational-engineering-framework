@@ -97,3 +97,23 @@ Self-audit **delta** (9 Pilastri applicati alla scrittura del nuovo layer, non u
 Un controllo automatico dei link su tutto il repo (fatto per verificare le modifiche di questa sessione, non per audit dedicato) ha trovato 11 link rotti pre-esistenti in 4 artefatti P2 (`RESPONSIBLE_AI_POLICY.md`, `VENDOR_SCORECARD.md`, `M&A_TECH_DD_CHECKLIST.md`, `HORIZON_BETS.md`) — path verso una struttura a cartelle mai esistita in questa forma (`1_DESIGN/PILASTRO_9.md`, `4_AI_AGENT/README.md`, `5_BROWNFIELD/README.md`, `discovery/DISCOVERY_SPIKE.md`) e doppio `../../` verso `6_STRATEGY_FRAMEWORK.md`. Il gap #1 sopra li dichiarava risolti dal 2026-07-24 — non lo erano. Corretti ora, verificati con lo stesso script: **0 link rotti su tutto il repo**.
 
 Non è un incidente grave, ma è un esempio concreto e non ipotetico di perché il gap "Loop di verifica efficacia" in [BENCHMARK.md](./BENCHMARK.md) è reale: un self-audit può dichiararsi "fatto" senza esserlo, se nessuno lo riverifica meccanicamente.
+
+---
+
+## 📎 Addendum — 2026-09-04 (sessione separata, dopo `/clear`): audit dogfooding Pilastri 1, 2, 4, 7, 8
+
+Eseguito da una sessione nuova (non quella che ha scritto le modifiche del giorno), su richiesta esplicita dell'owner via `NEXT_SESSION.md` punto 3. Applica solo i 5 pilastri indicati lì (i più rilevanti per un manuale, non un audit completo a 9).
+
+**Verifica preliminare baseline**: sia questo file sia `BENCHMARK.md` risultano aggiornati alla stessa data odierna (2026-09-04) — nessun drift da segnalare, `scripts/check_consistency.sh` esce pulito (0 link rotti, versioni coerenti, Check 3 copertura skill ok).
+
+| Pilastro | Severità | Esito |
+|---|---|---|
+| 1 Pre-Mortem | Alta | ✅ 5 scenari SPOF identificati (dipendenza dalla revisione umana come unico verificatore reale; skill/CLAUDE.md non caricati senza alert; corruzione sintattica di un `*_FRAMEWORK.md` non rilevata da check_consistency.sh, che verifica solo link/versioni; context budget saturo in sessione CRITICO tronca la lettura senza dirlo; "log farming" — voci vaghe in `SELF_IMPROVEMENT_LOG.md` per apparire produttivi, Goodhart). Nessuna azione nuova: SPOF #1 già noto/strutturale, gli altri annotati, non bloccanti oggi |
+| 2 ADR (Bloccante) | Bloccante | ✅ N/A per nuovo ADR — questa sessione è un audit/verifica, non una decisione architetturale. Criterio di falsificazione rispettato nella voce di log associata (vedi `SELF_IMPROVEMENT_LOG.md` #8: dichiarato esplicitamente "un solo data point, non un pattern") |
+| 4 Data Provenance | Alta | ✅ Ogni claim di questo addendum traccia a un file+sezione specifico, ≤ 3 hop. Verificato meccanicamente da `check_consistency.sh` |
+| 7 Circuit Breakers (Bloccante) | Bloccante | ⚠️ **Gap reale, non bloccante oggi**: `check_consistency.sh`+CI è un breaker automatico per drift strutturale (link/versioni/copertura skill), ma **non esiste un breaker equivalente per il loop di auto-miglioramento stesso** (`BENCHMARK.md` dimensione 9) — nessuna soglia tipo "se N sessioni passano senza una voce reale in `SELF_IMPROVEMENT_LOG.md`, segnala che il meccanismo è probabilmente morto". Oggi il loop ha prodotto un segnale positivo genuino (voce #8, prima volta da una sessione diversa da quella che ha scritto il framework) — ma nulla se ne accorgerebbe se smettesse di succedere. Non costruire ora solo perché notato (regola anti-over-building del manuale) — registrato come domanda aperta, vedi `SELF_IMPROVEMENT_LOG.md` #9 |
+| 8 Security | Bloccante | ✅ Nessun segreto/PII/nome progetto reale introdotto negli artefatti toccati oggi (verificato a mano sulla voce di log aggiunta) |
+
+**Esito**: nessun pilastro Bloccante rosso. Un gap reale annotato (Pilastro 7 sul loop stesso), non bloccante, coerente con gap già dichiarato in `BENCHMARK.md` dimensione 9 — questo audit lo rende più specifico (manca un trigger a soglia, non solo "poche voci").
+
+**Conferma baseline**: `SELF_AUDIT_2026-07-24.md` (corpo + addenda precedenti) e `BENCHMARK.md` restano accurati — nessuna revisione necessaria oltre questo addendum.

@@ -11,11 +11,17 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    # Ogni lunedì 06:00 UTC — vedi ADR-005.md e HOOKS_ENFORCEMENT_PLAN.md unità 4.
+    # Soglia dichiarata arbitraria (30gg, in check_consistency.sh), da rivedere al primo
+    # trigger reale invece che indovinata una volta per sempre.
+    - cron: '0 6 * * 1'
   workflow_dispatch: {}
 
 jobs:
   check-consistency:
     runs-on: ubuntu-latest
+    if: github.event_name != 'schedule'
     steps:
       - uses: actions/checkout@v4
 
@@ -23,3 +29,18 @@ jobs:
         run: |
           chmod +x scripts/check_consistency.sh
           ./scripts/check_consistency.sh
+
+  staleness-check:
+    # Circuit breaker per il loop di auto-miglioramento (SELF_IMPROVEMENT_LOG.md #9):
+    # nessun meccanismo prima d'ora rilevava se il loop smetteva di produrre voci reali.
+    # Job separato (non uno step nel job sopra) per isolamento — Blast Radius, 1_DESIGN Pilastro 3:
+    # un falso allarme qui non deve far fallire il check di link/versioni su ogni push.
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run staleness check on SELF_IMPROVEMENT_LOG.md
+        run: |
+          chmod +x scripts/check_consistency.sh
+          INCLUDE_STALENESS_CHECK=1 ./scripts/check_consistency.sh

@@ -332,7 +332,7 @@ Passo  2  →  Esegui checklist · verifica DoD · trace · stop su escalation
 
 Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 
-**Claude Code (o altro tool con supporto SKILL.md — standard aperto da dicembre 2025)**: [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) applica l'intero manuale on-demand, senza caricamento manuale — vedi [ADR-004.md](./ADR-004.md). **Non ancora verificata in una sessione reale** (limite dichiarato, vedi il file stesso).
+**Claude Code (o altro tool con supporto SKILL.md — standard aperto da dicembre 2025)**: [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) applica l'intero manuale on-demand, senza caricamento manuale — vedi [ADR-004.md](./ADR-004.md). Verificata una volta in una sessione reale (auto-invocata su un task generico senza essere nominata, `SELF_IMPROVEMENT_LOG.md` #8) — un solo data point, non ancora un pattern confermato su più richieste diverse. **Regole imposte** (non solo suggerite alla skill) sono ora anche enforced via [Hooks Claude Code](./HOOKS_ENFORCEMENT_PLAN.md) — vedi [ADR-005.md](./ADR-005.md).
 
 ---
 
@@ -397,7 +397,11 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 ├── scripts/check_consistency.sh  # Verifica meccanica link + versioni
 ├── SELF_IMPROVEMENT_LOG.md       # Incidenti/gap reali → cosa è cambiato
 ├── NEXT_SESSION.md               # Handover per la sessione successiva
-├── .github/workflows/check-consistency.yml  # CI: verifica meccanica su push/PR
+├── .github/workflows/check-consistency.yml  # CI: verifica meccanica su push/PR + staleness check schedulato
+├── ADR-005.md                    # Decisione Hooks Claude Code per enforcement deterministico
+├── HOOKS_ENFORCEMENT_PLAN.md     # Piano tecnico + unità di lavoro per gli Hooks (ADR-005)
+├── .claude/settings.json          # Hooks: blocco git distruttivo, check post-edit, reminder sessione
+├── .claude/hooks/                 # Script degli hook sopra
 ├── TECHNICAL_DEBT_LEDGER.md
 ├── runbooks/                    # 5 scenari P1–P3
 └── security/
@@ -415,6 +419,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 | [ADR-001.md](./ADR-001.md) | Decisione architetturale brownfield |
 | [ADR-003.md](./ADR-003.md) | Decisione architetturale layer `7_COLLABORATION` |
 | [ADR-004.md](./ADR-004.md) | Decisione architetturale skill canonica `operational-engineering-framework` (ex `lead-architect-plan`) |
+| [ADR-005.md](./ADR-005.md) | Decisione Hooks Claude Code per enforcement deterministico (blocco git distruttivo, check post-edit, staleness CI) — piano in [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) |
 | [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) | Ledger debito tecnico live |
 | [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md) | Autovalutazione manuale (9 pilastri) |
 | [LICENSE](./LICENSE) | **MIT** — uso, modifica e distribuzione liberi |
@@ -425,7 +430,17 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 
 ## 📅 Changelog
 
-**2026-09-04** — Layer collaborazione owner-AI + mental model mirati
+**2026-09-04 (b)** — Hooks Claude Code per enforcement deterministico
+
+- [ADR-005.md](./ADR-005.md) + [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) — primi Hooks del repo: enforcement deterministico invece di sola Skill (gap `BENCHMARK.md` dimensione 3, backlog `NEXT_SESSION.md` #4)
+- `.claude/hooks/check-destructive-git.sh` (`PreToolUse`/`Bash`) — richiede conferma su `git checkout --`/`reset --hard`/`clean -f`/`branch -D` con modifiche non committate — chiude l'incidente #4 (`SELF_IMPROVEMENT_LOG.md`), **verificato dal vivo**
+- `.claude/hooks/check-framework-edit.sh` (`PostToolUse`/`Edit|Write`) — avviso immediato su drift dopo un edit ai file `*_FRAMEWORK.md`, invece di aspettare la CI — **verificato dal vivo**
+- `.claude/hooks/check-next-session.sh` (`SessionStart`) — reminder se `NEXT_SESSION.md` non è aggiornato da >14 giorni — testato via pipe, non ancora in sessione reale
+- `.github/workflows/check-consistency.yml` — trigger `schedule` settimanale + job `staleness-check`: circuit breaker mancante su `SELF_IMPROVEMENT_LOG.md` (gap #9)
+- **Incidente reale scoperto testando l'hook dal vivo**: `scripts/check_consistency.sh` impiegava 19.4s (un processo `python3` per ciascuno dei 615 link del repo) contro un timeout hook di 15s — killato in silenzio. Riscritto in un solo processo batch → **1.4s** (~14×). Vedi `SELF_IMPROVEMENT_LOG.md` #10
+- Skill `operational-engineering-framework`: prima verifica non-circolare che si auto-invoca su un task reale senza essere nominata (`SELF_IMPROVEMENT_LOG.md` #8) — un solo data point, non ancora un pattern confermato
+
+**2026-09-04 (a)** — Layer collaborazione owner-AI + mental model mirati
 
 - [7_COLLABORATION_FRAMEWORK.md](./7_COLLABORATION_FRAMEWORK.md) v1.1 — 5 aree: session identity, working-tree condivisa, delega sub-agent, verification/trust boundary, tool/permission friction
 - [ADR-003.md](./ADR-003.md) — decisione layer collaborazione
@@ -437,7 +452,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 - [.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml) — `scripts/check_consistency.sh` automatizzato su ogni push/PR, non più solo a memoria · `BENCHMARK.md` dimensione 4 (Governance) 8/10→**9/10**
 - [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) — 5 voci reali da questa sessione (2 incidenti, 2 gap scoperti, 1 domanda aperta non forzata a una risposta): fonti obsolete usate senza verifica, self-audit che dichiarava un fix mai fatto, gap vs BMAD, `git checkout` distruttivo, formato Declaration/Trace che non copre le modifiche al manuale stesso · chiude la dimensione 9 di `BENCHMARK.md` (1/10→**3/10**)
 - [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) — artefatto per scomporre un design in unità di lavoro implementabili, agganciato a `2_EXECUTION` Fase A · chiude parzialmente il gap 6 di `BENCHMARK.md` (4/10, scala rivista), ispirato al concetto PRD→story di BMAD-METHOD ma nel nostro idioma gate+soglia
-- [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica Claude Code (standard aperto), generalizza la versione già in uso in CycleLab/Titan da 3 a 8 file coperti, nessuna versione hardcodata · [ADR-004.md](./ADR-004.md) · non ancora verificata in sessione reale (limite dichiarato)
+- [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica Claude Code (standard aperto), generalizza la versione già in uso in CycleLab/Titan da 3 a 8 file coperti, nessuna versione hardcodata · [ADR-004.md](./ADR-004.md) · verificata una volta in sessione reale il 2026-09-04 (b), vedi sopra
 - **Recency/Currency Check** (mental model, ricerca 2026 su knowledge cutoff staleness) → `1_DESIGN` P2 (v3.2→**v3.3**) + `7_COLLABORATION` D (v1.1→**v1.2**): scelte tecniche e claim time-sensitive verificati con ricerca live, mai per fiducia nel training data
 - [FAQ.md](./FAQ.md) — Q&A umano-orientate su tutto il manuale (tier, quale file per quale situazione, sessioni concorrenti, Goodhart, governance) — link ai file canonici, zero checklist duplicate
 - 11 link rotti pre-esistenti corretti in `executive/` P2 · self-audit 2026-07-24 corretto (dichiarava un fix mai fatto)

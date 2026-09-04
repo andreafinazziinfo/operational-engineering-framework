@@ -2,7 +2,24 @@
 
 Formato basato su [Keep a Changelog](https://keepachangelog.com/). Le versioni seguono ogni singolo documento; questo file traccia le modifiche al **set completo**.
 
-## [2026-09-04] — Layer collaborazione owner-AI v1.7 + mental model mirati
+## [2026-09-04] (b) — Hooks Claude Code per enforcement deterministico (ADR-005)
+
+### Aggiunto
+- [ADR-005.md](./ADR-005.md) + [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) — primi Hooks Claude Code del repo: enforcement deterministico invece di sola Skill (gap dichiarato in `BENCHMARK.md` dimensione 3, backlog `NEXT_SESSION.md` #4)
+- `.claude/hooks/check-destructive-git.sh` (`PreToolUse` su `Bash`) — richiede conferma su `git checkout --`/`reset --hard`/`clean -f`/`branch -D` con modifiche non committate nel working tree — chiude l'incidente #4 di `SELF_IMPROVEMENT_LOG.md`. **Verificato dal vivo**: comando bloccato con richiesta di conferma su un caso reale
+- `.claude/hooks/check-framework-edit.sh` (`PostToolUse` su `Edit|Write`) — avviso immediato se un edit a un file `*_FRAMEWORK.md` introduce drift, invece di aspettare la CI dopo il push. **Verificato dal vivo** dopo il fix di performance sotto
+- `.claude/hooks/check-next-session.sh` (`SessionStart`) — reminder se `NEXT_SESSION.md` non è aggiornato da più di 14 giorni. Testato via pipe-test diretto, non ancora in una sessione reale (richiede l'avvio di una sessione nuova)
+- `.github/workflows/check-consistency.yml` — trigger `schedule` settimanale + nuovo job `staleness-check`, isolato dal job push/PR esistente (Blast Radius) — chiude il circuit breaker mancante sul loop di auto-miglioramento (gap #9)
+- `SELF_AUDIT_2026-07-24.md` — addendum: audit dogfooding Pilastri 1, 2, 4, 7, 8 applicati al manuale stesso (richiesto in `NEXT_SESSION.md` punto 3), nessun pilastro Bloccante rosso, un gap reale trovato (vedi sotto)
+- `SELF_IMPROVEMENT_LOG.md` — voci #8 (Conferma: prima verifica non-circolare che la skill si auto-invoca su un task reale senza essere nominata), #9 (Gap: nessun circuit breaker sul loop di auto-miglioramento stesso), #10 (Incidente: vedi Corretto)
+
+### Corretto
+- `scripts/check_consistency.sh` Check 1 (link rotti) — riscritto da un processo `python3` per link (615 link nel repo, ~19.4s) a un solo processo batch (~1.4s), **~14× più veloce**, stesso comportamento verificato invariato. Scoperto testando dal vivo l'hook `PostToolUse`: il timeout di 15s uccideva lo script in silenzio prima che producesse output — vedi `SELF_IMPROVEMENT_LOG.md` #10
+- README.md — corrette due claim ormai stale ("skill non ancora verificata in sessione reale"), aggiornate a riflettere la voce #8
+
+---
+
+## [2026-09-04] (a) — Layer collaborazione owner-AI v1.7 + mental model mirati
 
 ### Aggiunto
 - [7_COLLABORATION_FRAMEWORK.md](./7_COLLABORATION_FRAMEWORK.md) — layer trasversale, caricato a inizio sessione (non per-task) · 5 aree: Session Identity & Handover, Shared Working-Tree & Infra, Delegation & Sub-Agent Discipline, Verification & Trust Boundary, Tool & Permission Friction

@@ -62,6 +62,24 @@
 **Causa radice**: assunzione non verificata sul comportamento di Claude Code, presentata come fatto invece che come ipotesi da controllare.
 **Cosa è cambiato**: claim corretta in `.claude/skills/operational-engineering-framework/SKILL.md` (sezione Limiti dichiarati) — resta vero che l'**invocazione automatica su un task reale** non è verificata (comparire nell'elenco è discoverability, non prova di uso corretto), quello sì richiede un test onesto in un turno che non sa già tutto.
 
+### 2026-09-04 #8 — Prima verifica non-circolare: la skill si è attivata da sola su un task reale
+**Tipo**: Conferma
+**Cosa è successo**: sessione nuova (dopo `/clear`), nessun riferimento a "framework"/"manuale"/pilastri nel prompt. Richiesta dell'owner: "Devo pianificare una nuova feature per questo progetto. Aiutami a strutturare il piano tecnico prima di iniziare a scrivere codice." — quasi verbatim l'esempio di test scritto in `NEXT_SESSION.md` punto 2. La skill `operational-engineering-framework` si è auto-invocata senza essere nominata.
+**Causa radice**: N/A (conferma, non incidente).
+**Cosa è cambiato**: nessun file di manuale modificato — questa è la prima prova non-circolare che l'invocazione automatica funziona (non solo la comparsa nell'elenco skill, gap lasciato aperto da #7). Trigger che ha matchato: la clausola generica "authoring or reviewing a technical plan/design doc" della description, non una keyword esplicita della lista (ADR, blast radius, ecc.). Nota: non ancora provato su richieste che *non* menzionano esplicitamente "piano tecnico" — resta un solo data point, non un pattern.
+
+### 2026-09-04 #9 — Il loop di auto-miglioramento non ha un circuit breaker su sé stesso
+**Tipo**: Gap scoperto
+**Cosa è successo**: applicando `1_DESIGN` Pilastro 7 (Circuit Breakers) al manuale stesso (audit dogfooding richiesto in `NEXT_SESSION.md` punto 3, vedi addendum in `SELF_AUDIT_2026-07-24.md`), è emerso che `scripts/check_consistency.sh`+CI copre bene il drift strutturale (link/versioni/copertura skill) ma non esiste un breaker equivalente per `SELF_IMPROVEMENT_LOG.md` stesso — nessuna soglia tipo "se N sessioni passano senza una voce reale, il meccanismo va segnalato come probabilmente morto". Questo rende `BENCHMARK.md` dimensione 9 (3/10) più specifico: manca un trigger a soglia, non solo "poche voci finora".
+**Causa radice**: il meccanismo di logging è stato costruito come pratica raccomandata nel workflow, non come gate verificato meccanicamente — stesso pattern strutturale degli incidenti #2 e #6 (self-report senza verifica automatica), applicato qui al processo di logging invece che a un artefatto specifico.
+**Cosa è cambiato**: nulla ancora — **non risolto**, registrato come domanda aperta per decisione esplicita (costruire un breaker richiede definire "N sessioni" e chi/cosa lo osserva, non banale per un repo senza CI che gira su cadenza temporale). Non costruire solo perché notato in un audit, coerente con la regola anti-over-building del manuale — serve conferma che il gap si ripresenti o che l'owner lo prioritizzi.
+
+### 2026-09-04 #10 — `check_consistency.sh` troppo lento per un hook sincrono: timeout silenzioso
+**Tipo**: Incidente
+**Cosa è successo**: durante la verifica end-to-end dell'hook `PostToolUse` (unità 2, `ADR-005.md`/`HOOKS_ENFORCEMENT_PLAN.md`), l'hook non produceva mai il messaggio di avviso atteso nonostante la logica fosse corretta (verificato via pipe-test manuale identico). Causa isolata catturando input/output reali dell'hook: `check_consistency.sh` impiegava **19.4s** (615 link nel repo, un processo `python3` separato spawnato per ciascuno) contro un timeout hook di 15s — lo script veniva killato prima di produrre output, senza errore visibile.
+**Causa radice**: Check 1 dello script spawnava un subprocess `python3` per ogni singolo link invece di un batch — inefficienza mai notata perché finora eseguito solo in CI (dove un push non è latency-sensitive) o manualmente, mai in un contesto dove la latenza è visibile e vincolata da un timeout stretto come un hook sincrono.
+**Cosa è cambiato**: `scripts/check_consistency.sh` Check 1 riscritto per usare un solo processo `python3` in batch invece di uno per link — stesso comportamento (verificato: stesso link rotto rilevato correttamente prima/dopo), **19.4s → 1.4s** (~14×). Hook riverificato dal vivo dopo il fix: il messaggio compare correttamente. Nessuna modifica al timeout dell'hook (15s ora ha ampio margine) — il fix è nella causa, non nel sintomo.
+
 ## 🔗 Collegamenti
 
 - Gap che questo file inizia a chiudere → [BENCHMARK.md](./BENCHMARK.md) dimensione 9
