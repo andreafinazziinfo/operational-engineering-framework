@@ -34,14 +34,14 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 | 1 | Copertura ciclo di vita (strategy→ops→brownfield) | 9/10 | Più completo di AWS Well-Architected su questo asse, ma non "niente altro da coprire" — sustainability e test strategy restano gap minori dichiarati |
 | 2 | Verificabilità (checklist + soglie quantitative) | 9/10 | Punto di forza reale vs prosa qualitativa AWS/Google — ma le soglie sono verificate a mano (self-report), non da enforcement automatico |
 | 3 | Protocollo esecuzione agente AI (intent/trace/escalation) | 8/10 | Solido, ma un solo agente generalista contro checklist — nessun ruolo specializzato (BMAD) né enforcement deterministico (Hooks) |
-| 4 | Governance del manuale stesso | **8/10** | Impianto raro (`0_META`) + ora [scripts/check_consistency.sh](./scripts/check_consistency.sh) (link+versioni, testato: rileva sia falsi positivi che falsi negativi). Non 9-10: appena scritto, non ancora parte di un ciclo di self-audit reale eseguito nel tempo |
+| 4 | Governance del manuale stesso | **9/10** | Impianto raro (`0_META`) + [scripts/check_consistency.sh](./scripts/check_consistency.sh) ora **automatizzato** su ogni push/PR ([.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml)) — non basta più ricordarsi di lanciarlo a mano. Non 10: primo run reale in CI non ancora osservato |
 | 5 | Igiene collaborazione/sessione multi-agente | 7/10 | Appena aggiunta (`7_COLLABORATION`), copertura ampia sulla carta, zero stress-test reale nel tempo |
 | 6 | Generazione artefatti implementabili (PRD/spec/stories) | 4/10 | [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) esiste, agganciato a `2_EXECUTION` Fase A — mai usato su un task reale |
 | 7 | Validazione esterna / adozione reale | 2/10 | Il *concetto* gira in 2 fork reali (CycleLab, Titan) — piccolo segnale positivo, non zero — ma nessuna adozione fuori dall'owner |
 | 8 | Allineamento a semplicità raccomandata (Anthropic) | 6/10 | Tier + loading on-demand + Skill aiutano; 8 file + skill + benchmark + FAQ restano comunque tanta superficie da rispettare |
 | 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | **3/10** | [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) creato con 5 voci reali di questa sessione (2 incidenti, 2 gap, 1 domanda aperta non risolta a forza). Meccanismo esiste e ha dati veri, non solo teoria — non oltre 3/10 finché non copre più di una sessione |
 
-**Voto composito**: **6.2/10** (media aritmetica: 56/90, aggiornato dopo `scripts/check_consistency.sh` e `SELF_IMPROVEMENT_LOG.md`). Non confrontarlo linearmente con il vecchio 3.2/5 — il passaggio a 10 punti ha reso i giudizi più severi dove c'era margine, non solo più fini.
+**Voto composito**: **6.3/10** (media aritmetica: 57/90, aggiornato dopo CI su `check-consistency.yml`). Non confrontarlo linearmente con il vecchio 3.2/5 — il passaggio a 10 punti ha reso i giudizi più severi dove c'era margine, non solo più fini.
 
 **Cosa significa il voto qui**: 9-10/10 = "pari o sopra il miglior comparabile verificato"; 6-8 = "impianto solido, esecuzione/verifica incompleta"; 3-5 = "meccanismo esiste, non provato"; 0-2 = "assente o non manifatturabile in una sessione". Non è un tetto: un 9/10 va rivisto in basso se emerge un comparabile migliore (cadenza trimestrale, stessa Idempotency applicata a questo file).
 
@@ -52,7 +52,7 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 | 1 | Copertura ciclo di vita | 9/10 | Pilastro sustainability + test strategy dedicata (gap minori, mai prioritizzati) |
 | 2 | Verificabilità | 9/10 | Enforcement automatico delle soglie (non solo checklist manuale) — vedi riga 4 |
 | 3 | Protocollo esecuzione agente AI | 8/10 | Hooks Claude Code per enforcement deterministico invece di sola Skill — non ancora costruito |
-| 4 | Governance del manuale | 8/10 | Script scritto e verificato — resta da farlo diventare abitudine reale nel ciclo di self-audit trimestrale, non solo esistere |
+| 4 | Governance del manuale | 9/10 | Script automatizzato in CI — resta da osservarlo girare su push reali nel tempo, non solo al primo commit |
 | 5 | Igiene collaborazione | 7/10 | Solo uso reale ripetuto nel tempo — non manifatturabile in sessione |
 | 6 | Generazione artefatti implementabili | 4/10 | `SPEC_TEMPLATE.md` usato su ≥ 3 task reali senza doverlo modificare |
 | 7 | Validazione esterna | 2/10 | Non manifatturabile — richiede adozione reale fuori dall'owner |

@@ -1,0 +1,25 @@
+name: Manual consistency check
+
+# Esegue scripts/check_consistency.sh su ogni push/PR — la stessa verifica
+# meccanica scritta dopo che il self-audit 2026-07-24 aveva dichiarato "fatto"
+# un fix di link mai applicato. Automatizzarla chiude il gap: non basta che
+# lo script esista, deve girare senza che qualcuno se ne ricordi a mano.
+# Vedi BENCHMARK.md dimensione 4 (Governance) e SELF_IMPROVEMENT_LOG.md #2.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  check-consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run consistency check (links + versions)
+        run: |
+          chmod +x scripts/check_consistency.sh
+          ./scripts/check_consistency.sh

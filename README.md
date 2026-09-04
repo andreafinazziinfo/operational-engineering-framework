@@ -277,6 +277,8 @@ stateDiagram-v2
 | 🪞 | [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) | Post-mortem compilabile per `2_EXECUTION` Fase F, entro 48h da P1/P2 |
 | 🔧 | [scripts/check_consistency.sh](./scripts/check_consistency.sh) | Verifica meccanica: link rotti + coerenza versioni — non solo self-audit dichiarato |
 | 📓 | [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) | Incidenti/gap reali e cosa è cambiato di conseguenza — chiude la dimensione 9 di `BENCHMARK.md` |
+| 🤝 | [NEXT_SESSION.md](./NEXT_SESSION.md) | Handover per la prossima sessione — sovrascritto a fine sessione, non un log |
+| ⚙️ | [.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml) | CI: `check_consistency.sh` su ogni push/PR |
 
 ### Maturity score (sintesi)
 
@@ -394,6 +396,8 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 ├── POST_MORTEM_TEMPLATE.md       # Post-mortem compilabile (2_EXECUTION Fase F)
 ├── scripts/check_consistency.sh  # Verifica meccanica link + versioni
 ├── SELF_IMPROVEMENT_LOG.md       # Incidenti/gap reali → cosa è cambiato
+├── NEXT_SESSION.md               # Handover per la sessione successiva
+├── .github/workflows/check-consistency.yml  # CI: verifica meccanica su push/PR
 ├── TECHNICAL_DEBT_LEDGER.md
 ├── runbooks/                    # 5 scenari P1–P3
 └── security/
@@ -428,7 +432,9 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 - `0_META` v1.6 → **v1.7** · `4_AI_AGENT` v1.6 → **v1.7** — loading a inizio sessione · escalation circuit breaker collaborazione
 - [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) — colonna Categoria (Architetturale | Collaborazione/Tooling)
 - 5 mental model innestati come checklist item mirati (non un nuovo pilastro): effetti di secondo ordine + falsificazione in `1_DESIGN` P1/P2 (v3.1→**v3.2**), sunk cost check in `5_BROWNFIELD` D (v1.0→**v1.1**), circle of competence + Goodhart's Law in `7_COLLABORATION` C/D (v1.0→**v1.1**)
-- [BENCHMARK.md](./BENCHMARK.md) — confronto esterno vs BMAD-METHOD, AWS/Google Well-Architected, guidance Anthropic "Building Effective Agents" · scala passata a **0–10** (più precisa di 0–5) · voto composito onesto **6.2/10**, non il 5/5 del self-audit interno · unico gap non manifatturabile rimasto: validazione esterna
+- [BENCHMARK.md](./BENCHMARK.md) — confronto esterno vs BMAD-METHOD, AWS/Google Well-Architected, guidance Anthropic "Building Effective Agents" · scala passata a **0–10** (più precisa di 0–5) · voto composito onesto **6.3/10**, non il 5/5 del self-audit interno · unico gap non manifatturabile rimasto: validazione esterna
+- [NEXT_SESSION.md](./NEXT_SESSION.md) — handover: primo task per la prossima sessione è verificare se la skill si attiva da sola, poi audit del framework su sé stesso, poi backlog aperto
+- [.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml) — `scripts/check_consistency.sh` automatizzato su ogni push/PR, non più solo a memoria · `BENCHMARK.md` dimensione 4 (Governance) 8/10→**9/10**
 - [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) — 5 voci reali da questa sessione (2 incidenti, 2 gap scoperti, 1 domanda aperta non forzata a una risposta): fonti obsolete usate senza verifica, self-audit che dichiarava un fix mai fatto, gap vs BMAD, `git checkout` distruttivo, formato Declaration/Trace che non copre le modifiche al manuale stesso · chiude la dimensione 9 di `BENCHMARK.md` (1/10→**3/10**)
 - [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) — artefatto per scomporre un design in unità di lavoro implementabili, agganciato a `2_EXECUTION` Fase A · chiude parzialmente il gap 6 di `BENCHMARK.md` (4/10, scala rivista), ispirato al concetto PRD→story di BMAD-METHOD ma nel nostro idioma gate+soglia
 - [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica Claude Code (standard aperto), generalizza la versione già in uso in CycleLab/Titan da 3 a 8 file coperti, nessuna versione hardcodata · [ADR-004.md](./ADR-004.md) · non ancora verificata in sessione reale (limite dichiarato)

@@ -195,6 +195,8 @@ Prima di ogni release del manuale, verificare:
 - [x] [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) — post-mortem compilabile, agganciato a `2_EXECUTION` Fase F
 - [x] [scripts/check_consistency.sh](./scripts/check_consistency.sh) — verifica meccanica link + versioni, non solo self-report
 - [x] [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) — incidenti/gap reali e cosa è cambiato di conseguenza, revisionato ad ogni self-audit
+- [x] [.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml) — `scripts/check_consistency.sh` automatizzato su ogni push/PR
+- [x] [NEXT_SESSION.md](./NEXT_SESSION.md) — handover per la sessione successiva (`7_COLLABORATION` Area A), sovrascritto a fine sessione
 
 ---
 
