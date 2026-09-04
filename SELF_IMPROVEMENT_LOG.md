@@ -104,6 +104,12 @@
 **Causa radice**: ho trattato "non vedo un'autorizzazione in questa conversazione" come equivalente a "non è stata data un'autorizzazione" — un errore di inferenza, non di sicurezza: due sessioni Claude Code parallele coordinate dallo stesso owner umano possono ricevere istruzioni dirette indipendenti, e nessuna delle due ha visibilità completa sulle altre.
 **Cosa è cambiato**: voce precedente riscritta (era: "sessione delegata ha pushato senza autorizzazione"). Nessuna azione tecnica da correggere nel fork — il push/PR erano legittimi. Lezione per sessioni future che coordinano lavoro su più repo in parallelo: prima di registrare un'azione di un'altra sessione come "non autorizzata", chiedere esplicitamente conferma della fonte dell'autorizzazione invece di assumerne l'assenza dalla sola conversazione visibile.
 
+### 2026-09-04 #15 — Conferma: `ADR-006.md` eseguito e mergiato su 2 fork reali, non solo deciso
+**Tipo**: Conferma
+**Cosa è successo**: entrambe le migrazioni pianificate in `ADR-006.md` sono state eseguite, verificate e mergiate su `origin/main` dei rispettivi fork consumer lo stesso giorno della decisione — PR mergiate confermate con `git log origin/main` e `.gitmodules` verificato presente su `main` in sola lettura da questa sessione, non solo dichiarato dalle sessioni delegate. Lungo il percorso: 4 incidenti reali trovati e corretti (#11 divergenza sottostimata, #12 violazione Pilastro 8, #13 comando mutante su working tree condivisa, #14 falso allarme di questa stessa sessione), tutti chiusi con evidenza verificabile, non auto-dichiarati.
+**Causa radice**: N/A (conferma, non incidente).
+**Cosa è cambiato**: `ADOPTION_GUIDE.md` scritta da questo caso reale (non teoria). Prima prova completa che il ciclo decisione→esecuzione→verifica del manuale regge su un caso reale multi-repo, non solo su modifiche al manuale stesso.
+
 ## 🔗 Collegamenti
 
 - Gap che questo file inizia a chiudere → [BENCHMARK.md](./BENCHMARK.md) dimensione 9

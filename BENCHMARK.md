@@ -1,7 +1,7 @@
 # Benchmark — Confronto Esterno del Manuale
 
 **Artefatto**: trasversale (non un framework numerato) · **Owner**: owner manuale
-**Ultima revisione**: 2026-09-04 (seconda revisione della giornata, dopo Hooks/ADR-005/ADR-006) · **Prossima revisione**: agganciata al self-audit trimestrale ([2026-10-24](./0_META_FRAMEWORK.md))
+**Ultima revisione**: 2026-09-04 (terza revisione della giornata, dopo l'esecuzione e il merge reale di `ADR-006.md` su 2 fork) · **Prossima revisione**: agganciata al self-audit trimestrale ([2026-10-24](./0_META_FRAMEWORK.md))
 
 ---
 
@@ -35,13 +35,13 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 | 2 | Verificabilità (checklist + soglie quantitative) | 9/10 | Punto di forza reale vs prosa qualitativa AWS/Google — ma le soglie sono verificate a mano (self-report), non da enforcement automatico |
 | 3 | Protocollo esecuzione agente AI (intent/trace/escalation) | **9/10** | Gap dichiarato (nessun enforcement deterministico) **chiuso**: [ADR-005.md](./ADR-005.md) — 3 Hooks Claude Code, 2 verificati dal vivo in questa sessione (blocco git distruttivo, check post-edit), 1 solo via pipe-test. Non 10: resta un solo agente generalista, nessun ruolo specializzato (BMAD) |
 | 4 | Governance del manuale stesso | 9/10 | Invariato, ma con una sfumatura nuova: l'audit dogfooding di oggi ha trovato che il manuale violava la propria regola Pilastro 8 ("zero riferimenti a progetti specifici") in 9 file, per un tempo indefinito, rilevato solo perché l'owner l'ha chiesto esplicitamente — non da `check_consistency.sh` (che non controlla questa classe di leak, vedi [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) TD-001). La governance corregge quando qualcuno guarda, non ancora da sola |
-| 5 | Igiene collaborazione/sessione multi-agente | 7/10 | Invariato — nessuna nuova evidenza specifica alle 5 aree di `7_COLLABORATION` oltre quanto già osservato |
+| 5 | Igiene collaborazione/sessione multi-agente | **8/10** | Prima evidenza reale multi-sessione: coordinare 2 sessioni Claude Code delegate in parallelo su repo diversi ha prodotto 2 incidenti concreti (Area B — comando mutante su working tree condivisa; Area D — trust boundary tra sessioni, un falso allarme corretto). Non 9-10: gli incidenti sono stati della sessione coordinatrice stessa, non ancora un caso di team reale con più persone |
 | 6 | Generazione artefatti implementabili (PRD/spec/stories) | 5/10 | **Prima vera prova d'uso**: [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) ha compilato 4 unità di lavoro in formato `SPEC_TEMPLATE.md`, eseguite fino a Done e verificate. Resta 1 di ≥ 3 occasioni d'uso richieste per salire oltre — un solo task (per quanto reale) non è ancora un pattern |
 | 7 | Validazione esterna / adozione reale | 2/10 | Invariato — nessuna nuova adozione fuori dall'owner |
 | 8 | Allineamento a semplicità raccomandata (Anthropic) | 7/10 | Gli Hooks seguono esattamente il pattern che Anthropic raccomanda (*regole imposte → Hooks, non più logica infilata nella Skill*) — allineamento architetturale migliore, anche se la superficie totale di file è cresciuta (non 8, ma 7/10 perché la direzione è quella giusta, non la quantità) |
-| 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | **5/10** | Soglia esplicitamente dichiarata la scorsa revisione — "non oltre 3/10 finché non copre più di una sessione" — **superata**: sessione odierna, diversa da quella che ha scritto il manuale, ha prodotto 5 nuove voci reali (#8-#12), inclusi 2 incidenti concreti trovati e risolti tramite il loop stesso (timeout hook da 19s, violazione Pilastro 8 su 9 file). Non oltre 5/10: solo 2 sessioni totali, non ancora un trend consolidato nel tempo |
+| 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | **6/10** | Terza revisione della giornata: `ADR-006.md` non solo deciso ma **eseguito e mergiato su 2 progetti reali indipendenti**, con 4 incidenti in più trovati e corretti durante l'esecuzione (#11-#14), non solo durante la scrittura del manuale. Il loop ha funzionato anche fuori dal proprio repo, su lavoro delegato reale — non solo su modifiche a se stesso. Non oltre 6/10: resta un solo giorno di osservazione, nessun trend su settimane/mesi |
 
-**Voto composito**: **6.9/10** (media aritmetica: 62/90, seconda revisione 2026-09-04). Salito da 6.3/10 grazie a evidenza reale — Hooks verificati dal vivo, prima vera prova di `SPEC_TEMPLATE.md`, loop di auto-miglioramento che ha superato la soglia "multi-sessione" — non per giudizio più permissivo sulle stesse dimensioni.
+**Voto composito**: **7.1/10** (media aritmetica: 64/90, terza revisione 2026-09-04). Salito da 6.9/10 grazie a `ADR-006.md` eseguito e mergiato su 2 fork reali, non solo deciso — dimensioni 5 e 9 toccate da evidenza multi-repo, non per giudizio più permissivo sulle altre.
 
 **Cosa significa il voto qui**: 9-10/10 = "pari o sopra il miglior comparabile verificato"; 6-8 = "impianto solido, esecuzione/verifica incompleta"; 3-5 = "meccanismo esiste, non provato"; 0-2 = "assente o non manifatturabile in una sessione". Non è un tetto: un 9/10 va rivisto in basso se emerge un comparabile migliore (cadenza trimestrale, stessa Idempotency applicata a questo file).
 
@@ -53,11 +53,11 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 | 2 | Verificabilità | 9/10 | Enforcement automatico delle soglie (non solo checklist manuale) — vedi riga 4 |
 | 3 | Protocollo esecuzione agente AI | 9/10 | Verificare gli Hooks su altri 2-3 task reali (oggi solo 2 dei 3 hook verificati dal vivo) prima di considerarlo maturo |
 | 4 | Governance del manuale | 9/10 | Un check meccanico per riferimenti a progetti specifici (TD-001) — non costruire ora, solo se il pattern si ripresenta |
-| 5 | Igiene collaborazione | 7/10 | Solo uso reale ripetuto nel tempo — non manifatturabile in sessione |
+| 5 | Igiene collaborazione | 8/10 | Un caso con più persone reali (non solo owner + sessioni delegate) — non manifatturabile in sessione |
 | 6 | Generazione artefatti implementabili | 5/10 | `SPEC_TEMPLATE.md` usato su altre 2+ occasioni reali indipendenti (oggi è 1 di 3) |
 | 7 | Validazione esterna | 2/10 | Non manifatturabile — richiede adozione reale fuori dall'owner |
 | 8 | Allineamento a semplicità | 7/10 | Osservare se l'uso reale sui fork consumer rivela file ridondanti da tagliare |
-| 9 | Loop di verifica efficacia | 5/10 | Continuare a popolare `SELF_IMPROVEMENT_LOG.md` su sessioni future, non solo le prime 2 — un trend richiede più di 2 punti dati |
+| 9 | Loop di verifica efficacia | 6/10 | Continuare a popolare `SELF_IMPROVEMENT_LOG.md` su sessioni e settimane future, non solo un giorno — un trend richiede tempo, non solo eventi |
 
 **Le leve restanti buildable senza aspettare adozione esterna** (righe 3, 6, 9): non richiedono più *costruire* qualcosa di nuovo — Hooks e `SPEC_TEMPLATE.md` esistono già e funzionano — richiedono **uso ripetuto reale**. Coerente con la richiesta dell'owner del 2026-09-04: il framework è al punto in cui l'editing ulteriore in isolamento rende meno di iniziare a usarlo davvero sui progetti consumer. Riga 7 (validazione esterna) resta l'unica non manifatturabile in alcun modo dall'owner solo.
 
