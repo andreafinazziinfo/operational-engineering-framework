@@ -25,6 +25,7 @@
 - [Architettura del manuale](#-architettura-del-manuale)
 - [Flusso operativo](#-flusso-operativo)
 - [Framework operativi](#-framework-operativi)
+- [Adottare il manuale in un nuovo progetto](#-adottare-il-manuale-in-un-nuovo-progetto)
 - [Classificazione task](#-classificazione-task)
 - [Brownfield](#-brownfield)
 - [Artefatti trasversali](#-artefatti-trasversali)
@@ -213,6 +214,20 @@ Framework e artefatti per **CEO**, **CTO** e **Fellow** — sopra Discovery, sot
 | **E** | Legacy fit · integrazione graduale |
 
 </details>
+
+---
+
+## 🔌 Adottare il manuale in un nuovo progetto
+
+**Non ancora una guida verificata passo-passo** — deliberatamente: la meccanica di installazione (submodule vs copia, dove mettere skill/hooks) è stata decisa in [ADR-006.md](./ADR-006.md), ma non ancora eseguita su un progetto reale. Scrivere qui il passo-passo prima di averlo testato una volta rischierebbe di documentare una procedura mai verificata — lo stesso errore che questo repo ha già trovato e corretto altrove (vedi [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md)).
+
+Nel frattempo, il percorso di riferimento:
+
+1. [ADR-004.md](./ADR-004.md) — perché la skill si chiama `operational-engineering-framework`, non un nome legacy
+2. [ADR-005.md](./ADR-005.md) — quali Hooks Claude Code aggiungere e perché
+3. [ADR-006.md](./ADR-006.md) — submodule sul contenuto canonico puro, non copia dell'intero albero
+
+Una guida passo-passo verificata (`ADOPTION_GUIDE.md` o simile) verrà scritta **dopo** la prima migrazione reale completata, basata su cosa ha effettivamente funzionato — non prima.
 
 ---
 
