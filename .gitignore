@@ -3,7 +3,7 @@ Thumbs.db
 *.swp
 *~
 
-# archify diagram output (regenerable — see
-# cyclelab-terminal/docs/plans/ARCHIFY_DIAGRAM_ADOPTION_PLAN.md §3)
+# archify diagram output (regenerable dal comando archify — vedi il diagramma
+# sorgente nel workflow, non serve committare l'HTML/JSON rigenerabile)
 archify-out/*.html
 archify-out/*.visual-check.*
