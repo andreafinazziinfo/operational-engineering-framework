@@ -388,6 +388,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 ├── DISCOVERY_CHECKLIST.md
 ├── DR_BACKUP_PLAN.md
 ├── FRAMEWORK_MATURITY.md
+├── SELF_AUDIT_2026-07-24.md      # Autovalutazione manuale (9 pilastri) + addenda
 ├── BENCHMARK.md                 # Confronto esterno (BMAD, AWS/Google, Anthropic)
 ├── SPEC_TEMPLATE.md              # Unità di lavoro implementabile (2_EXECUTION Fase A)
 ├── ADR-004.md                    # Decisione skill canonica operational-engineering-framework
@@ -417,6 +418,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 | [CHANGELOG.md](./CHANGELOG.md) | Storico modifiche al set |
 | [ADR-000.md](./ADR-000.md) | Perché 9/6/5 pilastri |
 | [ADR-001.md](./ADR-001.md) | Decisione architetturale brownfield |
+| [ADR-002.md](./ADR-002.md) | Decisione architetturale layer strategico `6_STRATEGY` e cartella `executive/` |
 | [ADR-003.md](./ADR-003.md) | Decisione architetturale layer `7_COLLABORATION` |
 | [ADR-004.md](./ADR-004.md) | Decisione architetturale skill canonica `operational-engineering-framework` (ex `lead-architect-plan`) |
 | [ADR-005.md](./ADR-005.md) | Decisione Hooks Claude Code per enforcement deterministico (blocco git distruttivo, check post-edit, staleness CI) — piano in [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) |
