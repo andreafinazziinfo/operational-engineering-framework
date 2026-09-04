@@ -39,9 +39,9 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 | 6 | Generazione artefatti implementabili (PRD/spec/stories) | 4/10 | [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) esiste, agganciato a `2_EXECUTION` Fase A — mai usato su un task reale |
 | 7 | Validazione esterna / adozione reale | 2/10 | Il *concetto* gira in 2 fork reali (CycleLab, Titan) — piccolo segnale positivo, non zero — ma nessuna adozione fuori dall'owner |
 | 8 | Allineamento a semplicità raccomandata (Anthropic) | 6/10 | Tier + loading on-demand + Skill aiutano; 8 file + skill + benchmark + FAQ restano comunque tanta superficie da rispettare |
-| 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | 1/10 | Praticamente inesistente — nessun meccanismo, non solo dati mancanti |
+| 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | **3/10** | [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) creato con 5 voci reali di questa sessione (2 incidenti, 2 gap, 1 domanda aperta non risolta a forza). Meccanismo esiste e ha dati veri, non solo teoria — non oltre 3/10 finché non copre più di una sessione |
 
-**Voto composito**: **6.0/10** (media aritmetica: 54/90, aggiornato dopo `scripts/check_consistency.sh`). Non confrontarlo linearmente con il vecchio 3.2/5 — il passaggio a 10 punti ha reso i giudizi più severi dove c'era margine, non solo più fini.
+**Voto composito**: **6.2/10** (media aritmetica: 56/90, aggiornato dopo `scripts/check_consistency.sh` e `SELF_IMPROVEMENT_LOG.md`). Non confrontarlo linearmente con il vecchio 3.2/5 — il passaggio a 10 punti ha reso i giudizi più severi dove c'era margine, non solo più fini.
 
 **Cosa significa il voto qui**: 9-10/10 = "pari o sopra il miglior comparabile verificato"; 6-8 = "impianto solido, esecuzione/verifica incompleta"; 3-5 = "meccanismo esiste, non provato"; 0-2 = "assente o non manifatturabile in una sessione". Non è un tetto: un 9/10 va rivisto in basso se emerge un comparabile migliore (cadenza trimestrale, stessa Idempotency applicata a questo file).
 
@@ -57,7 +57,7 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 | 6 | Generazione artefatti implementabili | 4/10 | `SPEC_TEMPLATE.md` usato su ≥ 3 task reali senza doverlo modificare |
 | 7 | Validazione esterna | 2/10 | Non manifatturabile — richiede adozione reale fuori dall'owner |
 | 8 | Allineamento a semplicità | 6/10 | Stesso fix riga 3 (Hooks) + eventuale riduzione file se l'uso reale mostra ridondanze |
-| 9 | Loop di verifica efficacia | 1/10 | Meccanismo costruibile ora: log che registra se un gate ha prevenuto un problema reale o è stato overhead |
+| 9 | Loop di verifica efficacia | 3/10 | Popolare `SELF_IMPROVEMENT_LOG.md` su più sessioni reali, non solo questa — 5 voci di un solo giorno non bastano a dire che il loop funziona nel tempo |
 
 **Le uniche due leve buildable-ora senza aspettare adozione esterna**: riga 4 (script di verifica meccanica nel self-audit) e riga 9 (meccanismo del loop di efficacia) — stessa lezione: il self-audit rivelatosi inaffidabile è l'esempio concreto di *perché* serve verifica automatica invece che auto-dichiarata.
 
@@ -76,7 +76,7 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 3. **Loop di verifica efficacia** — non affrontato: nessun meccanismo che misuri se seguire un tier ha davvero prevenuto un problema reale, distinto dal solo tracciare che è stato seguito.
 4. ~~**Verifica meccanica del self-audit**~~ — **chiuso** (2026-09-04): [scripts/check_consistency.sh](./scripts/check_consistency.sh) scritto e verificato (testato che rileva sia link rotti sia versioni disallineate iniettati apposta). Resta da istituzionalizzarlo nel ciclo trimestrale reale, non solo farlo esistere.
 
-I gap 2 e 3 restano dichiarati, non affrontati — coerente con la regola di non inseguire "completo in ogni ambito" senza motivo verificato. Il gap 3 resta **buildable ora** (meccanismo, non tempo) — candidato naturale per il prossimo giro.
+Il gap 2 (validazione esterna) resta dichiarato, non affrontato — non manifatturabile. Il gap 3 (loop di verifica efficacia) è **parzialmente chiuso** (2026-09-04): [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) esiste con 5 voci reali — resta a 3/10 finché non copre più sessioni nel tempo.
 
 ---
 

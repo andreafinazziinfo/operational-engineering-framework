@@ -194,6 +194,7 @@ Prima di ogni release del manuale, verificare:
 - [x] [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica, 8 file coperti · [ADR-004.md](./ADR-004.md) · **non ancora verificata in sessione reale** (limite dichiarato)
 - [x] [POST_MORTEM_TEMPLATE.md](./POST_MORTEM_TEMPLATE.md) — post-mortem compilabile, agganciato a `2_EXECUTION` Fase F
 - [x] [scripts/check_consistency.sh](./scripts/check_consistency.sh) — verifica meccanica link + versioni, non solo self-report
+- [x] [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) — incidenti/gap reali e cosa è cambiato di conseguenza, revisionato ad ogni self-audit
 
 ---
 
@@ -201,7 +202,7 @@ Prima di ogni release del manuale, verificare:
 
 | Review | Frequenza | Owner | Output |
 |--------|-----------|-------|--------|
-| Self-audit manuale (Area C) | Trimestrale | Owner manuale | Checklist `0_META` + [SELF_AUDIT](./SELF_AUDIT_2026-07-24.md) template + [scripts/check_consistency.sh](./scripts/check_consistency.sh) (verifica meccanica, non solo auto-dichiarata) |
+| Self-audit manuale (Area C) | Trimestrale | Owner manuale | Checklist `0_META` + [SELF_AUDIT](./SELF_AUDIT_2026-07-24.md) template + [scripts/check_consistency.sh](./scripts/check_consistency.sh) (verifica meccanica, non solo auto-dichiarata) + nuove voci in [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) da revisionare |
 | Benchmark esterno (coerenza vs framework reali) | Trimestrale (con self-audit) | Owner manuale | [BENCHMARK.md](./BENCHMARK.md) aggiornato · fonti riverificate |
 | Strategy / portfolio | Trimestrale | CEO / CTO | [executive/PORTFOLIO_PRIORITIZATION.md](./executive/PORTFOLIO_PRIORITIZATION.md) |
 | Maturity org | Annuale (+ trimestrale light) | CTO | [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURITY.md) sezione org |
