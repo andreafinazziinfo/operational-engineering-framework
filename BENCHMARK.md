@@ -1,7 +1,7 @@
 # Benchmark — Confronto Esterno del Manuale
 
 **Artefatto**: trasversale (non un framework numerato) · **Owner**: owner manuale
-**Ultima revisione**: 2026-09-04 · **Prossima revisione**: agganciata al self-audit trimestrale ([2026-10-24](./0_META_FRAMEWORK.md))
+**Ultima revisione**: 2026-09-04 (seconda revisione della giornata, dopo Hooks/ADR-005/ADR-006) · **Prossima revisione**: agganciata al self-audit trimestrale ([2026-10-24](./0_META_FRAMEWORK.md))
 
 ---
 
@@ -33,15 +33,15 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 |---|---|:---:|---|
 | 1 | Copertura ciclo di vita (strategy→ops→brownfield) | 9/10 | Più completo di AWS Well-Architected su questo asse, ma non "niente altro da coprire" — sustainability e test strategy restano gap minori dichiarati |
 | 2 | Verificabilità (checklist + soglie quantitative) | 9/10 | Punto di forza reale vs prosa qualitativa AWS/Google — ma le soglie sono verificate a mano (self-report), non da enforcement automatico |
-| 3 | Protocollo esecuzione agente AI (intent/trace/escalation) | 8/10 | Solido, ma un solo agente generalista contro checklist — nessun ruolo specializzato (BMAD) né enforcement deterministico (Hooks) |
-| 4 | Governance del manuale stesso | **9/10** | Impianto raro (`0_META`) + [scripts/check_consistency.sh](./scripts/check_consistency.sh) automatizzato su ogni push/PR ([.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml)), primo run reale osservato **success** su GitHub (run 33836961414, 15s). Non 10: un solo run non prova affidabilità nel tempo |
-| 5 | Igiene collaborazione/sessione multi-agente | 7/10 | Appena aggiunta (`7_COLLABORATION`), copertura ampia sulla carta, zero stress-test reale nel tempo |
-| 6 | Generazione artefatti implementabili (PRD/spec/stories) | 4/10 | [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) esiste, agganciato a `2_EXECUTION` Fase A — mai usato su un task reale |
-| 7 | Validazione esterna / adozione reale | 2/10 | Il *concetto* gira in 2 fork reali (non nominati, Pilastro 8) — piccolo segnale positivo, non zero — ma nessuna adozione fuori dall'owner |
-| 8 | Allineamento a semplicità raccomandata (Anthropic) | 6/10 | Tier + loading on-demand + Skill aiutano; 8 file + skill + benchmark + FAQ restano comunque tanta superficie da rispettare |
-| 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | **3/10** | [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) creato con 5 voci reali di questa sessione (2 incidenti, 2 gap, 1 domanda aperta non risolta a forza). Meccanismo esiste e ha dati veri, non solo teoria — non oltre 3/10 finché non copre più di una sessione |
+| 3 | Protocollo esecuzione agente AI (intent/trace/escalation) | **9/10** | Gap dichiarato (nessun enforcement deterministico) **chiuso**: [ADR-005.md](./ADR-005.md) — 3 Hooks Claude Code, 2 verificati dal vivo in questa sessione (blocco git distruttivo, check post-edit), 1 solo via pipe-test. Non 10: resta un solo agente generalista, nessun ruolo specializzato (BMAD) |
+| 4 | Governance del manuale stesso | 9/10 | Invariato, ma con una sfumatura nuova: l'audit dogfooding di oggi ha trovato che il manuale violava la propria regola Pilastro 8 ("zero riferimenti a progetti specifici") in 9 file, per un tempo indefinito, rilevato solo perché l'owner l'ha chiesto esplicitamente — non da `check_consistency.sh` (che non controlla questa classe di leak, vedi [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) TD-001). La governance corregge quando qualcuno guarda, non ancora da sola |
+| 5 | Igiene collaborazione/sessione multi-agente | 7/10 | Invariato — nessuna nuova evidenza specifica alle 5 aree di `7_COLLABORATION` oltre quanto già osservato |
+| 6 | Generazione artefatti implementabili (PRD/spec/stories) | 5/10 | **Prima vera prova d'uso**: [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) ha compilato 4 unità di lavoro in formato `SPEC_TEMPLATE.md`, eseguite fino a Done e verificate. Resta 1 di ≥ 3 occasioni d'uso richieste per salire oltre — un solo task (per quanto reale) non è ancora un pattern |
+| 7 | Validazione esterna / adozione reale | 2/10 | Invariato — nessuna nuova adozione fuori dall'owner |
+| 8 | Allineamento a semplicità raccomandata (Anthropic) | 7/10 | Gli Hooks seguono esattamente il pattern che Anthropic raccomanda (*regole imposte → Hooks, non più logica infilata nella Skill*) — allineamento architetturale migliore, anche se la superficie totale di file è cresciuta (non 8, ma 7/10 perché la direzione è quella giusta, non la quantità) |
+| 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | **5/10** | Soglia esplicitamente dichiarata la scorsa revisione — "non oltre 3/10 finché non copre più di una sessione" — **superata**: sessione odierna, diversa da quella che ha scritto il manuale, ha prodotto 5 nuove voci reali (#8-#12), inclusi 2 incidenti concreti trovati e risolti tramite il loop stesso (timeout hook da 19s, violazione Pilastro 8 su 9 file). Non oltre 5/10: solo 2 sessioni totali, non ancora un trend consolidato nel tempo |
 
-**Voto composito**: **6.3/10** (media aritmetica: 57/90, aggiornato dopo CI su `check-consistency.yml`). Non confrontarlo linearmente con il vecchio 3.2/5 — il passaggio a 10 punti ha reso i giudizi più severi dove c'era margine, non solo più fini.
+**Voto composito**: **6.9/10** (media aritmetica: 62/90, seconda revisione 2026-09-04). Salito da 6.3/10 grazie a evidenza reale — Hooks verificati dal vivo, prima vera prova di `SPEC_TEMPLATE.md`, loop di auto-miglioramento che ha superato la soglia "multi-sessione" — non per giudizio più permissivo sulle stesse dimensioni.
 
 **Cosa significa il voto qui**: 9-10/10 = "pari o sopra il miglior comparabile verificato"; 6-8 = "impianto solido, esecuzione/verifica incompleta"; 3-5 = "meccanismo esiste, non provato"; 0-2 = "assente o non manifatturabile in una sessione". Non è un tetto: un 9/10 va rivisto in basso se emerge un comparabile migliore (cadenza trimestrale, stessa Idempotency applicata a questo file).
 
@@ -51,15 +51,15 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 |---|---|:---:|---|
 | 1 | Copertura ciclo di vita | 9/10 | Pilastro sustainability + test strategy dedicata (gap minori, mai prioritizzati) |
 | 2 | Verificabilità | 9/10 | Enforcement automatico delle soglie (non solo checklist manuale) — vedi riga 4 |
-| 3 | Protocollo esecuzione agente AI | 8/10 | Hooks Claude Code per enforcement deterministico invece di sola Skill — non ancora costruito |
-| 4 | Governance del manuale | 9/10 | Script automatizzato in CI — resta da osservarlo girare su push reali nel tempo, non solo al primo commit |
+| 3 | Protocollo esecuzione agente AI | 9/10 | Verificare gli Hooks su altri 2-3 task reali (oggi solo 2 dei 3 hook verificati dal vivo) prima di considerarlo maturo |
+| 4 | Governance del manuale | 9/10 | Un check meccanico per riferimenti a progetti specifici (TD-001) — non costruire ora, solo se il pattern si ripresenta |
 | 5 | Igiene collaborazione | 7/10 | Solo uso reale ripetuto nel tempo — non manifatturabile in sessione |
-| 6 | Generazione artefatti implementabili | 4/10 | `SPEC_TEMPLATE.md` usato su ≥ 3 task reali senza doverlo modificare |
+| 6 | Generazione artefatti implementabili | 5/10 | `SPEC_TEMPLATE.md` usato su altre 2+ occasioni reali indipendenti (oggi è 1 di 3) |
 | 7 | Validazione esterna | 2/10 | Non manifatturabile — richiede adozione reale fuori dall'owner |
-| 8 | Allineamento a semplicità | 6/10 | Stesso fix riga 3 (Hooks) + eventuale riduzione file se l'uso reale mostra ridondanze |
-| 9 | Loop di verifica efficacia | 3/10 | Popolare `SELF_IMPROVEMENT_LOG.md` su più sessioni reali, non solo questa — 5 voci di un solo giorno non bastano a dire che il loop funziona nel tempo |
+| 8 | Allineamento a semplicità | 7/10 | Osservare se l'uso reale sui fork consumer rivela file ridondanti da tagliare |
+| 9 | Loop di verifica efficacia | 5/10 | Continuare a popolare `SELF_IMPROVEMENT_LOG.md` su sessioni future, non solo le prime 2 — un trend richiede più di 2 punti dati |
 
-**Le uniche due leve buildable-ora senza aspettare adozione esterna**: riga 4 (script di verifica meccanica nel self-audit) e riga 9 (meccanismo del loop di efficacia) — stessa lezione: il self-audit rivelatosi inaffidabile è l'esempio concreto di *perché* serve verifica automatica invece che auto-dichiarata.
+**Le leve restanti buildable senza aspettare adozione esterna** (righe 3, 6, 9): non richiedono più *costruire* qualcosa di nuovo — Hooks e `SPEC_TEMPLATE.md` esistono già e funzionano — richiedono **uso ripetuto reale**. Coerente con la richiesta dell'owner del 2026-09-04: il framework è al punto in cui l'editing ulteriore in isolamento rende meno di iniziare a usarlo davvero sui progetti consumer. Riga 7 (validazione esterna) resta l'unica non manifatturabile in alcun modo dall'owner solo.
 
 ---
 
@@ -71,12 +71,13 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 
 ## ⚠️ Gap strutturali reali
 
-1. ~~**Generazione artefatti implementabili**~~ — **parzialmente chiuso** (2026-09-04): [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) aggiunto, ispirato al concetto BMAD (idea → unità implementabile) ma nel nostro idioma gate+soglia. Resta 4/10 finché non è battle-tested — non salire oltre senza evidenza reale d'uso.
+1. ~~**Generazione artefatti implementabili**~~ — **battle-tested una prima volta** (2026-09-04, seconda revisione): `SPEC_TEMPLATE.md` usato in [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md), 4 unità reali eseguite fino a Done. 5/10, non oltre finché non capita altre 2 volte indipendenti.
 2. **Validazione esterna** — non affrontato, non manifatturabile in una sessione: mai adottato fuori da uso interno diretto dell'owner (a parte il segnale debole dei 2 fork).
-3. **Loop di verifica efficacia** — non affrontato: nessun meccanismo che misuri se seguire un tier ha davvero prevenuto un problema reale, distinto dal solo tracciare che è stato seguito.
+3. ~~**Loop di verifica efficacia**~~ — **soglia multi-sessione superata** (2026-09-04): [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) ha ora voci da 2 sessioni distinte, inclusi 2 incidenti reali trovati e risolti dal loop stesso. 5/10, non un trend consolidato finché non copre più di 2 sessioni.
 4. ~~**Verifica meccanica del self-audit**~~ — **chiuso** (2026-09-04): [scripts/check_consistency.sh](./scripts/check_consistency.sh) scritto e verificato (testato che rileva sia link rotti sia versioni disallineate iniettati apposta). Resta da istituzionalizzarlo nel ciclo trimestrale reale, non solo farlo esistere.
+5. **Nuovo, minore**: nessun check meccanico per riferimenti a progetti/fork specifici nel contenuto (Pilastro 8) — trovato per caso il 2026-09-04, non da verifica automatica. [TD-001](./TECHNICAL_DEBT_LEDGER.md).
 
-Il gap 2 (validazione esterna) resta dichiarato, non affrontato — non manifatturabile. Il gap 3 (loop di verifica efficacia) è **parzialmente chiuso** (2026-09-04): [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) esiste con 5 voci reali — resta a 3/10 finché non copre più sessioni nel tempo.
+Il gap 2 (validazione esterna) resta l'unico non manifatturabile in alcun modo dall'owner solo.
 
 ---
 
