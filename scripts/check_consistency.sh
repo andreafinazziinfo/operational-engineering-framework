@@ -96,7 +96,7 @@ SKILL_FILE=".claude/skills/operational-engineering-framework/SKILL.md"
 # Artefatti trasversali che la skill deve conoscere per pianificare/eseguire un task.
 # Non ogni file .md del repo (CHANGELOG, LICENSE, ADR storiche non servono qui) — solo
 # quelli che uno svolgimento reale di un task dovrebbe usare o aggiornare.
-EXPECTED_ARTIFACTS="SPEC_TEMPLATE.md POST_MORTEM_TEMPLATE.md BENCHMARK.md SELF_IMPROVEMENT_LOG.md NEXT_SESSION.md TECHNICAL_DEBT_LEDGER.md DEFINITION_OF_DONE.md DISCOVERY_CHECKLIST.md FAQ.md"
+EXPECTED_ARTIFACTS="SPEC_TEMPLATE.md POST_MORTEM_TEMPLATE.md BENCHMARK.md SELF_IMPROVEMENT_LOG.md NEXT_SESSION.md TECHNICAL_DEBT_LEDGER.md DEFINITION_OF_DONE.md DISCOVERY_CHECKLIST.md FAQ.md ADOPTION_GUIDE.md"
 
 MISSING_FROM_SKILL=0
 if [ -f "$SKILL_FILE" ]; then

@@ -29,6 +29,7 @@ Manuale: [README.md](../../../README.md)
 | Verifica meccanica link + versioni | [scripts/check_consistency.sh](../../../scripts/check_consistency.sh) |
 | Pre-design go/no-go (idea vaga, zero codice) | [DISCOVERY_CHECKLIST.md](../../../DISCOVERY_CHECKLIST.md) |
 | Definition of Done per tier | [DEFINITION_OF_DONE.md](../../../DEFINITION_OF_DONE.md) |
+| Come collegare questo manuale a un progetto (submodule, skill, hooks) | [ADOPTION_GUIDE.md](../../../ADOPTION_GUIDE.md) |
 
 **Nota versioni**: non hardcodare mai un numero di versione qui — leggi l'header del file target. Causa diretta di staleness osservata nella versione precedente di questa skill (vedi `ADR-004`); coerente con il Recency Check di `7_COLLABORATION` Area D.
 
@@ -131,12 +132,12 @@ Manuale: [README.md](../../../README.md)
 
 ## Limiti dichiarati
 
-- **Aggiornato 2026-09-04**: la skill è comparsa nell'elenco skill disponibili nella stessa sessione in cui è stata scritta — la claim originale "serve una sessione nuova perché non comparirà" era sbagliata (vedi `SELF_IMPROVEMENT_LOG.md`). Resta vero che **non è ancora verificato** che si auto-invochi correttamente su un task reale senza essere nominata esplicitamente — comparire nell'elenco è discoverability, non prova di invocazione corretta. Non trattare l'una come prova dell'altra.
+- **Aggiornato 2026-09-04**: la skill è comparsa nell'elenco skill disponibili nella stessa sessione in cui è stata scritta — la claim originale "serve una sessione nuova perché non comparirà" era sbagliata (vedi `SELF_IMPROVEMENT_LOG.md`). L'auto-invocazione su un task reale senza essere nominata esplicitamente è stata verificata **una volta** in una sessione separata (`SELF_IMPROVEMENT_LOG.md` #8) — un solo data point, non ancora un pattern confermato su richieste diverse.
 - Nessun contenuto specifico di progetto qui per design (coerente con la regola "zero riferimenti a progetti specifici" del repo canonico). Un fork che ne ha bisogno (IP policy, tool interni) li aggiunge nella propria copia, non qui.
 - Questo file va tenuto sincronizzato a mano con i nuovi artefatti trasversali del repo — `scripts/check_consistency.sh` ora verifica che ogni artefatto atteso sia referenziato qui (Check 3), ma non verifica che il *workflow* descritto sopra li usi correttamente.
 
 ## Adattare a un fork
 
-Se questo file viene copiato in un progetto che ha spostato il manuale sotto un path diverso (es. `docs/framework/`, pattern usato in alcuni fork esistenti), aggiorna i path relativi sopra di conseguenza.
+Se questo file viene copiato in un progetto che consuma il manuale via submodule (es. sotto `docs/framework/`), aggiorna i path relativi sopra di conseguenza e vedi [ADOPTION_GUIDE.md](../../../ADOPTION_GUIDE.md) per il procedimento completo, verificato su 2 fork reali il 2026-09-04.
 
 **Data ultimo confronto con la versione canonica**: [compilare alla copia — serve a rilevare la deriva nel tempo, vedi `ADR-004.md`]

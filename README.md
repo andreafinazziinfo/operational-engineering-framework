@@ -219,15 +219,9 @@ Framework e artefatti per **CEO**, **CTO** e **Fellow** — sopra Discovery, sot
 
 ## 🔌 Adottare il manuale in un nuovo progetto
 
-**Non ancora una guida verificata passo-passo** — deliberatamente: la meccanica di installazione (submodule vs copia, dove mettere skill/hooks) è stata decisa in [ADR-006.md](./ADR-006.md), ma non ancora eseguita su un progetto reale. Scrivere qui il passo-passo prima di averlo testato una volta rischierebbe di documentare una procedura mai verificata — lo stesso errore che questo repo ha già trovato e corretto altrove (vedi [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md)).
+**[ADOPTION_GUIDE.md](./ADOPTION_GUIDE.md)** — guida passo-passo, scritta il 2026-09-04 dopo (non prima) 2 migrazioni reali su fork consumer indipendenti. Copre: audit prima di fidarsi della documentazione esistente, cosa preservare vs cosa sostituisce il submodule, perché skill e Hooks vanno ricreati alla radice del progetto (non lasciati dentro il submodule), verifica live degli Hook invece di un dry-run, e le insidie note (cambio branch con submodule, verifica di sola lettura sul lavoro di un'altra sessione).
 
-Nel frattempo, il percorso di riferimento:
-
-1. [ADR-004.md](./ADR-004.md) — perché la skill si chiama `operational-engineering-framework`, non un nome legacy
-2. [ADR-005.md](./ADR-005.md) — quali Hooks Claude Code aggiungere e perché
-3. [ADR-006.md](./ADR-006.md) — submodule sul contenuto canonico puro, non copia dell'intero albero
-
-Una guida passo-passo verificata (`ADOPTION_GUIDE.md` o simile) verrà scritta **dopo** la prima migrazione reale completata, basata su cosa ha effettivamente funzionato — non prima.
+Decisioni a monte: [ADR-004.md](./ADR-004.md) (skill), [ADR-005.md](./ADR-005.md) (Hooks), [ADR-006.md](./ADR-006.md) (submodule vs copia).
 
 ---
 
