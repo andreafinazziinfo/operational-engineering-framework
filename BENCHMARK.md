@@ -37,7 +37,7 @@ Diverso apposta dalla scala 0–5 di [FRAMEWORK_MATURITY.md](./FRAMEWORK_MATURIT
 | 4 | Governance del manuale stesso | **9/10** | Impianto raro (`0_META`) + [scripts/check_consistency.sh](./scripts/check_consistency.sh) automatizzato su ogni push/PR ([.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml)), primo run reale osservato **success** su GitHub (run 33836961414, 15s). Non 10: un solo run non prova affidabilità nel tempo |
 | 5 | Igiene collaborazione/sessione multi-agente | 7/10 | Appena aggiunta (`7_COLLABORATION`), copertura ampia sulla carta, zero stress-test reale nel tempo |
 | 6 | Generazione artefatti implementabili (PRD/spec/stories) | 4/10 | [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) esiste, agganciato a `2_EXECUTION` Fase A — mai usato su un task reale |
-| 7 | Validazione esterna / adozione reale | 2/10 | Il *concetto* gira in 2 fork reali (CycleLab, Titan) — piccolo segnale positivo, non zero — ma nessuna adozione fuori dall'owner |
+| 7 | Validazione esterna / adozione reale | 2/10 | Il *concetto* gira in 2 fork reali (non nominati, Pilastro 8) — piccolo segnale positivo, non zero — ma nessuna adozione fuori dall'owner |
 | 8 | Allineamento a semplicità raccomandata (Anthropic) | 6/10 | Tier + loading on-demand + Skill aiutano; 8 file + skill + benchmark + FAQ restano comunque tanta superficie da rispettare |
 | 9 | Loop di verifica efficacia (previene problemi reali o è overhead?) | **3/10** | [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) creato con 5 voci reali di questa sessione (2 incidenti, 2 gap, 1 domanda aperta non risolta a forza). Meccanismo esiste e ha dati veri, non solo teoria — non oltre 3/10 finché non copre più di una sessione |
 

@@ -401,6 +401,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 ├── .github/workflows/check-consistency.yml  # CI: verifica meccanica su push/PR + staleness check schedulato
 ├── ADR-005.md                    # Decisione Hooks Claude Code per enforcement deterministico
 ├── HOOKS_ENFORCEMENT_PLAN.md     # Piano tecnico + unità di lavoro per gli Hooks (ADR-005)
+├── ADR-006.md                    # Decisione distribuzione ai fork (submodule) — esecuzione per-fork rimandata
 ├── .claude/settings.json          # Hooks: blocco git distruttivo, check post-edit, reminder sessione
 ├── .claude/hooks/                 # Script degli hook sopra
 ├── TECHNICAL_DEBT_LEDGER.md
@@ -422,6 +423,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 | [ADR-003.md](./ADR-003.md) | Decisione architetturale layer `7_COLLABORATION` |
 | [ADR-004.md](./ADR-004.md) | Decisione architetturale skill canonica `operational-engineering-framework` (ex `lead-architect-plan`) |
 | [ADR-005.md](./ADR-005.md) | Decisione Hooks Claude Code per enforcement deterministico (blocco git distruttivo, check post-edit, staleness CI) — piano in [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) |
+| [ADR-006.md](./ADR-006.md) | Decisione distribuzione ai fork consumer (2 fork reali, non nominati) — git submodule sul contenuto canonico puro, esecuzione per-fork rimandata a sessioni dedicate |
 | [TECHNICAL_DEBT_LEDGER.md](./TECHNICAL_DEBT_LEDGER.md) | Ledger debito tecnico live |
 | [SELF_AUDIT_2026-07-24.md](./SELF_AUDIT_2026-07-24.md) | Autovalutazione manuale (9 pilastri) |
 | [LICENSE](./LICENSE) | **MIT** — uso, modifica e distribuzione liberi |
@@ -454,7 +456,7 @@ Protocollo completo: **[4_AI_AGENT_FRAMEWORK.md](./4_AI_AGENT_FRAMEWORK.md)**
 - [.github/workflows/check-consistency.yml](./.github/workflows/check-consistency.yml) — `scripts/check_consistency.sh` automatizzato su ogni push/PR, non più solo a memoria · `BENCHMARK.md` dimensione 4 (Governance) 8/10→**9/10**
 - [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) — 5 voci reali da questa sessione (2 incidenti, 2 gap scoperti, 1 domanda aperta non forzata a una risposta): fonti obsolete usate senza verifica, self-audit che dichiarava un fix mai fatto, gap vs BMAD, `git checkout` distruttivo, formato Declaration/Trace che non copre le modifiche al manuale stesso · chiude la dimensione 9 di `BENCHMARK.md` (1/10→**3/10**)
 - [SPEC_TEMPLATE.md](./SPEC_TEMPLATE.md) — artefatto per scomporre un design in unità di lavoro implementabili, agganciato a `2_EXECUTION` Fase A · chiude parzialmente il gap 6 di `BENCHMARK.md` (4/10, scala rivista), ispirato al concetto PRD→story di BMAD-METHOD ma nel nostro idioma gate+soglia
-- [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica Claude Code (standard aperto), generalizza la versione già in uso in CycleLab/Titan da 3 a 8 file coperti, nessuna versione hardcodata · [ADR-004.md](./ADR-004.md) · verificata una volta in sessione reale il 2026-09-04 (b), vedi sopra
+- [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md) — skill canonica Claude Code (standard aperto), generalizza la versione già in uso in fork consumer reali da 3 a 8 file coperti, nessuna versione hardcodata · [ADR-004.md](./ADR-004.md) · verificata una volta in sessione reale il 2026-09-04 (b), vedi sopra
 - **Recency/Currency Check** (mental model, ricerca 2026 su knowledge cutoff staleness) → `1_DESIGN` P2 (v3.2→**v3.3**) + `7_COLLABORATION` D (v1.1→**v1.2**): scelte tecniche e claim time-sensitive verificati con ricerca live, mai per fiducia nel training data
 - [FAQ.md](./FAQ.md) — Q&A umano-orientate su tutto il manuale (tier, quale file per quale situazione, sessioni concorrenti, Goodhart, governance) — link ai file canonici, zero checklist duplicate
 - 11 link rotti pre-esistenti corretti in `executive/` P2 · self-audit 2026-07-24 corretto (dichiarava un fix mai fatto)

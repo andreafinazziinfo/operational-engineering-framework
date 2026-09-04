@@ -230,7 +230,7 @@ Ogni unità ≤ 2h, ≤ 3 moduli toccati, in ordine di dipendenza. Compilate sec
 
 - Enforcement dei Pilastri 2/8 in generale (es. un hook che verifica che ogni commit su file `*_FRAMEWORK.md` referenzi un ADR) — non richiesto da nessun incidente reale osservato finora, non costruire "perché si potrebbe" (regola anti-over-building).
 - Un hook che impedisce del tutto (non solo avvisa) il merge se `check_consistency.sh` non è pulito — la CI già lo fa post-push; un blocco locale pre-commit è un'estensione naturale ma non ancora richiesta da un incidente osservato.
-- Sincronizzazione di questi hook verso i fork (CycleLab/Titan) — stesso scope-cut già dichiarato per la skill in `ADR-004.md`.
+- Sincronizzazione di questi hook verso i fork consumer — stesso scope-cut già dichiarato per la skill in `ADR-004.md`.
 
 ## 🔗 Collegamenti
 

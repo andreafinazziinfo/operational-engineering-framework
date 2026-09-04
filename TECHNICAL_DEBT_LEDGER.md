@@ -5,7 +5,7 @@ Registro condiviso dei compromessi architetturali e delle scorciatoie prese sott
 
 | ID | Categoria | Descrizione | Impatto | Trigger revisione | Owner | Data |
 |----|-----------|-------------|---------|-------------------|-------|------|
-| — | — | *Nessuna voce al momento — aggiungere righe sotto* | — | — | — | — |
+| TD-001 | Architetturale | `check_consistency.sh` non ha un check meccanico per riferimenti a progetti/fork specifici (regola Pilastro 8, "zero riferimenti a progetti specifici") — violazione trovata solo perché l'owner l'ha chiesto esplicitamente ([SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) #12), non da verifica automatica | Medio | Se il pattern si ripresenta una seconda volta (non costruire un check ora solo perché notato una volta, regola anti-over-building) | owner | 2026-09-04 |
 
 ## Regole
 

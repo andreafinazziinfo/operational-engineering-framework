@@ -5,7 +5,7 @@ description: Applies the Operational Engineering Framework (9-pillar design gate
 
 # Operational Engineering Framework — Skill Canonica
 
-Versione canonica generalizzata della skill nota come `lead-architect-plan` nei fork CycleLab/Titan (decisione: [ADR-004.md](../../../ADR-004.md)) — rinominata `operational-engineering-framework` per allinearla al nome del repo/progetto invece di ereditare un nome legacy specifico di un fork. Copre tutti gli 8 file del manuale, non solo i 3 originariamente wrappati.
+Versione canonica generalizzata della skill nota come `lead-architect-plan` in fork consumer reali (decisione: [ADR-004.md](../../../ADR-004.md)) — rinominata `operational-engineering-framework` per allinearla al nome del repo/progetto invece di ereditare un nome legacy specifico di un fork. Copre tutti gli 8 file del manuale, non solo i 3 originariamente wrappati.
 
 ## Riferimento canonico
 

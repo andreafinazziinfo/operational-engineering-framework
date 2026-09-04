@@ -22,7 +22,7 @@
 | 3 | Validazione esterna (`BENCHMARK.md` dim. 7, 2/10) | Richiede adozione fuori dall'owner | No — non manifatturabile |
 | 4 | Hooks Claude Code (enforcement deterministico) | ✅ **Fatto** (2026-09-04) — `ADR-005.md` + `HOOKS_ENFORCEMENT_PLAN.md`, 4 unità implementate, 2 verificate end-to-end in sessione reale (blocco git, check post-edit), 1 solo via pipe-test (SessionStart, vedi task 1 sopra), 1 su CI mai osservata girare per davvero (staleness check, vedi task 2 sopra) | — |
 | 5 | Formato Declaration/Trace non copre modifiche al manuale | Finding di una sola sessione, non ancora confermato serva un fix | Solo se si ripresenta in altre sessioni |
-| 6 | Sync skill/manuale → CycleLab/Titan (fork divergenti) | Fuori scope dichiarato dall'inizio di questa serie di sessioni. Nota: i 3 hook Claude Code (unità 1-3) **non sono stati sincronizzati** verso i fork — stesso scope-cut già dichiarato per la skill in `ADR-004.md` | Sì, ma è una sessione a sé — decidere prima submodule vs copia |
+| 6 | Sync skill/manuale → fork consumer (2 fork reali, non nominati qui — Pilastro 8) | **Decisione presa** ([ADR-006.md](./ADR-006.md)): git submodule sul contenuto canonico puro, artefatti project-specific spostati fuori dal perimetro sincronizzato. Divergenza reale verificata più profonda di quanto `ADR-004.md` documentasse (voce #11) — non solo la skill, l'intero `docs/framework/` di ciascun fork. **Esecuzione non ancora fatta** | Sì, ma **una sessione dedicata per fork** (separatamente, branch dedicato in quel repo, non in questo) — vedi "Prossimi passi" in `ADR-006.md` |
 | 7 | Pilastro sustainability, test strategy dedicata | Bassa priorità, nessuna pressione reale | Sì ma perché? |
 | 8 | Circuit breaker sul loop di auto-miglioramento stesso | Gap trovato oggi (voce #9) — **parzialmente mitigato** dal job CI schedulato (unità 4 del punto 4), ma quel job osserva solo la staleness assoluta, non un pattern "N sessioni senza voce" più fine | Solo se il gap si ripresenta dopo aver osservato il primo trigger CI |
 
@@ -46,7 +46,7 @@
 
 - Hook `SessionStart` (unità 3): logica testata solo via pipe-test diretto, mai in una sessione Claude Code reale (l'evento scatta solo all'avvio sessione, non testabile a metà sessione)
 - Job CI `staleness-check` (unità 4): mai osservato girare per davvero su GitHub Actions (solo testato localmente in positivo/negativo) — il primo trigger reale è lunedì alle 06:00 UTC
-- I 3 hook Claude Code non sono sincronizzati verso i fork CycleLab/Titan (stesso scope-cut della skill)
+- I 3 hook Claude Code non sono sincronizzati verso i fork consumer (stesso scope-cut della skill)
 - Che `SELF_IMPROVEMENT_LOG.md` catturi lezioni utili oltre le prime 2 sessioni che l'hanno popolato
 - Che i mental model e i nuovi hook restino effettivamente usati nel tempo, non solo scritti/testati una volta
 
