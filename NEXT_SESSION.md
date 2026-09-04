@@ -6,51 +6,51 @@
 
 ## 🎯 Primo task esplicito per la prossima sessione
 
-1. **Verifica end-to-end dell'unità 3** (`check-next-session.sh`, hook `SessionStart`): non testabile nella sessione che l'ha scritta (l'evento scatta solo all'avvio). Apri una sessione nuova e osserva se compare un banner — oggi non dovrebbe comparire nulla (`NEXT_SESSION.md` è aggiornato a oggi), quindi per un test reale serve forzare temporaneamente una data vecchia in una copia, o aspettare che passino i 14 giorni.
-2. **Osserva il primo trigger reale del job CI schedulato** (`staleness-check`, lunedì 06:00 UTC, vedi `ADR-005.md`/`HOOKS_ENFORCEMENT_PLAN.md` unità 4) — non ancora osservato girare per davvero su GitHub Actions, solo testato localmente in positivo/negativo. Se il primo trigger è un falso allarme, la soglia di 30gg va rivista (non il meccanismo).
-3. **Popola ulteriormente `SELF_IMPROVEMENT_LOG.md`** in una sessione futura, per continuare a costruire evidenza multi-sessione (voci #8 e #9-10 sono già un secondo/terzo punto dati, oltre le #1-7 della sessione che ha scritto il manuale).
-4. Solo dopo, passa al backlog sotto.
+Nessuno bloccante. Se serve un punto di partenza:
+
+1. **Osserva il primo trigger reale del job CI `staleness-check`** (lunedì 06:00 UTC, `ADR-005.md`/`HOOKS_ENFORCEMENT_PLAN.md` unità 4) — mai osservato girare per davvero su GitHub Actions, solo testato in locale. Se il primo trigger è un falso allarme, rivedi la soglia di 30gg, non il meccanismo.
+2. **Verifica end-to-end dell'hook `SessionStart`** su questo repo (non sui fork, dove è già stato verificato come no-op corretto): apri una sessione nuova con `NEXT_SESSION.md` datato artificialmente vecchio (in una copia, mai il file reale) e osserva se compare il banner.
+3. Continua a popolare `SELF_IMPROVEMENT_LOG.md` nelle sessioni future — un solo giorno di dati (per quanto denso, 15 voci) non è ancora un trend nel tempo.
 
 ---
 
 ## 📋 Backlog — cosa manca, in ordine di priorità onesta
 
-| # | Cosa | Perché non fatto prima | Buildable subito? |
-|---|---|---|---|
-| 1 | Verifica live della skill | ✅ **Fatto** (2026-09-04, voce #8) — un solo data point, non ancora un pattern su richieste diverse | — |
-| 2 | Popolare `SELF_IMPROVEMENT_LOG.md` su più sessioni | In corso — 3 nuove voci da questa sessione (#8, #9, #10), da una sessione diversa da quella che ha scritto il manuale | Solo con l'uso reale |
-| 3 | Validazione esterna (`BENCHMARK.md` dim. 7, 2/10) | Richiede adozione fuori dall'owner | No — non manifatturabile |
-| 4 | Hooks Claude Code (enforcement deterministico) | ✅ **Fatto** (2026-09-04) — `ADR-005.md` + `HOOKS_ENFORCEMENT_PLAN.md`, 4 unità implementate, 2 verificate end-to-end in sessione reale (blocco git, check post-edit), 1 solo via pipe-test (SessionStart, vedi task 1 sopra), 1 su CI mai osservata girare per davvero (staleness check, vedi task 2 sopra) | — |
-| 5 | Formato Declaration/Trace non copre modifiche al manuale | Finding di una sola sessione, non ancora confermato serva un fix | Solo se si ripresenta in altre sessioni |
-| 6 | Sync skill/manuale → fork consumer (2 fork reali, non nominati qui — Pilastro 8) | ✅ **Fatto e mergiato** (2026-09-04) — entrambe le migrazioni ([ADR-006.md](./ADR-006.md)) mergiate su `origin/main` dei rispettivi fork, verificato in sola lettura da questa sessione (voce #15). 4 incidenti reali trovati e corretti lungo il percorso (#11-#14). `ADOPTION_GUIDE.md` scritta da questo caso | — |
-| 7 | Pilastro sustainability, test strategy dedicata | Bassa priorità, nessuna pressione reale | Sì ma perché? |
-| 8 | Circuit breaker sul loop di auto-miglioramento stesso | Gap trovato oggi (voce #9) — **parzialmente mitigato** dal job CI schedulato (unità 4 del punto 4), ma quel job osserva solo la staleness assoluta, non un pattern "N sessioni senza voce" più fine | Solo se il gap si ripresenta dopo aver osservato il primo trigger CI |
-| 9 | `ADOPTION_GUIDE.md` | ✅ **Fatto** (2026-09-04) — scritta dopo 2 migrazioni reali complete su fork indipendenti (non 1 come pianificato, dato che entrambe si sono concluse lo stesso giorno). Percorso B (progetto nuovo, senza copia da migrare) resta dedotto, non testato di persona | — |
+| # | Cosa | Stato |
+|---|---|---|
+| 1 | Verifica live della skill | ✅ Fatto (#8) |
+| 2 | Popolare `SELF_IMPROVEMENT_LOG.md` su più sessioni | In corso — 15 voci da questa sessione, ancora 1 solo giorno |
+| 3 | Validazione esterna (`BENCHMARK.md` dim. 7, 2/10) | Non manifatturabile — richiede adozione fuori dall'owner |
+| 4 | Hooks Claude Code (enforcement deterministico) | ✅ Fatto (`ADR-005.md`) — 2/3 unità verificate end-to-end nel canonico, tutte e 3 portate e verificate sui 2 fork |
+| 5 | Formato Declaration/Trace non copre modifiche al manuale | Non confermato serva un fix — solo se si ripresenta |
+| 6 | Sync manuale/skill/hooks → fork consumer | ✅ Fatto e mergiato (`ADR-006.md`, voce #15) — 2 fork reali, `ADOPTION_GUIDE.md` scritta da questo caso |
+| 7 | Pilastro sustainability, test strategy dedicata | Bassa priorità, nessuna pressione reale |
+| 8 | Circuit breaker sul loop di auto-miglioramento | Mitigato dal job CI `staleness-check` (già in produzione) — il pattern più fine ("N sessioni senza voce") resta un gap solo se si ripresenta |
+| 9 | `ADOPTION_GUIDE.md` | ✅ Fatto — Percorso A (migrazione) verificato 2 volte, Percorso B (progetto nuovo) dedotto, non testato |
 
-**Non aggiungere altro a questa lista senza un motivo verificato** — coerente con la regola seguita per tutta questa serie di sessioni: non inseguire "completo in ogni ambito".
+**Non aggiungere altro senza un motivo verificato.**
 
 ---
 
-## ✅ Cosa è stato fatto (stato al 2026-09-04, sessione "hooks enforcement")
+## ✅ Cosa è stato fatto oggi (2026-09-04, sessione "hooks + distribuzione ai fork")
 
-- Verifica live della skill: auto-invocata su una richiesta generica ("aiutami a pianificare una feature") senza nominare il framework — prima prova non-circolare (`SELF_IMPROVEMENT_LOG.md` #8)
-- Audit dogfooding Pilastri 1, 2, 4, 7, 8 applicati al manuale stesso (`SELF_AUDIT_2026-07-24.md` addendum) — nessun pilastro Bloccante rosso, gap trovato: nessun circuit breaker sul loop di auto-miglioramento (`SELF_IMPROVEMENT_LOG.md` #9)
-- `ADR-005.md` (Accettato) + `HOOKS_ENFORCEMENT_PLAN.md` — piano Engineering Gate completo per gli Hooks Claude Code
-- 3 hook implementati in `.claude/hooks/` + registrati in `.claude/settings.json`: blocco git distruttivo (`PreToolUse`), check post-edit sui file framework (`PostToolUse`), reminder sessione stale (`SessionStart`)
-- CI (`check-consistency.yml`) estesa con trigger `schedule` settimanale + job `staleness-check` isolato
-- **Incidente reale trovato e corretto testando dal vivo**: `check_consistency.sh` troppo lento (19.4s, 615 link con un `python3` per link) per il timeout dell'hook (15s) — ottimizzato a un solo processo batch, 1.4s (`SELF_IMPROVEMENT_LOG.md` #10)
-- Verificati end-to-end in sessione reale: hook blocco git (richiesta di conferma comparsa su un caso reale) e hook check post-edit (avviso comparso dopo il fix di performance)
-- `README.md`, `CHANGELOG.md` aggiornati: indice ADR, file tree, sezione Changelog `2026-09-04 (b)`, corrette 2 claim stale sulla skill
-- `archify-out/` verificato non necessitare aggiornamento (il diagramma non menziona Skill/Hook, opera a livello di fasi Discovery→Design→Execution→Ops)
+- Verifica non-circolare che la skill si auto-invoca su un task reale (#8)
+- Audit dogfooding Pilastri 1,2,4,7,8 sul manuale stesso — gap trovato: nessun circuit breaker sul proprio loop di miglioramento (#9)
+- `ADR-005.md` + `HOOKS_ENFORCEMENT_PLAN.md` — 3 Hook Claude Code costruiti, verificati dal vivo (2/3 nel canonico, tutti e 3 sui fork)
+- Incidente reale trovato e risolto testando dal vivo: `check_consistency.sh` da 19.4s a 1.4s (#10)
+- Il manuale violava la propria regola Pilastro 8 (9 file con riferimenti a progetti specifici) — trovato e ripulito (#12)
+- `ADR-006.md`: decisione di distribuzione (submodule) basata su verifica diretta sui 2 fork, non su ipotesi (#11) — **eseguita e mergiata su entrambi lo stesso giorno** (#15)
+- 4 incidenti reali durante l'esecuzione delegata: divergenza sottostimata (#11), violazione Pilastro 8 (#12), comando mutante su working tree condivisa (#13), falso allarme di questa stessa sessione su un'autorizzazione data altrove (#14)
+- `ADOPTION_GUIDE.md` scritta da 2 casi reali, non da teoria
+- `BENCHMARK.md`: 3 revisioni nella giornata, 6.3 → 6.9 → 7.1/10, ogni salita ancorata a un evento verificato, mai a giudizio più permissivo
 
-## ⚠️ Cosa NON è stato verificato (onestà, non solo elenco)
+## ⚠️ Cosa NON è ancora verificato (onestà, non solo elenco)
 
-- Hook `SessionStart` (unità 3): logica testata solo via pipe-test diretto, mai in una sessione Claude Code reale (l'evento scatta solo all'avvio sessione, non testabile a metà sessione)
-- Job CI `staleness-check` (unità 4): mai osservato girare per davvero su GitHub Actions (solo testato localmente in positivo/negativo) — il primo trigger reale è lunedì alle 06:00 UTC
-- I 3 hook Claude Code non sono sincronizzati verso i fork consumer (stesso scope-cut della skill)
-- Che `SELF_IMPROVEMENT_LOG.md` catturi lezioni utili oltre le prime 2 sessioni che l'hanno popolato
-- Che i mental model e i nuovi hook restino effettivamente usati nel tempo, non solo scritti/testati una volta
+- Job CI `staleness-check`: mai osservato girare per davvero su GitHub Actions (primo trigger lunedì)
+- Hook `SessionStart` su *questo* repo specificamente: verificato come no-op corretto sui fork, non ancora testato con una data forzata nel canonico stesso
+- Percorso B di `ADOPTION_GUIDE.md` (progetto nuovo senza copia da migrare): dedotto, mai eseguito
+- Che tutto questo resti effettivamente usato nelle prossime settimane, non solo funzionante oggi — un solo giorno di dati non è un trend
 
 ## 🔗 Riferimenti
 
-[README.md](./README.md) · [ADR-005.md](./ADR-005.md) · [HOOKS_ENFORCEMENT_PLAN.md](./HOOKS_ENFORCEMENT_PLAN.md) · [BENCHMARK.md](./BENCHMARK.md) · [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md) · [.claude/skills/operational-engineering-framework/SKILL.md](./.claude/skills/operational-engineering-framework/SKILL.md)
+[README.md](./README.md) · [ADR-005.md](./ADR-005.md) · [ADR-006.md](./ADR-006.md) · [ADOPTION_GUIDE.md](./ADOPTION_GUIDE.md) · [BENCHMARK.md](./BENCHMARK.md) · [SELF_IMPROVEMENT_LOG.md](./SELF_IMPROVEMENT_LOG.md)
